@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import Head from 'next/head';
 
-export default function Home() {
+const Welcome: FC = () => {
   return (
     <>
       <Head>
@@ -10,4 +11,6 @@ export default function Home() {
       </Head>
     </>
   );
-}
+};
+
+export default Welcome;

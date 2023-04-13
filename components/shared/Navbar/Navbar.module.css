@@ -1,0 +1,87 @@
+.container {
+  background-color: rgb(18, 18, 53);
+  width: 25vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  margin-right: 5rem;
+}
+
+
+.hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    border: none;
+    background: none;
+  }
+
+  .hamburger:hover {
+    cursor: pointer;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.userInfo {
+  text-align: center;
+}
+
+.userInfo > h3 {
+  padding-top: 1rem;
+  font-size: 21px;
+}
+
+.links > a,
+.logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 200px;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 0.5rem;
+  transition: background-color 400ms, color 400ms;
+}
+
+.links > a:hover {
+  background-color: white;
+  color: rgb(18, 18, 53);
+  transition: background-color 400ms, color 400ms;
+}
+
+.links > a > p,
+.logout > p {
+  padding-left: 0.5rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.logout {
+  color: gray;
+  font-size: 15px;
+  margin-bottom: 0;
+  margin-top: 10rem;
+}
+
+.logout:hover {
+  color: white;
+}

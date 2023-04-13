@@ -1,19 +1,22 @@
-import { Inter, Roboto } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
-import AppLayout from '@/components/UI/Layout/AppLayout/AppLayout';
-import Navbar from '@/components/UI/Navbar/Navbar';
+import AppLayout from '@/components/shared/Layout/AppLayout/AppLayout';
+import Navbar from '@/components/shared/Navbar/Navbar';
 
 import '@/styles/globals.css';
 
-const roboto = Roboto({ weight: '700', subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] });
 
 import type { AppProps } from 'next/app';
+import UserContextProvider from '@/context/UserContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <AppLayout className={roboto.className}>
-      <Navbar />
-      <Component {...pageProps} />
-    </AppLayout>
+    <UserContextProvider>
+      <AppLayout className={inter.className}>
+        <Navbar />
+        <Component {...pageProps} />
+      </AppLayout>
+    </UserContextProvider>
   );
 }
