@@ -1,17 +1,24 @@
 import { HealthcareCompany } from './general';
-
-export interface Diagnosis {
-  name: string;
-  latinName: string;
-  code: string;
-}
+import { User } from './user';
 
 type HealthRating = 1 | 2 | 3 | 4 | 5;
 
-interface Entry {
-  date: Date;
-  diagnosis?: Array<Diagnosis>;
+type Doctor = Omit<
+  User,
+  'identificationNumber' | 'company' | 'imageUrl' | 'isAdministrator'
+>;
+
+type Diagnosis = Array<string>;
+type Prescriptions = Array<string>;
+
+export interface Entry {
+  date: string;
+  addedDiagnosis?: Diagnosis;
+  removedDiagnosis?: Diagnosis;
+  addedPrescriptions?: Prescriptions;
+  removedPrescriptions?: Prescriptions;
   content: string;
+  by: Doctor;
 }
 
 export interface Patient {
@@ -20,7 +27,8 @@ export interface Patient {
   identificationNumber: string;
   occupation: string;
   sex: 'Male' | 'Female' | 'Intersex';
-  diagnosis?: Array<Diagnosis>;
+  diagnosis?: Diagnosis;
+  prescriptions?: Prescriptions;
   healthcareCompany: HealthcareCompany;
   healthRating: HealthRating;
   entries?: Array<Entry>;

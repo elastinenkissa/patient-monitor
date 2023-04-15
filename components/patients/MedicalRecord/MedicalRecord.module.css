@@ -1,0 +1,9 @@
+.item {
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
+  padding: 0.4rem;
+  width: fit-content;
+  margin-right: 10px;
+  color: black;
+  font-weight: 500;
+}

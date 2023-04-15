@@ -43,3 +43,26 @@ a {
   transform: scale(1);
   transition: transform 300ms;
 }
+
+
+.zoom-enter {
+  transform: translateX(0);
+}
+
+.zoom-enter-active {
+  transform: translateX(50%);
+  transition: transform 1000ms;
+}
+
+.zoom-enter-done {
+  transform: translateX(50%);
+}
+
+.zoom-exit {
+  transform: translateX(50%);
+}
+
+.zoom-exit-active {
+  transform: translateX(0);
+  transition: transform 1000ms;
+}

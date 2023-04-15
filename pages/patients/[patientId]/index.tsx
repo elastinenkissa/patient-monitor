@@ -1,20 +1,30 @@
 import { useRouter } from 'next/router';
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Female, Male, Transgender } from '@mui/icons-material';
+import { Modal } from '@mui/material';
+import Head from 'next/head';
 
 import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLayout';
+import PatientHeader from '@/components/patients/PatientHeader/PatientHeader';
+import Entries from '@/components/patients/Entries/Entries';
+import PatientFooter from '@/components/patients/PatientFooter/PatientFooter';
+import Diagnosis from '@/components/patients/Diagnosis/Diagnosis';
+import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
+import NewEntry from '@/components/patients/NewEntry/NewEntry';
 
 import { Patient as PatientType } from '@/types/patient';
 
 import classes from './Patient.module.css';
-import Head from 'next/head';
 
 interface PatientProps {
   patient: PatientType;
 }
 
 const Patient: FC<PatientProps> = (props) => {
+  const [patient, setPatient] = useState<PatientType>(props.patient);
+  const [modalIsVisible, setModalIsVisible] = useState<boolean>(false);
+
   const router = useRouter();
 
   const checkGender = () => {
@@ -45,30 +55,25 @@ const Patient: FC<PatientProps> = (props) => {
     <>
       <Head>
         <title>Patient {props.patient.name}</title>
-        <meta name="description" content={`Patient ${props.patient.name}`} />
+        <meta name="description" content={`Patient ${patient.name}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <PatientsLayout>
         <div className={classes.container}>
-          <div>
-            <h2 className={classes.header}>
-              <p>{props.patient.name}</p>
-              <p>{gender}</p>
-            </h2>
-            <h3>ID: {props.patient.identificationNumber}</h3>
-            <h3>{props.patient.occupation}</h3>
-            <ul>{props.patient.entries?.map((entry) => entry.content)}</ul>
-            <ul>
-              {props.patient.diagnosis?.map((diagnosis) => diagnosis.code)}
-            </ul>
+          <div className={classes.main}>
+            <PatientHeader patient={patient} genderSymbol={gender} />
+            <Entries patient={patient} />
+            <Diagnosis patient={patient} />
+            <Prescriptions patient={patient} />
           </div>
           <div className={classes.buttons}>
-            <button className={classes.button + ' ' + classes.newEntry}>
-              NEW ENTRY
-            </button>
-            <button className={classes.button + ' ' + classes.dismiss}>
-              DISMISS
-            </button>
+            <PatientFooter onNewEntry={() => setModalIsVisible(true)} />
+            <Modal
+              open={modalIsVisible}
+              onClose={() => setModalIsVisible(false)}
+            >
+              <NewEntry />
+            </Modal>
           </div>
         </div>
       </PatientsLayout>
@@ -87,7 +92,73 @@ export const getStaticProps = (
       sex: 'Male',
       occupation: 'Placeholder',
       healthRating: 1,
-      identificationNumber: 'blabla055'
+      identificationNumber: 'blabla055',
+      diagnosis: [
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding',
+        'Malding'
+      ],
+      prescriptions: ['bludfluw'],
+      entries: [
+        {
+          content:
+            'This guy got 1 heart, he should eat some food to regenThis guy got 1 heart, he should eat some food to regenThis guy got 1 heart, he should eat some food to regenThis guy got 1 heart, he should eat some food to regenThis guy got 1 heart, he should eat some food to regen',
+          date: new Date().toLocaleString(),
+          by: {
+            id: 'u1',
+            name: 'Arto Hellas'
+          },
+          addedDiagnosis: ['Malding'],
+          addedPrescriptions: ['bludfluw']
+        },
+        {
+          content: 'This guy got 1 heart, he should eat some food to regen',
+          date: new Date().toLocaleString(),
+          by: {
+            id: 'u1',
+            name: 'Arto Hellas'
+          }
+        },
+        {
+          content: 'This guy got 1 heart, he should eat some food to regen',
+          date: new Date().toLocaleString(),
+          by: {
+            id: 'u1',
+            name: 'Arto Hellas'
+          }
+        },
+        {
+          content: 'This guy got 1 heart, he should eat some food to regen',
+          date: new Date().toLocaleString(),
+          by: { id: 'u1', name: 'Arto Hellas' }
+        },
+        {
+          content: 'This guy got 1 heart, he should eat some food to regen',
+          date: new Date().toLocaleString(),
+          by: { id: 'u1', name: 'Arto Hellas' }
+        },
+        {
+          content: 'This guy got 1 heart, he should eat some food to regen',
+          date: new Date().toLocaleString(),
+          by: {
+            id: 'u1',
+            name: 'Arto Hellas'
+          }
+        }
+      ]
     }
   ];
 

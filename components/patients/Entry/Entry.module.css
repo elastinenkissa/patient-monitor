@@ -1,0 +1,16 @@
+.entry {
+  /* border: 2px solid black; */
+  background-color:rgb(18, 18, 53) ;
+  color: white;
+  border-radius: 5px;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: fit-content;
+  margin-bottom: 1rem;
+}
+
+.content {
+  margin-bottom: 2rem;
+}

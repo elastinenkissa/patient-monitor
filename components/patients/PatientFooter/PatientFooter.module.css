@@ -1,0 +1,42 @@
+.button {
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  margin-left: 1rem;
+  color: white;
+  padding: 1rem;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.newEntry {
+  background-color: rgb(18, 18, 53);
+  transition: background-color 200ms;
+}
+
+.newEntry:hover {
+  background-color: #0e2c55;
+  transition: background-color 200ms;
+}
+
+.newEntry:active {
+  background-color: #11396d;
+  transition: background-color 200ms;
+}
+
+.dismiss {
+  background-color: rgb(104, 25, 25);
+  transition: background-color 200ms;
+}
+
+.dismiss:hover {
+  background-color: rgb(138, 34, 34);
+  transition: background-color 200ms;
+}
+
+.dismiss:active {
+  background-color: rgb(156, 39, 39);
+  transition: background-color 200ms;
+}

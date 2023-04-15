@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Link from 'next/link';
 import { ChevronRight, History } from '@mui/icons-material';
 
@@ -9,6 +9,7 @@ import { User } from '@/types/user';
 import { Patient } from '@/types/patient';
 
 import classes from './ViewPatientsCard.module.css';
+import { CSSTransition } from 'react-transition-group';
 
 interface ViewPatientsCardProps {
   user: User | undefined;
@@ -16,14 +17,20 @@ interface ViewPatientsCardProps {
 }
 
 const ViewPatientsCard: FC<ViewPatientsCardProps> = (props) => {
+  const [zoom, setZoom] = useState<boolean>(false);
+
   return (
     <Card className={classes.patients}>
       <Link
         href={`/patients?doctor=${props.user!.id}`}
         className={classes.viewPatients}
+        onMouseEnter={() => setZoom(true)}
+        onMouseLeave={() => setZoom(false)}
       >
         <h4>View your patients</h4>
-        <ChevronRight />
+        <CSSTransition timeout={1000} in={zoom} classNames="zoom">
+          <ChevronRight className={classes.arrow} />
+        </CSSTransition>
       </Link>
       <div className={classes.recentPatients}>
         <div className={classes.recentPatientsHeader}>
