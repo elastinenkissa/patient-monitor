@@ -1,0 +1,17 @@
+.container {
+  height: 90vh;
+  width: 63vw;
+  align-self: center;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        width: 92vw;
+    }
+}

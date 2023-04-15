@@ -1,34 +1,40 @@
 .viewPatients {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding: 10px;
-    border-radius: 8px;
-    transition: background-color 300ms;
-  }
-  
-  .viewPatients:hover {
-    background-color: rgb(223, 223, 223);
-    transition: background-color 300ms;
-  }
-  
-  .patients {
-    width: 500px;
-    padding: 2rem;
-    height: 100%;
-  }
-  
-  .recentPatients {
-    padding-left: 10px;
-  }
-  
-  .recentPatientsHeader {
-    display: flex;
-  }
-  
-  .recentPatientsHeader > p {
-    margin-right: 0.5rem;
-  }
-  
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 300ms, color 300ms;
+}
+
+.viewPatients:hover {
+  background-color: rgb(18, 18, 53);
+  color: white;
+  transition: background-color 300ms, color 300ms;
+}
+
+.viewPatients:active {
+  background-color: #14427e;
+  background-color: 200ms;
+}
+
+.patients {
+  width: 500px;
+  padding: 2rem;
+  height: 100%;
+}
+
+.recentPatients {
+  padding-left: 10px;
+}
+
+.recentPatientsHeader {
+  display: flex;
+}
+
+.recentPatientsHeader > p {
+  margin-right: 0.5rem;
+}

@@ -1,0 +1,23 @@
+.container {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  color: gray;
+  transition: color 200ms;
+}
+
+.link:hover {
+  color: rgb(18, 18, 53);
+  transition: color 200ms;
+}
+
+.link:active {
+  color: #1877f2;
+}

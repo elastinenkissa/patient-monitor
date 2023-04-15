@@ -9,7 +9,9 @@ const Profile: FC = () => {
   return (
     <>
       <Head>
-        <title>Company name - {user?.name}</title>
+        <title>
+          {user?.company.name} - {user?.name}
+        </title>
         <meta name="description" content="Because time heals all wounds." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>

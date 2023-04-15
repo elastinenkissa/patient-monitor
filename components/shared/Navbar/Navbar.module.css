@@ -59,7 +59,8 @@
   transition: background-color 400ms, color 400ms;
 }
 
-.links > a:hover {
+.links > a:hover,
+.active {
   background-color: white;
   color: rgb(18, 18, 53);
   transition: background-color 400ms, color 400ms;

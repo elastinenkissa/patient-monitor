@@ -15,3 +15,31 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.new-patient-enter {
+  transform: scale(1);
+}
+
+.new-patient-enter-active {
+  transform: scale(0);
+  transition: transform 300ms;
+}
+
+.new-patient-enter-done {
+  transform: scale(1);
+  transition: transform 300ms;
+}
+
+.new-patient-exit {
+  transform: scale(1);
+}
+
+.new-patient-exit-active {
+  transform: scale(0);
+  transition: transform 300ms;
+}
+
+.new-patient-exit-done {
+  transform: scale(1);
+  transition: transform 300ms;
+}

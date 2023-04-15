@@ -23,7 +23,7 @@ const UserContextProvider: FC<UserContextProviderProps> = (props) => {
     id: 'u1',
     name: 'Max Mustermann',
     identificationNumber: '0506000954978',
-    companyId: 'c1',
+    company: { id: 'c1', name: 'KYS' },
     imageUrl:
       'https://th.bing.com/th/id/R.2212e2e523684c91bb6ade690d9e3fc0?rik=jKD89fg3ekClvw&pid=ImgRaw&r=0',
     isAdministrator: true

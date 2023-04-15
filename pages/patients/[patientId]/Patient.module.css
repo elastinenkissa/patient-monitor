@@ -1,0 +1,65 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+
+.gender {
+  margin-left: 0.5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button {
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  margin-left: 1rem;
+  color: white;
+  padding: 1rem;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.newEntry {
+  background-color: rgb(18, 18, 53);
+  transition: background-color 200ms;
+}
+
+.newEntry:hover {
+  background-color: #142e50;
+  transition: background-color 200ms;
+}
+
+.newEntry:active {
+  background-color: #14427e;
+  transition: background-color 200ms;
+}
+
+.dismiss {
+  background-color: rgb(104, 25, 25);
+  transition: background-color 200ms;
+}
+
+.dismiss:hover {
+  background-color: rgb(126, 31, 31);
+  transition: background-color 200ms;
+}
+
+.dismiss:active {
+  background-color: rgb(148, 33, 33);
+  transition: background-color 200ms;
+}

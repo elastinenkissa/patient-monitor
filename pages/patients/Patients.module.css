@@ -1,0 +1,13 @@
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .health {
+    margin-left: 3.2rem;
+  }
+  

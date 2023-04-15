@@ -20,6 +20,8 @@ import classes from './Navbar.module.css';
 const Navbar: FC = () => {
   const { user, logout } = useContext<UserContextType>(UserContext);
 
+  const router = useRouter();
+
   const logoutHandler = () => {
     logout();
   };
@@ -30,6 +32,7 @@ const Navbar: FC = () => {
         <Menu />
       </button>
       <div className={classes.container}>
+        <h1>PatientsE</h1> {/*make logo and replace this with it */}
         {!user ? (
           <div className={classes.buttons}>
             <Button>LOGIN</Button>
@@ -48,20 +51,36 @@ const Navbar: FC = () => {
               <h3>{user?.name}</h3>
             </div>
             <div className={classes.links}>
-              <Link href="/home">
+              <Link
+                href="/home"
+                className={router.pathname === '/home' ? classes.active : ''}
+              >
                 <Home />
                 <p>Home</p>
               </Link>
-              <Link href="/profile">
+              <Link
+                href="/profile"
+                className={router.pathname === '/profile' ? classes.active : ''}
+              >
                 <AccountCircle />
                 <p>Profile</p>
               </Link>
-              <Link href="/patients">
+              <Link
+                href="/patients"
+                className={
+                  router.pathname.startsWith('/patients') ? classes.active : ''
+                }
+              >
                 <PeopleAlt />
                 <p>Patients</p>
               </Link>
               {user.isAdministrator && (
-                <Link href="/dashboard">
+                <Link
+                  href="/dashboard"
+                  className={
+                    router.pathname === '/dashboard' ? classes.active : ''
+                  }
+                >
                   <AdminPanelSettings />
                   <p>Admin Panel</p>
                 </Link>

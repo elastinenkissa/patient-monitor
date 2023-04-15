@@ -3,3 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
 }
+
+.container > h1 {
+  padding-bottom: 3rem;
+}
