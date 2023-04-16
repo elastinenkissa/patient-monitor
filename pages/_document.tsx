@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta
           name="keywords"
-          content="Healthcare, Patients, Diagnosis, Patient monitoring"
+          content="Healthcare, Patients, Patient, Diagnosis, Patient monitoring, Patients monitoring, Prescription, Prescriptions"
         />
       </Head>
       <body>

@@ -1,15 +1,16 @@
 import { Inter } from 'next/font/google';
+import { AnimatePresence } from 'framer-motion';
 
 import AppLayout from '@/components/shared/Layout/AppLayout/AppLayout';
 import Navbar from '@/components/shared/Navbar/Navbar';
 
+import UserContextProvider from '@/context/UserContext';
+
+import type { AppProps } from 'next/app';
+
 import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
-
-import type { AppProps } from 'next/app';
-import UserContextProvider from '@/context/UserContext';
-import { AnimatePresence } from 'framer-motion';
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
