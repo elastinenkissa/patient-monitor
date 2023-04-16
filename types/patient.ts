@@ -1,7 +1,7 @@
 import { HealthcareCompany } from './general';
 import { User } from './user';
 
-type HealthRating = 1 | 2 | 3 | 4 | 5;
+export type HealthRating = 1 | 2 | 3 | 4 | 5;
 
 type Doctor = Omit<
   User,
@@ -13,12 +13,13 @@ type Prescriptions = Array<string>;
 
 export interface Entry {
   date: string;
-  addedDiagnosis?: Diagnosis;
-  removedDiagnosis?: Diagnosis;
-  addedPrescriptions?: Prescriptions;
-  removedPrescriptions?: Prescriptions;
+  addedDiagnosis: Diagnosis;
+  removedDiagnosis: Diagnosis;
+  addedPrescriptions: Prescriptions;
+  removedPrescriptions: Prescriptions;
   content: string;
   by: Doctor;
+  newHealthRating: HealthRating;
 }
 
 export interface Patient {
@@ -27,9 +28,9 @@ export interface Patient {
   identificationNumber: string;
   occupation: string;
   sex: 'Male' | 'Female' | 'Intersex';
-  diagnosis?: Diagnosis;
-  prescriptions?: Prescriptions;
+  diagnosis: Diagnosis;
+  prescriptions: Prescriptions;
   healthcareCompany: HealthcareCompany;
   healthRating: HealthRating;
-  entries?: Array<Entry>;
+  entries: Array<Entry>;
 }

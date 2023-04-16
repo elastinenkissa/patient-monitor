@@ -13,9 +13,11 @@ interface EntriesProps {
 const Entries: FC<EntriesProps> = (props) => {
   return (
     <div className={classes.scrollable}>
-      {props.patient.entries?.map((entry) => (
-        <PatientEntry key={entry.date + Math.random()} entry={entry} />
-      ))}
+      {props.patient.entries
+        ?.map((entry) => (
+          <PatientEntry key={entry.date + Math.random()} entry={entry} />
+        ))
+        .reverse()}
     </div>
   );
 };

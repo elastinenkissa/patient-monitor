@@ -13,7 +13,7 @@ import Diagnosis from '@/components/patients/Diagnosis/Diagnosis';
 import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
 import NewEntry from '@/components/patients/NewEntry/NewEntry';
 
-import { Patient as PatientType } from '@/types/patient';
+import { Entry, Patient as PatientType } from '@/types/patient';
 
 import classes from './Patient.module.css';
 
@@ -23,6 +23,7 @@ interface PatientProps {
 
 const Patient: FC<PatientProps> = (props) => {
   const [patient, setPatient] = useState<PatientType>(props.patient);
+
   const [modalIsVisible, setModalIsVisible] = useState<boolean>(false);
 
   const router = useRouter();
@@ -49,6 +50,23 @@ const Patient: FC<PatientProps> = (props) => {
     }
   };
 
+  const addEntryHandler = (entry: Entry) => {
+    setModalIsVisible(false);
+    setPatient((prevPatient) => {
+      return {
+        ...prevPatient,
+        entries: prevPatient.entries?.concat(entry),
+        diagnosis: entry.addedDiagnosis
+          ? prevPatient.diagnosis?.concat(entry.addedDiagnosis)
+          : prevPatient.diagnosis,
+        prescriptions: entry.addedPrescriptions
+          ? prevPatient.prescriptions?.concat(entry.addedPrescriptions)
+          : prevPatient.prescriptions,
+          healthRating: entry.newHealthRating
+      };
+    });
+  };
+
   const gender = checkGender();
 
   return (
@@ -63,8 +81,10 @@ const Patient: FC<PatientProps> = (props) => {
           <div className={classes.main}>
             <PatientHeader patient={patient} genderSymbol={gender} />
             <Entries patient={patient} />
-            <Diagnosis patient={patient} />
-            <Prescriptions patient={patient} />
+            {patient.diagnosis.length > 0 && <Diagnosis patient={patient} />}
+            {patient.prescriptions.length > 0 && (
+              <Prescriptions patient={patient} />
+            )}
           </div>
           <div className={classes.buttons}>
             <PatientFooter onNewEntry={() => setModalIsVisible(true)} />
@@ -73,7 +93,11 @@ const Patient: FC<PatientProps> = (props) => {
               open={modalIsVisible}
               onClose={() => setModalIsVisible(false)}
             >
-              <NewEntry visible={modalIsVisible} />
+              <NewEntry
+                patient={patient}
+                onAddEntry={addEntryHandler}
+                visible={modalIsVisible}
+              />
             </Modal>
           </div>
         </div>
@@ -91,75 +115,12 @@ export const getStaticProps = (
       name: 'Arto Hellas',
       healthcareCompany: { id: 'c1', name: 'KYS' },
       sex: 'Male',
-      occupation: 'Placeholder',
+      occupation: 'Doctor',
       healthRating: 1,
       identificationNumber: 'blabla055',
-      diagnosis: [
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding',
-        'Malding'
-      ],
-      prescriptions: ['bludfluw'],
-      entries: [
-        {
-          content:
-            'This guy got 1 heart, he should eat some food to regenThis guy got 1 heart, he should eat some food to regenThis guy got 1 heart, he should eat some food to regenThis guy got 1 heart, he should eat some food to regenThis guy got 1 heart, he should eat some food to regen',
-          date: new Date().toLocaleString(),
-          by: {
-            id: 'u1',
-            name: 'Arto Hellas'
-          },
-          addedDiagnosis: ['Malding'],
-          addedPrescriptions: ['bludfluw']
-        },
-        {
-          content: 'This guy got 1 heart, he should eat some food to regen',
-          date: new Date().toLocaleString(),
-          by: {
-            id: 'u1',
-            name: 'Arto Hellas'
-          }
-        },
-        {
-          content: 'This guy got 1 heart, he should eat some food to regen',
-          date: new Date().toLocaleString(),
-          by: {
-            id: 'u1',
-            name: 'Arto Hellas'
-          }
-        },
-        {
-          content: 'This guy got 1 heart, he should eat some food to regen',
-          date: new Date().toLocaleString(),
-          by: { id: 'u1', name: 'Arto Hellas' }
-        },
-        {
-          content: 'This guy got 1 heart, he should eat some food to regen',
-          date: new Date().toLocaleString(),
-          by: { id: 'u1', name: 'Arto Hellas' }
-        },
-        {
-          content: 'This guy got 1 heart, he should eat some food to regen',
-          date: new Date().toLocaleString(),
-          by: {
-            id: 'u1',
-            name: 'Arto Hellas'
-          }
-        }
-      ]
+      diagnosis: [],
+      prescriptions: [],
+      entries: []
     }
   ];
 

@@ -18,6 +18,7 @@ const NewRecord: FC<NewRecordProps> = (props) => {
 
   const addRecordHandler = () => {
     props.onAddRecord(recordValue);
+    setRecordValue('');
   };
 
   return (
@@ -29,7 +30,7 @@ const NewRecord: FC<NewRecordProps> = (props) => {
         <OutlinedInput
           id={props.htmlId}
           className={classes.input}
-          label={props.label + "(Optional)"}
+          label={props.label + '(Optional)'}
           value={recordValue}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             setRecordValue(event.target.value)

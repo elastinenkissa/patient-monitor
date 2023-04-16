@@ -15,7 +15,7 @@ const MedicalRecords: FC<MedicalRecordsProps> = (props) => {
       <h4>{props.children}:</h4>
       <div className={classes.records}>
         {props.records?.map((record) => (
-          <MedicalRecord key={record} record={record} />
+          <MedicalRecord key={record + Math.random()} record={record} />
         ))}
       </div>
     </div>

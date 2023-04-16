@@ -1,22 +1,25 @@
-import { ChangeEvent, FC, ReactEventHandler, useEffect, useState } from 'react';
+import { FC, FormEvent, useContext, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import {
-  Badge,
-  Box,
-  FormControl,
-  InputLabel,
-  OutlinedInput
-} from '@mui/material';
-import { AddCircle } from '@mui/icons-material';
+import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 
 import Card from '@/components/shared/Card/Card';
-import MedicalRecord from '../MedicalRecord/MedicalRecord';
+import NewRecord from './NewRecord/NewRecord';
+import HealthRatingChange from './HealthRatingChange/HealthRatingChange';
+
+import { UserContext, UserContextType } from '@/context/UserContext';
+
+import {
+  Entry,
+  HealthRating as HealthRatingType,
+  Patient
+} from '@/types/patient';
 
 import classes from './NewEntry.module.css';
-import NewRecord from './NewRecord/NewRecord';
 
 interface NewEntryProps {
   visible: boolean;
+  onAddEntry: (entry: Entry) => void;
+  patient: Patient;
 }
 
 const NewEntry: FC<NewEntryProps> = (props) => {
@@ -26,6 +29,11 @@ const NewEntry: FC<NewEntryProps> = (props) => {
   const [prescriptions, setPrescriptions] = useState<Array<string>>([]);
 
   const [contentValue, setContentValue] = useState<string>('');
+  const [newHealthRating, setNewHealthRating] = useState<HealthRatingType>(
+    props.patient.healthRating
+  );
+
+  const { user } = useContext<UserContextType>(UserContext);
 
   useEffect(() => {
     if (props.visible === true) {
@@ -68,6 +76,27 @@ const NewEntry: FC<NewEntryProps> = (props) => {
     );
   };
 
+  const submitHandler = (event: FormEvent) => {
+    event.preventDefault();
+
+    if (contentValue.trim().length < 10) {
+      return;
+    }
+
+    const newEntry: Entry = {
+      by: user!,
+      content: contentValue,
+      date: new Date().toLocaleString(),
+      addedDiagnosis: diagnosis,
+      addedPrescriptions: prescriptions,
+      newHealthRating,
+      removedDiagnosis: [],
+      removedPrescriptions: []
+    };
+
+    props.onAddEntry(newEntry);
+  };
+
   return (
     <CSSTransition
       in={show}
@@ -77,7 +106,7 @@ const NewEntry: FC<NewEntryProps> = (props) => {
       unmountOnExit
     >
       <Card className={classes.container}>
-        <Box className={classes.form}>
+        <form className={classes.form} onSubmit={submitHandler}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="content">Content</InputLabel>
             <OutlinedInput
@@ -85,6 +114,8 @@ const NewEntry: FC<NewEntryProps> = (props) => {
               multiline
               className={classes.input}
               label="Content"
+              value={contentValue}
+              onChange={(event) => setContentValue(event.target.value)}
             />
           </FormControl>
           <FormControl className={classes.formControl + ' ' + classes.record}>
@@ -103,7 +134,23 @@ const NewEntry: FC<NewEntryProps> = (props) => {
               onAddRecord={addPrescriptionHandler}
             />
           </FormControl>
-        </Box>
+          <FormControl>
+            <HealthRatingChange
+              newHealthRating={newHealthRating}
+              increaseHealthRating={() =>
+                setNewHealthRating(
+                  (prevRating) => (prevRating + 1) as HealthRatingType
+                )
+              }
+              reduceHealthRating={() =>
+                setNewHealthRating(
+                  (prevRating) => (prevRating - 1) as HealthRatingType
+                )
+              }
+            />
+          </FormControl>
+          <button type="submit">Add</button>
+        </form>
       </Card>
     </CSSTransition>
   );
