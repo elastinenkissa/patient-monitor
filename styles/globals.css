@@ -44,7 +44,6 @@ a {
   transition: transform 300ms;
 }
 
-
 .zoom-enter {
   transform: translateX(0);
 }
@@ -65,4 +64,22 @@ a {
 .zoom-exit-active {
   transform: translateX(0);
   transition: transform 1000ms;
+}
+
+.modal-appear-enter {
+  transform: scale(0);
+}
+
+.modal-appear-enter-active {
+  transform: scale(100%);
+  transition: transform 300ms;
+}
+
+.modal-appear-exit {
+  transform: scale(100%);
+}
+
+.modal-appear-exit-active {
+  transform: scale(0);
+  transition: transform 300ms;
 }

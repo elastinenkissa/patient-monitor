@@ -69,10 +69,11 @@ const Patient: FC<PatientProps> = (props) => {
           <div className={classes.buttons}>
             <PatientFooter onNewEntry={() => setModalIsVisible(true)} />
             <Modal
+              className={classes.modal}
               open={modalIsVisible}
               onClose={() => setModalIsVisible(false)}
             >
-              <NewEntry />
+              <NewEntry visible={modalIsVisible} />
             </Modal>
           </div>
         </div>

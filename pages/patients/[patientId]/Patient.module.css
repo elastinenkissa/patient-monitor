@@ -20,3 +20,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.modal {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

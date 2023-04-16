@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import Link from 'next/link';
 import { ChevronRight, History } from '@mui/icons-material';
+import { CSSTransition } from 'react-transition-group';
 
 import Card from '@/components/shared/Card/Card';
 import PatientList from '@/components/patients/PatientList/PatientList';
@@ -9,7 +10,6 @@ import { User } from '@/types/user';
 import { Patient } from '@/types/patient';
 
 import classes from './ViewPatientsCard.module.css';
-import { CSSTransition } from 'react-transition-group';
 
 interface ViewPatientsCardProps {
   user: User | undefined;
