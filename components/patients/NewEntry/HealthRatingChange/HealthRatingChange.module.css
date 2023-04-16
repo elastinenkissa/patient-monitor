@@ -1,6 +1,23 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+.container > svg {
+  color: #121235;
+  transition: color 300ms;
+}
+
+.container > svg:hover {
+  cursor: pointer;
+  color: #113466;
+  transition: color 300ms;
+}
+
+.container > svg:active {
+  color: #174c91;
+  transition: color 300ms;
 }

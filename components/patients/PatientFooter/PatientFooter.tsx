@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import Button from '@/components/shared/Button/Button';
+
 import classes from './PatientFooter.module.css';
 
 interface PatientFooterProps {
@@ -9,15 +11,15 @@ interface PatientFooterProps {
 const PatientFooter: FC<PatientFooterProps> = (props) => {
   return (
     <>
-      <button
+      <Button
         onClick={props.onNewEntry}
-        className={classes.button + ' ' + classes.newEntry}
+        className={classes.button}
       >
         NEW ENTRY
-      </button>
-      <button className={classes.button + ' ' + classes.dismiss}>
+      </Button>
+      <Button className={classes.button + ' ' + classes.dismiss}>
         DISMISS
-      </button>
+      </Button>
     </>
   );
 };

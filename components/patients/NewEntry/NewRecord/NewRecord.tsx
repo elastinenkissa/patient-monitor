@@ -25,7 +25,7 @@ const NewRecord: FC<NewRecordProps> = (props) => {
     <>
       <div className={classes.recordInput}>
         <InputLabel htmlFor={props.htmlId} margin="dense">
-          {props.label} (Optional)
+          (Optional) {props.label}
         </InputLabel>
         <OutlinedInput
           id={props.htmlId}

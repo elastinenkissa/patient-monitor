@@ -20,7 +20,7 @@ const PatientHeader: FC<PatientHeaderProps> = (props) => {
           <p>{props.genderSymbol}</p>
         </h2>
         <h5>SN: {props.patient.identificationNumber}</h5>
-        <h5>{props.patient.occupation}</h5>
+        <h5>Occupation: {props.patient.occupation}</h5>
       </div>
       <div>
         <HealthRating healthRating={props.patient.healthRating} />
