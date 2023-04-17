@@ -14,9 +14,9 @@ type Prescriptions = Array<string>;
 export interface Entry {
   date: string;
   addedDiagnosis: Diagnosis;
-  removedDiagnosis: Diagnosis;
+  removingDiagnosis: Diagnosis;
   addedPrescriptions: Prescriptions;
-  removedPrescriptions: Prescriptions;
+  removingPrescriptions: Prescriptions;
   content: string;
   by: Doctor;
   newHealthRating: HealthRating;

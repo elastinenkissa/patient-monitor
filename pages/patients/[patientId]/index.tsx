@@ -53,16 +53,36 @@ const Patient: FC<PatientProps> = (props) => {
   const addEntryHandler = (entry: Entry) => {
     setModalIsVisible(false);
     setPatient((prevPatient) => {
+      let diagnosis = prevPatient.diagnosis;
+      let prescriptions = prevPatient.prescriptions;
+
+      if (entry.addedDiagnosis) {
+        diagnosis = diagnosis.concat(entry.addedDiagnosis);
+      }
+
+      if (entry.addedPrescriptions) {
+        prescriptions = prescriptions.concat(entry.addedPrescriptions);
+      }
+
+      if (entry.removingDiagnosis) {
+        diagnosis = diagnosis.filter(
+          (diagnose, index) => diagnose !== entry.removingDiagnosis[index]
+        );
+      }
+
+      if (entry.removingPrescriptions) {
+        prescriptions = prescriptions.filter(
+          (prescription, index) =>
+            prescription !== entry.removingPrescriptions[index]
+        );
+      }
+
       return {
         ...prevPatient,
         entries: prevPatient.entries?.concat(entry),
-        diagnosis: entry.addedDiagnosis
-          ? prevPatient.diagnosis?.concat(entry.addedDiagnosis)
-          : prevPatient.diagnosis,
-        prescriptions: entry.addedPrescriptions
-          ? prevPatient.prescriptions?.concat(entry.addedPrescriptions)
-          : prevPatient.prescriptions,
-          healthRating: entry.newHealthRating
+        diagnosis,
+        prescriptions,
+        healthRating: entry.newHealthRating
       };
     });
   };

@@ -14,24 +14,25 @@ const Entry: FC<EntryProps> = (props) => {
   return (
     <div className={classes.entry}>
       <p className={classes.content}>{props.entry.content}</p>
-      {props.entry.addedDiagnosis.length > 0 && (
-        <MedicalRecords records={props.entry.addedDiagnosis}>
-          Added diagnosis
-        </MedicalRecords>
-      )}
-      {props.entry.removedDiagnosis.length > 0 && (
-        <MedicalRecords records={props.entry.removedDiagnosis}>
-          Removed diagnosis
-        </MedicalRecords>
-      )}
+
       {props.entry.addedPrescriptions.length > 0 && (
         <MedicalRecords records={props.entry.addedPrescriptions}>
           Added prescriptions
         </MedicalRecords>
       )}
-      {props.entry.removedPrescriptions.length > 0 && (
-        <MedicalRecords records={props.entry.removedPrescriptions}>
+      {props.entry.removingPrescriptions?.length > 0 && (
+        <MedicalRecords records={props.entry.removingPrescriptions}>
           Removed prescrpitions
+        </MedicalRecords>
+      )}
+      {props.entry.addedDiagnosis?.length > 0 && (
+        <MedicalRecords records={props.entry.addedDiagnosis}>
+          Added diagnosis
+        </MedicalRecords>
+      )}
+      {props.entry.removingDiagnosis.length > 0 && (
+        <MedicalRecords records={props.entry.removingDiagnosis}>
+          Removed diagnosis
         </MedicalRecords>
       )}
       <p>Health rating:</p>

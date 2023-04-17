@@ -29,6 +29,10 @@ const NewEntry: FC<NewEntryProps> = (props) => {
 
   const [diagnosis, setDiagnosis] = useState<Array<string>>([]);
   const [prescriptions, setPrescriptions] = useState<Array<string>>([]);
+  const [removingDiagnosis, setRemovingDiagnosis] = useState<Array<string>>([]);
+  const [removingPrescriptions, setRemovingPrescriptions] = useState<
+    Array<string>
+  >([]);
 
   const [contentValue, setContentValue] = useState<string>('');
   const [newHealthRating, setNewHealthRating] = useState<HealthRatingType>(
@@ -92,8 +96,8 @@ const NewEntry: FC<NewEntryProps> = (props) => {
       addedDiagnosis: diagnosis,
       addedPrescriptions: prescriptions,
       newHealthRating,
-      removedDiagnosis: [],
-      removedPrescriptions: []
+      removingDiagnosis,
+      removingPrescriptions
     };
 
     props.onAddEntry(newEntry);
@@ -140,6 +144,16 @@ const NewEntry: FC<NewEntryProps> = (props) => {
             {props.patient.diagnosis.length > 0 && (
               <FormControl>
                 <RemoveRecord
+                  onSelect={(record) =>
+                    setRemovingDiagnosis((prevDiagnosis) =>
+                      prevDiagnosis.concat(record)
+                    )
+                  }
+                  onDeselect={(record) =>
+                    setRemovingDiagnosis((prevDiagnosis) =>
+                      prevDiagnosis.filter((diagnosis) => diagnosis !== record)
+                    )
+                  }
                   records={props.patient.diagnosis}
                   recordType="diagnosis"
                 />
@@ -148,6 +162,18 @@ const NewEntry: FC<NewEntryProps> = (props) => {
             {props.patient.prescriptions.length > 0 && (
               <FormControl>
                 <RemoveRecord
+                  onSelect={(record) =>
+                    setRemovingPrescriptions((prevPrescriptions) =>
+                      prevPrescriptions.concat(record)
+                    )
+                  }
+                  onDeselect={(record) =>
+                    setRemovingPrescriptions((prevPrescriptions) =>
+                      prevPrescriptions.filter(
+                        (prescription) => prescription !== record
+                      )
+                    )
+                  }
                   records={props.patient.prescriptions}
                   recordType="prescriptions"
                 />
