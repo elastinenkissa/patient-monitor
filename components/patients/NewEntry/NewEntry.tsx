@@ -89,16 +89,15 @@ const NewEntry: FC<NewEntryProps> = (props) => {
       return;
     }
 
-    const newEntry: Entry = {
-      by: user!,
-      content: contentValue,
-      date: new Date().toLocaleString(),
-      addedDiagnosis: diagnosis,
-      addedPrescriptions: prescriptions,
-      newHealthRating,
+    const newEntry = new Entry(
+      user!,
+      contentValue,
+      diagnosis,
       removingDiagnosis,
-      removingPrescriptions
-    };
+      prescriptions,
+      removingPrescriptions,
+      newHealthRating
+    );
 
     props.onAddEntry(newEntry);
   };

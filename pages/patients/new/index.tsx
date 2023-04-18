@@ -2,9 +2,9 @@ import { FC, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 
-import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLayout';
 import HealthRatingChange from '@/components/patients/NewEntry/HealthRatingChange/HealthRatingChange';
 import Button from '@/components/shared/Button/Button';
+import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLayout';
 
 import { HealthRating } from '@/types/patient';
 
@@ -18,11 +18,11 @@ const NewPatient: FC = () => {
   const addPatientHandler = (event: FormEvent) => {
     event.preventDefault();
 
-    router.push('/patients')
+    router.push('/patients');
   };
 
   return (
-    <PatientsLayout>
+    <PatientsLayout className={classes.container}>
       <form className={classes.form} onSubmit={addPatientHandler}>
         <div className={classes.inputs}>
           <FormControl>
@@ -53,7 +53,9 @@ const NewPatient: FC = () => {
             />
           </FormControl>
         </div>
-        <Button type="submit">ADD</Button>
+        <Button type="submit" className={classes.submit}>
+          ADD
+        </Button>
       </form>
     </PatientsLayout>
   );

@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-import { Entry as EntryType } from '@/types/patient';
-
-import classes from './Entry.module.css';
 import MedicalRecords from '../MedicalRecords/MedicalRecords';
 import HealthRating from '../HealthRating/HealthRating';
 
+import { Entry as EntryType } from '@/types/patient';
+
+import classes from './Entry.module.css';
 interface EntryProps {
   entry: EntryType;
 }
@@ -40,7 +40,7 @@ const Entry: FC<EntryProps> = (props) => {
         <HealthRating healthRating={props.entry.newHealthRating} />
       </div>
       <em>
-        Checked by {props.entry.by.name} on {props.entry.date}
+        Checked by {props.entry.by.name} on {props.entry.date.toLocaleString()}
       </em>
     </div>
   );

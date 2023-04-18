@@ -7,12 +7,15 @@ import classes from './PatientsLayout.module.css';
 
 interface PatientsLayoutProps {
   children: ReactNode;
+  className?: string;
 }
 
 const PatientsLayout: FC<PatientsLayoutProps> = (props) => {
   return (
     <Layout>
-      <Card className={classes.container}>{props.children}</Card>
+      <Card className={classes.container + ' ' + props.className}>
+        {props.children}
+      </Card>
     </Layout>
   );
 };

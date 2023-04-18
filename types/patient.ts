@@ -11,15 +11,20 @@ type Doctor = Omit<
 type Diagnosis = Array<string>;
 type Prescriptions = Array<string>;
 
-export interface Entry {
-  date: string;
-  addedDiagnosis: Diagnosis;
-  removingDiagnosis: Diagnosis;
-  addedPrescriptions: Prescriptions;
-  removingPrescriptions: Prescriptions;
-  content: string;
-  by: Doctor;
-  newHealthRating: HealthRating;
+export class Entry {
+  date: Date;
+
+  constructor(
+    public by: Doctor,
+    public content: string,
+    public addedDiagnosis: Diagnosis,
+    public removingDiagnosis: Diagnosis,
+    public addedPrescriptions: Prescriptions,
+    public removingPrescriptions: Prescriptions,
+    public newHealthRating: HealthRating
+  ) {
+    this.date = new Date();
+  }
 }
 
 export interface Patient {

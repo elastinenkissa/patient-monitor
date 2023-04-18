@@ -1,7 +1,7 @@
 .container {
   padding: 2rem;
   width: 50vw;
-  height: fit-content;
+  height: 60vh;
 }
 
 .form {
@@ -37,10 +37,11 @@
   color: white;
   padding: 1rem;
   width: 5rem;
-  align-self: stretch;
 }
 
 .formInputs {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 65%;
 }
