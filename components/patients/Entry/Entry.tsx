@@ -35,8 +35,10 @@ const Entry: FC<EntryProps> = (props) => {
           Removed diagnosis
         </MedicalRecords>
       )}
-      <p>Health rating:</p>
-      <HealthRating healthRating={props.entry.newHealthRating} />
+      <div className={classes.healthRating}>
+        <p>Health rating:</p>
+        <HealthRating healthRating={props.entry.newHealthRating} />
+      </div>
       <em>
         Checked by {props.entry.by.name} on {props.entry.date}
       </em>

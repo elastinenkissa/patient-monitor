@@ -1,11 +1,5 @@
 import { Favorite } from '@mui/icons-material';
-import {
-  Children,
-  FC,
-  JSXElementConstructor,
-  ReactElement,
-  cloneElement
-} from 'react';
+import { FC, JSXElementConstructor, ReactElement, cloneElement } from 'react';
 
 interface HealthRatingProps {
   healthRating: number;
