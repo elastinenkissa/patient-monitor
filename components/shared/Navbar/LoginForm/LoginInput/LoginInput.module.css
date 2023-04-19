@@ -1,12 +1,18 @@
 .input {
   background-color: white;
+  height: 2.5rem;
 }
 
 .arrow {
   position: absolute;
+  border: none;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   top: 50%;
   transform: translate(-50%, -50%);
-  right: -5px;
+  right: -0.5rem;
   height: 80%;
   width: 1.5rem;
   background-color: rgb(18, 18, 53);

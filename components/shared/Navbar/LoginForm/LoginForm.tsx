@@ -2,9 +2,9 @@ import { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import LoginButton, { LoginType } from './LoginButton/LoginButton';
+import LoginInput from './LoginInput/LoginInput';
 
 import classes from './LoginForm.module.css';
-import LoginInput from './LoginInput/LoginInput';
 
 const LoginForm: FC = () => {
   const [loginType, setLoginType] = useState<LoginType>();
@@ -40,6 +40,8 @@ const LoginForm: FC = () => {
         <LoginInput
           show={showLoginForm}
           onExited={() => setShowLoginButton(true)}
+          onLogin={(value) => router.push('/home')}
+          loginType={loginType}
         />
       </div>
       <div className={classes.login}>
@@ -52,6 +54,8 @@ const LoginForm: FC = () => {
         <LoginInput
           show={showRegisterForm}
           onExited={() => setShowRegisterButton(true)}
+          onLogin={(value) => router.push('/home')}
+          loginType={loginType}
         />
       </div>
     </div>

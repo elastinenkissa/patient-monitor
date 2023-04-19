@@ -78,3 +78,7 @@
 .logout:hover {
   color: white;
 }
+
+.logout:active {
+  color: #808080;
+}

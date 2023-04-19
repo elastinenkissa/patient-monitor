@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import Button from '@/components/shared/Button/Button';
 
-import classes from './LoginButton.module.css'
+import classes from './LoginButton.module.css';
 
 export type LoginType = 'LOGIN' | 'REGISTER';
 
@@ -24,9 +24,14 @@ const LoginButton: FC<LoginButtonProps> = (props) => {
       mountOnEnter
       onExited={props.onExited}
     >
-      <Button className={classes.button} onClick={() => props.onLoginTypeSwitch(props.loginType)}>
-        {props.loginType}
-      </Button>
+      <div>
+        <Button
+          className={classes.button}
+          onClick={() => props.onLoginTypeSwitch(props.loginType)}
+        >
+          {props.loginType}
+        </Button>
+      </div>
     </CSSTransition>
   );
 };

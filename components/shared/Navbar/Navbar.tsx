@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -21,6 +21,13 @@ const Navbar: FC = () => {
   const { user, logout } = useContext<UserContextType>(UserContext);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const logoutHandler = () => {
     logout();

@@ -84,40 +84,35 @@ a {
   transition: transform 400ms;
 }
 
-.login-button-exit {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.login-button-exit-active {
-  transform: translateX(-100%);
-  opacity: 0;
-  transition: all 500ms;
-}
-
-.login-button-exit-done {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-
 .login-button-enter {
-  transform: translateX(-100%);
+  transform: translateX(100%);
   opacity: 0;
 }
 
 .login-button-enter-active {
   transform: translateX(0);
   opacity: 1;
-  transition: all 500ms;
+  transition: all 400ms;
 }
 
-.login-button-enter-done {
+.login-button-exit {
   transform: translateX(0);
   opacity: 1;
 }
 
-.login-input-enter {
+.login-button-exit-active {
   transform: translateX(100%);
+  opacity: 0;
+  transition: all 500ms;
+}
+
+.login-input-exit-done {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.login-input-enter {
+  transform: translateX(-100%);
   opacity: 0;
 }
 
@@ -133,12 +128,12 @@ a {
 }
 
 .login-input-exit-active {
-  transform: translateX(100%);
+  transform: translateX(-100%);
   opacity: 0;
   transition: all 500ms;
 }
 
 .login-input-exit-done {
-  transform: translateX(100%);
+  transform: translateX(-100%);
   opacity: 0;
 }

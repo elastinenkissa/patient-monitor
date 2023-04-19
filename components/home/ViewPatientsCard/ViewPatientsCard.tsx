@@ -22,7 +22,7 @@ const ViewPatientsCard: FC<ViewPatientsCardProps> = (props) => {
   return (
     <Card className={classes.patients}>
       <Link
-        href={`/patients?doctor=${props.user!.id}`}
+        href={`/patients?doctor=${props.user?.id}`}
         className={classes.viewPatients}
         onMouseEnter={() => setZoom(true)}
         onMouseLeave={() => setZoom(false)}
