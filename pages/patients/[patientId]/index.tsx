@@ -39,7 +39,7 @@ const Patient: FC<PatientProps> = (props) => {
         <Female color="error" fontSize="large" className={classes.gender} />
       );
     }
-    if (props.patient.sex === 'Intersex') {
+    if (props.patient.sex === 'Other') {
       return (
         <Transgender
           color="success"

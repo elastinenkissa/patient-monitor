@@ -50,7 +50,7 @@ a {
 
 .zoom-enter-active {
   transform: translateX(50%);
-  transition: transform 1000ms;
+  transition: transform 500ms;
 }
 
 .zoom-enter-done {
@@ -63,7 +63,7 @@ a {
 
 .zoom-exit-active {
   transform: translateX(0);
-  transition: transform 1000ms;
+  transition: transform 500ms;
 }
 
 .modal-appear-enter {
@@ -81,5 +81,64 @@ a {
 
 .modal-appear-exit-active {
   transform: scale(0);
-  transition: transform 300ms;
+  transition: transform 400ms;
+}
+
+.login-button-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.login-button-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 500ms;
+}
+
+.login-button-exit-done {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.login-button-enter {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.login-button-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.login-button-enter-done {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.login-input-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.login-input-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 400ms;
+}
+
+.login-input-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.login-input-exit-active {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 500ms;
+}
+
+.login-input-exit-done {
+  transform: translateX(100%);
+  opacity: 0;
 }

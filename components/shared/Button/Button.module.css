@@ -5,15 +5,20 @@
   background-color: rgb(18, 18, 53);
   padding: 1rem;
   transition: background-color 200ms;
+  font-weight: 600;
+  transform: scale(1);
+  transition: transform 200ms;
 }
 
 .button:hover {
   cursor: pointer;
   background-color: #0e2c55;
-  transition: background-color 200ms;
+  transform: scale(1.05);
+  transition: all 200ms;
 }
 
 .button:active {
   background-color: #11396d;
-  transition: background-color 200ms;
+  transform: scale(1);
+  transition: all 200ms;
 }

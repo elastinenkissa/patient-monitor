@@ -27,12 +27,14 @@ export class Entry {
   }
 }
 
+export type Gender = 'Male' | 'Female' | 'Other';
+
 export interface Patient {
   id: string;
   name: string;
   identificationNumber: string;
   occupation: string;
-  sex: 'Male' | 'Female' | 'Intersex';
+  sex: Gender;
   diagnosis: Diagnosis;
   prescriptions: Prescriptions;
   healthcareCompany: HealthcareCompany;

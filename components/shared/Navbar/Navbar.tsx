@@ -11,7 +11,7 @@ import {
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 
-import Button from '../Button/Button';
+import LoginForm from './LoginForm/LoginForm';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
@@ -34,10 +34,7 @@ const Navbar: FC = () => {
       <div className={classes.container}>
         <h1>PatientsE</h1> {/*make logo and replace this with it */}
         {!user ? (
-          <div className={classes.buttons}>
-            <Button>LOGIN</Button>
-            <Button>REGISTER</Button>
-          </div>
+          <LoginForm />
         ) : (
           <>
             <div className={classes.userInfo}>

@@ -1,6 +1,6 @@
 import { AddCircle } from '@mui/icons-material';
 import { Badge, InputLabel, OutlinedInput } from '@mui/material';
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, FocusEvent, useState } from 'react';
 
 import MedicalRecord from '../../MedicalRecord/MedicalRecord';
 
@@ -16,8 +16,11 @@ interface NewRecordProps {
 const NewRecord: FC<NewRecordProps> = (props) => {
   const [recordValue, setRecordValue] = useState<string>('');
 
+  const [addButtonIsShown, setAddButtonIsShown] = useState<boolean>(false);
+
   const addRecordHandler = () => {
     props.onAddRecord(recordValue);
+    setAddButtonIsShown(false)
     setRecordValue('');
   };
 
@@ -35,8 +38,14 @@ const NewRecord: FC<NewRecordProps> = (props) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             setRecordValue(event.target.value)
           }
+          onFocus={() => setAddButtonIsShown(true)}
+          onBlur={(event: FocusEvent<HTMLTextAreaElement>) => {
+            if (event.target.value === '') {
+              setAddButtonIsShown(false);
+            }
+          }}
         />
-        <AddCircle onClick={addRecordHandler} />
+        {addButtonIsShown && <AddCircle onClick={addRecordHandler} />}
       </div>
       <div className={classes.recordList}>
         {props.records.map((record) => (

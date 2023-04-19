@@ -1,0 +1,19 @@
+.button {
+  background-color: transparent;
+  /* color: rgb(18, 18, 53); */
+  color: white;
+  font-weight: bolder;
+  width: 150px;
+}
+
+.button:hover {
+  transform: scale(1.1);
+  transition: transform 300ms;
+  background-color: transparent;
+}
+
+.button:active {
+  /* background-color: rgb(219, 219, 219); */
+  transform: scale(1);
+  transition: transform 100ms;
+}

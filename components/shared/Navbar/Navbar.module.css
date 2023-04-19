@@ -10,7 +10,6 @@
   margin-right: 5rem;
 }
 
-
 .hamburger {
   display: none;
 }
@@ -29,13 +28,6 @@
   .hamburger:hover {
     cursor: pointer;
   }
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .userInfo {

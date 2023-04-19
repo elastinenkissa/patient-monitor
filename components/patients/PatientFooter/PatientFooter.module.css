@@ -8,15 +8,15 @@
 
 .dismiss {
   background-color: rgb(104, 25, 25);
-  transition: background-color 200ms;
+  transition: all 200ms;
 }
 
 .dismiss:hover {
   background-color: rgb(138, 34, 34);
-  transition: background-color 200ms;
+  transition: all 200ms;
 }
 
 .dismiss:active {
   background-color: rgb(156, 39, 39);
-  transition: background-color 200ms;
+  transition: all 200ms;
 }

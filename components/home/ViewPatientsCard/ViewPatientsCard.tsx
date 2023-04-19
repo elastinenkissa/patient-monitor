@@ -28,7 +28,7 @@ const ViewPatientsCard: FC<ViewPatientsCardProps> = (props) => {
         onMouseLeave={() => setZoom(false)}
       >
         <h4>View your patients</h4>
-        <CSSTransition timeout={1000} in={zoom} classNames="zoom">
+        <CSSTransition timeout={500} in={zoom} classNames="zoom">
           <ChevronRight className={classes.arrow} />
         </CSSTransition>
       </Link>

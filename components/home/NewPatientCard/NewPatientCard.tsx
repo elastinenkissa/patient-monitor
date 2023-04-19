@@ -9,21 +9,19 @@ import classes from './NewPatientCard.module.css';
 
 const NewPatientCard: FC = () => {
   const [hovered, setHovered] = useState<boolean>(false);
-  const [content, setContent] = useState<string | ReactNode>(
-    <Add fontSize={'large'} />
-  );
+  const [content, setContent] = useState<string | ReactNode>('Add new patient');
 
   const hoverInHandler = () => {
     setHovered(true);
     setTimeout(() => {
-      setContent('Add new patient');
+      setContent(<Add fontSize={'large'} />);
     }, 300);
   };
 
   const hoverOutHandler = () => {
     setHovered(false);
     setTimeout(() => {
-      setContent(<Add fontSize={'large'} />);
+      setContent('Add new patient');
     }, 300);
   };
 

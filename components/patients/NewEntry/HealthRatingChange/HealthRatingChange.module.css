@@ -1,8 +1,10 @@
 .container {
   display: flex;
   flex-direction: row;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  justify-content: space-between;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+  width: 100%;
 }
 
 
@@ -13,11 +15,11 @@
 
 .container > svg:hover {
   cursor: pointer;
-  color: #113466;
+  color: #0f2e5a;
   transition: color 300ms;
 }
 
 .container > svg:active {
-  color: #174c91;
+  color: #11396d;
   transition: color 300ms;
 }
