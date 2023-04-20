@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import PatientItem from '../PatientItem/PatientItem';
 
-import { Patient } from '@/types/patient';
+import { Patient } from '@/models/patient';
 
 import classes from './PatientList.module.css';
 

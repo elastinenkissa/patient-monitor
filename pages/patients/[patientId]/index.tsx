@@ -13,7 +13,7 @@ import Diagnosis from '@/components/patients/Diagnosis/Diagnosis';
 import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
 import NewEntry from '@/components/patients/NewEntry/NewEntry';
 
-import { Entry, Patient as PatientType } from '@/types/patient';
+import { Entry, Patient as PatientType } from '@/models/patient';
 
 import classes from './Patient.module.css';
 

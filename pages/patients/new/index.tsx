@@ -6,7 +6,7 @@ import HealthRatingChange from '@/components/patients/NewEntry/HealthRatingChang
 import Form from '@/components/shared/Form/Form';
 import NewPatientGender from '@/components/patients/NewPatientGender/NewPatientGender';
 
-import { Gender, HealthRating } from '@/types/patient';
+import { Gender, HealthRating } from '@/models/patient';
 
 import classes from './NewPatient.module.css';
 

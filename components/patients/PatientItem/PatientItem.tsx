@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import HealthRating from '../HealthRating/HealthRating';
 
-import { Patient } from '@/types/patient';
+import { Patient } from '@/models/patient';
 
 import classes from './PatientItem.module.css';
 

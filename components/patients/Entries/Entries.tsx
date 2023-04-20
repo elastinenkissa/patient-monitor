@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import PatientEntry from '../Entry/Entry';
 
-import { Patient } from '@/types/patient';
+import { Patient } from '@/models/patient';
 
 import classes from './Entries.module.css';
 

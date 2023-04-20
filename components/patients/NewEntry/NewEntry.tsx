@@ -13,7 +13,7 @@ import {
   Entry,
   HealthRating as HealthRatingType,
   Patient
-} from '@/types/patient';
+} from '@/models/patient';
 
 import classes from './NewEntry.module.css';
 

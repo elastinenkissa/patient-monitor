@@ -3,7 +3,7 @@ import { FC, useContext } from 'react';
 import NewPatientCard from '../NewPatientCard/NewPatientCard';
 import ViewPatientsCard from '../ViewPatientsCard/ViewPatientsCard';
 
-import { Patient } from '@/types/patient';
+import { Patient } from '@/models/patient';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 

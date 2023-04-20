@@ -46,7 +46,7 @@ const Navbar: FC = () => {
           <>
             <div className={classes.userInfo}>
               <Image
-                src={user!.imageUrl}
+                src={user!.imageUrl!}
                 alt={user!.name}
                 width={110}
                 height={110}
@@ -78,7 +78,7 @@ const Navbar: FC = () => {
                 <PeopleAlt />
                 <p>Patients</p>
               </Link>
-              {user.isAdministrator && (
+              {(user.isAdministrator || user.isOwner) && (
                 <Link
                   href="/dashboard"
                   className={

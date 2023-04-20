@@ -3,7 +3,7 @@ import { AddCircle, RemoveCircle } from '@mui/icons-material';
 
 import HealthRating from '../../HealthRating/HealthRating';
 
-import { HealthRating as HealthRatingType } from '@/types/patient';
+import { HealthRating as HealthRatingType } from '@/models/patient';
 
 import classes from './HealthRatingChange.module.css';
 

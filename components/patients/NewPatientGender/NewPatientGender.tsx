@@ -1,7 +1,7 @@
 import { FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { FC } from 'react';
 
-import { Gender } from '@/types/patient';
+import { Gender } from '@/models/patient';
 
 import classes from './NewPatientGender.module.css';
 

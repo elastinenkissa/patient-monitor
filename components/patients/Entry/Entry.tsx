@@ -3,7 +3,7 @@ import { FC } from 'react';
 import MedicalRecords from '../MedicalRecords/MedicalRecords';
 import HealthRating from '../HealthRating/HealthRating';
 
-import { Entry as EntryType } from '@/types/patient';
+import { Entry as EntryType } from '@/models/patient';
 
 import classes from './Entry.module.css';
 interface EntryProps {

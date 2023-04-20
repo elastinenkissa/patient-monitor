@@ -7,7 +7,7 @@ import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLa
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
-import { Patient } from '@/types/patient';
+import { Patient } from '@/models/patient';
 
 import classes from './Patients.module.css';
 

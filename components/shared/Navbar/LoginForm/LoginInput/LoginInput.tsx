@@ -11,7 +11,11 @@ interface LoginInputProps {
   show: boolean;
   loginType: LoginType | undefined;
   onExited: () => void;
-  onLogin: (value: object) => void;
+  onLogin: (value: {
+    socialNumber: string;
+    companyName?: string;
+    fullName?: string;
+  }) => Promise<void>;
 }
 
 const LoginInput: FC<LoginInputProps> = (props) => {
@@ -56,7 +60,7 @@ const LoginInput: FC<LoginInputProps> = (props) => {
     if (props.loginType === 'REGISTER') {
       if (registerPhase === 3) {
         const registerData = {
-          name: fullName,
+          fullName,
           socialNumber,
           companyName
         };

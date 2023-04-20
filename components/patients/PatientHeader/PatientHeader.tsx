@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 
 import HealthRating from '../HealthRating/HealthRating';
 
-import { Patient } from '@/types/patient';
+import { Patient } from '@/models/patient';
 
 import classes from './PatientHeader.module.css';
 

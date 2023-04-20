@@ -1,6 +1,8 @@
 import { FC, ReactNode, createContext, useState } from 'react';
 
-import { User } from '@/types/user';
+import { UserType } from '@/models/user';
+
+type User = UserType & { token: string };
 
 export interface UserContextType {
   user: User | undefined;
@@ -19,15 +21,7 @@ interface UserContextProviderProps {
 }
 
 const UserContextProvider: FC<UserContextProviderProps> = (props) => {
-  const [user, setUser] = useState<User | undefined>({
-    id: 'u1',
-    name: 'Max Mustermann',
-    identificationNumber: '0506000954978',
-    company: { id: 'c1', name: 'KYS' },
-    imageUrl:
-      'https://th.bing.com/th/id/R.2212e2e523684c91bb6ade690d9e3fc0?rik=jKD89fg3ekClvw&pid=ImgRaw&r=0',
-    isAdministrator: true
-  });
+  const [user, setUser] = useState<User | undefined>();
 
   const login = (user: User) => {
     setUser(user);

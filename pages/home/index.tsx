@@ -7,7 +7,7 @@ import HomeLayout from '@/components/shared/Layout/HomeLayout/HomeLayout';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
-import { Patient } from '@/types/patient';
+import { Patient } from '@/models/patient';
 
 import classes from './Home.module.css';
 

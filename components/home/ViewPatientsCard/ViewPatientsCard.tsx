@@ -6,8 +6,8 @@ import { CSSTransition } from 'react-transition-group';
 import Card from '@/components/shared/Card/Card';
 import PatientList from '@/components/patients/PatientList/PatientList';
 
-import { User } from '@/types/user';
-import { Patient } from '@/types/patient';
+import { User } from '@/models/user';
+import { Patient } from '@/models/patient';
 
 import classes from './ViewPatientsCard.module.css';
 

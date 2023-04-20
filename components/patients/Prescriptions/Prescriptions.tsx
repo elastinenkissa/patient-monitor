@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import MedicalRecords from '../MedicalRecords/MedicalRecords';
 
-import { Patient } from '@/types/patient';
+import { Patient } from '@/models/patient';
 
 interface PrescriptionsProps {
   patient: Patient;
