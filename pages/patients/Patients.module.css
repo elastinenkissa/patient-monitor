@@ -21,3 +21,11 @@
 .health {
   margin-left: 3.2rem;
 }
+
+.scrollable {
+  overflow: scroll;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 0;
+}

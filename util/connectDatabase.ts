@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
 
 export const connectDatabase = async () => {
-  if (mongoose.connection.readyState === 1) {
-    console.log('Connected');
-    
-    return mongoose.connection.asPromise();
+  if (mongoose.connection.readyState >= 1) {
+    return mongoose.connection.db;
   }
-  return await mongoose.connect(process.env.MONGODB_URI!).then(() => console.log('Connected 2'));
+  return await mongoose.connect(process.env.MONGODB_URI!).then(() => {
+    require('../models/company');
+    require('../models/entry');
+    require('../models/patient');
+    require('../models/user');
+  });
 };

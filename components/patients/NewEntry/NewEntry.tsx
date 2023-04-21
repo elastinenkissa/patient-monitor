@@ -13,13 +13,12 @@ import {
   HealthRating as HealthRatingType,
   PatientType
 } from '@/models/patient';
-import { EntryType } from '@/models/entry';
 
 import classes from './NewEntry.module.css';
 
 interface NewEntryProps {
   visible: boolean;
-  onAddEntry: (entry: EntryType) => void;
+  onAddEntry: (patient: PatientType) => void;
   patient: PatientType;
 }
 
@@ -105,9 +104,9 @@ const NewEntry: FC<NewEntryProps> = (props) => {
           }
         }
       );
-      const newEntry: EntryType = await response.json();
+      const patient: PatientType = await response.json();
 
-      props.onAddEntry(newEntry);
+      props.onAddEntry(patient);
     } catch (error: any) {
       console.log(error);
     }
@@ -153,7 +152,7 @@ const NewEntry: FC<NewEntryProps> = (props) => {
             onAddRecord={addPrescriptionHandler}
           />
         </FormControl>
-        {props.patient.diagnosis.length > 0 && (
+        {props.patient.diagnosis?.length > 0 && (
           <FormControl>
             <RemoveRecord
               onSelect={(record) =>
@@ -171,7 +170,7 @@ const NewEntry: FC<NewEntryProps> = (props) => {
             />
           </FormControl>
         )}
-        {props.patient.prescriptions.length > 0 && (
+        {props.patient.prescriptions?.length > 0 && (
           <FormControl>
             <RemoveRecord
               onSelect={(record) =>

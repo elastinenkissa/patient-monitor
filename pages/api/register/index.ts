@@ -23,7 +23,8 @@ export default async function handler(
       identificationNumber: req.body.socialNumber,
       company: newCompany.id,
       isOwner: true,
-      patients: []
+      patients: [],
+      recentPatients: []
     });
 
     res

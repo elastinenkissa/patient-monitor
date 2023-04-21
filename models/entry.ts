@@ -3,18 +3,9 @@ import mongoose from 'mongoose';
 import { HealthRating } from './patient';
 import { UserType } from './user';
 
-type Doctor = Omit<
-  UserType,
-  | 'identificationNumber'
-  | 'company'
-  | 'imageUrl'
-  | 'isAdministrator'
-  | 'isOwner'
->;
-
 export interface EntryType {
   id: string;
-  by: Doctor;
+  by: string;
   content: string;
   addedDiagnosis: Array<string>;
   removingDiagnosis: Array<string>;
@@ -26,8 +17,8 @@ export interface EntryType {
 
 const entrySchema = new mongoose.Schema<EntryType>({
   by: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true
   },
   content: {
     type: String,

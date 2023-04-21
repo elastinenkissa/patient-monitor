@@ -8,6 +8,10 @@ import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLa
 import { UserContext, UserContextType } from '@/context/UserContext';
 
 import { PatientType } from '@/models/patient';
+import { Company } from '@/models/company';
+import { User } from '@/models/user';
+
+import { connectDatabase } from '@/util/connectDatabase';
 
 import classes from './Patients.module.css';
 
@@ -29,15 +33,15 @@ const Patients: FC<PatientsProps> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <PatientsLayout>
+        <div className={classes.header}>
+          <h4>Name</h4>
+          <h4 className={classes.health}>Health rating</h4>
+          <h4>View</h4>
+        </div>
         {props.patients.length > 0 && (
-          <>
-            <div className={classes.header}>
-              <h4>Name</h4>
-              <h4 className={classes.health}>Health rating</h4>
-              <h4>View</h4>
-            </div>
+          <div className={classes.scrollable}>
             <PatientList patients={props.patients} />
-          </>
+          </div>
         )}
       </PatientsLayout>
     </>
@@ -47,15 +51,62 @@ const Patients: FC<PatientsProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const response = await fetch(
-    `http://localhost:3000/api/patients?companyId=${context.query.company}&doctorId=${context.query.doctor}`
-  );
-  const patients = await response.json();
+  const { company, doctor } = context.query;
+
+  if (company) {
+    try {
+      await connectDatabase();
+
+      const fetchedCompany = await Company.findById(company).populate(
+        'patients'
+      );
+
+      if (!fetchedCompany) {
+        return {
+          notFound: true
+        };
+      }
+
+      return {
+        props: {
+          patients: JSON.parse(JSON.stringify(fetchedCompany.patients))
+        }
+      };
+    } catch (error: any) {
+      return {
+        notFound: true
+      };
+    }
+  }
+
+  if (doctor) {
+    try {
+      await connectDatabase();
+
+      const fetchedDoctor = await User.findById(doctor).populate('patients');
+
+      if (!fetchedDoctor) {
+        console.log('i here');
+
+        return {
+          notFound: true
+        };
+      }
+
+      return {
+        props: {
+          patients: JSON.parse(JSON.stringify(fetchedDoctor.patients))
+        }
+      };
+    } catch (error: any) {
+      return {
+        notFound: true
+      };
+    }
+  }
 
   return {
-    props: {
-      patients
-    }
+    notFound: true
   };
 };
 

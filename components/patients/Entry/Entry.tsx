@@ -6,6 +6,7 @@ import HealthRating from '../HealthRating/HealthRating';
 import { EntryType } from '@/models/entry';
 
 import classes from './Entry.module.css';
+
 interface EntryProps {
   entry: EntryType;
 }
@@ -40,8 +41,8 @@ const Entry: FC<EntryProps> = (props) => {
         <HealthRating healthRating={props.entry.newHealthRating} />
       </div>
       <em>
-        Checked by {props.entry.by.name} on
-        <time>{' '}{new Date(props.entry.lastUpdated).toLocaleDateString()}</time>
+        Checked by {props.entry.by} on
+        <time> {new Date(props.entry.lastUpdated).toLocaleString()}</time>
       </em>
     </div>
   );

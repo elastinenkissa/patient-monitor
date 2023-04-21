@@ -1,35 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import jwt from 'jsonwebtoken';
 
 import { Entry } from '@/models/entry';
-import { User } from '@/models/user';
 
 import { connectDatabase } from '@/util/connectDatabase';
+import { getLoggedInUser } from '@/util/pseudoMiddleware';
+
 import { Patient } from '@/models/patient';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const token =
-      req.headers.authorization?.startsWith('bearer') &&
-      req.headers.authorization.split(' ')[1];
-
-    if (!token) {
-      return res.status(401).json({ message: 'Invalid token.' });
-    }
-
     try {
       await connectDatabase();
 
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET!);
-      const user = await User.findById(decodedToken);
-
-      if (!user) {
-        return res.status(401).json({ message: 'Unauthorized.' });
-      }
+      const user = await getLoggedInUser(req);
 
       const newEntry = await Entry.create({
         content: req.body.content,
-        by: user.id,
+        by: user.name,
         newHealthRating: req.body.newHealthRating,
         addedDiagnosis: req.body.addedDiagnosis,
         addedPrescriptions: req.body.addedPrescriptions,
@@ -48,11 +35,26 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       patient.entries = patient.entries.concat(newEntry.id);
+      patient.diagnosis = patient.diagnosis.concat(req.body.addedDiagnosis);
+      patient.prescriptions = patient.prescriptions.concat(
+        req.body.addedPrescriptions
+      );
+      req.body.removingDiagnosis.map((diagnosis: string) => {
+        patient.diagnosis = patient.diagnosis.filter(
+          (diag) => diag !== diagnosis
+        );
+      });
+      req.body.removingPrescriptions.map((prescription: string) => {
+        patient.prescriptions = patient.prescriptions.filter(
+          (prescr) => prescr !== prescription
+        );
+      });
+      patient.healthRating = req.body.newHealthRating;
       await patient.save();
 
-      const entry = await newEntry.populate('by');
+      const newPatient = await patient.populate('entries');
 
-      return res.status(201).json(entry);
+      return res.status(201).json(newPatient);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }

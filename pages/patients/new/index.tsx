@@ -25,7 +25,7 @@ const NewPatient: FC = () => {
 
   const addPatientHandler = async () => {
     try {
-      await fetch('/api/patients', {
+      const response = await fetch('/api/patients', {
         method: 'post',
         body: JSON.stringify({
           name: patientName,
@@ -39,6 +39,10 @@ const NewPatient: FC = () => {
           'Content-Type': 'application/json'
         }
       });
+
+      if (!response.ok) {
+        return console.log(JSON.parse(await response.text()).message);
+      }
     } catch (error: any) {
       return console.log(error.message);
     }

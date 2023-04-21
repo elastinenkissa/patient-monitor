@@ -13,8 +13,9 @@ import Diagnosis from '@/components/patients/Diagnosis/Diagnosis';
 import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
 import NewEntry from '@/components/patients/NewEntry/NewEntry';
 
-import { PatientType } from '@/models/patient';
-import { EntryType } from '@/models/entry';
+import { PatientType, Patient as PatientDB } from '@/models/patient';
+
+import { connectDatabase } from '@/util/connectDatabase';
 
 import classes from './Patient.module.css';
 
@@ -51,11 +52,9 @@ const Patient: FC<PatientProps> = (props) => {
     }
   };
 
-  const addEntryHandler = (entry: EntryType) => {
+  const addEntryHandler = (newPatient: PatientType) => {
     setModalIsVisible(false);
-    setPatient((prevPatient) => {
-      return { ...prevPatient, entries: prevPatient.entries.concat(entry) };
-    });
+    setPatient(newPatient);
   };
 
   const gender = checkGender();
@@ -72,8 +71,8 @@ const Patient: FC<PatientProps> = (props) => {
           <div className={classes.main}>
             <PatientHeader patient={patient} genderSymbol={gender} />
             <Entries patient={patient} />
-            {patient.diagnosis.length > 0 && <Diagnosis patient={patient} />}
-            {patient.prescriptions.length > 0 && (
+            {patient.diagnosis?.length > 0 && <Diagnosis patient={patient} />}
+            {patient.prescriptions?.length > 0 && (
               <Prescriptions patient={patient} />
             )}
           </div>
@@ -100,16 +99,29 @@ const Patient: FC<PatientProps> = (props) => {
 export const getServerSideProps: GetServerSideProps<PatientProps> = async (
   context
 ) => {
-  const response = await fetch(
-    `http://localhost:3000/api/patients/${context.query.patientId}`
-  );
-  const patient: PatientType = await response.json();
+  try {
+    await connectDatabase();
 
-  return {
-    props: {
-      patient
+    const patient = await PatientDB.findById(context.query.patientId).populate(
+      'entries'
+    );
+
+    if (!patient) {
+      return {
+        notFound: true
+      };
     }
-  };
+
+    return {
+      props: {
+        patient: JSON.parse(JSON.stringify(patient))
+      }
+    };
+  } catch (error: any) {
+    return {
+      notFound: true
+    };
+  }
 };
 
 export default Patient;

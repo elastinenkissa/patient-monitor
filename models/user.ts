@@ -9,6 +9,7 @@ export interface UserType extends mongoose.Document {
   identificationNumber: string;
   company: HealthcareCompany;
   patients: Array<PatientType>;
+  recentPatients: Array<PatientType>;
   imageUrl?: string;
   isAdministrator?: boolean;
   isOwner?: boolean;
@@ -38,6 +39,12 @@ const userSchema = new mongoose.Schema<UserType>({
     type: String
   },
   patients: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Patient'
+    }
+  ],
+  recentPatients: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Patient'

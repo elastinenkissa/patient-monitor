@@ -26,7 +26,6 @@ const patientSchema = new mongoose.Schema<PatientType>({
   identificationNumber: {
     type: String,
     required: true,
-    unique: true
   },
   occupation: {
     type: String,
@@ -38,12 +37,14 @@ const patientSchema = new mongoose.Schema<PatientType>({
   },
   diagnosis: [
     {
-      type: String
+      type: String,
+      unique: true
     }
   ],
   prescriptions: [
     {
-      type: String
+      type: String,
+      unique: true
     }
   ],
   healthRating: {

@@ -8,12 +8,8 @@
   margin-top: 1.2rem;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
 }
 
-.container::-webkit-scrollbar {
-  width: 0;
-}
 
 @media screen and (max-width: 900px) {
     .container {

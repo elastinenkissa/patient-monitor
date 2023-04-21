@@ -17,7 +17,6 @@ const HomeCards: FC<HomeCardsProps> = (props) => {
   return (
     <>
       <ViewPatientsCard user={user} patients={props.patients} />
-
       <NewPatientCard />
     </>
   );

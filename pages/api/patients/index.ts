@@ -1,30 +1,33 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import jwt from 'jsonwebtoken';
 
 import { Patient } from '@/models/patient';
 import { Company } from '@/models/company';
-import { User } from '@/models/user';
 
 import { connectDatabase } from '@/util/connectDatabase';
+import { getLoggedInUser } from '@/util/pseudoMiddleware';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const token =
-      req.headers.authorization?.startsWith('bearer') &&
-      req.headers.authorization.split(' ')[1];
-
-    if (!token) {
-      return res.status(401).json({ message: 'Invalid token.' });
-    }
-
     try {
       await connectDatabase();
 
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET!);
-      const user = await User.findById(decodedToken);
+      const user = await getLoggedInUser(req);
 
-      if (!user) {
-        return res.status(401).json({ message: 'Unauthorized.' });
+      const existingPatients = await Patient.find({
+        identificationNumber: req.body.socialNumber
+      });
+
+      const currentCompanyPatients = (await user.populate('company')).company
+        .patients;
+
+      if (
+        existingPatients.find((patient) =>
+          currentCompanyPatients.includes(patient.id)
+        )
+      ) {
+        return res
+          .status(400)
+          .json({ message: 'Patient is already registered in this company.' });
       }
 
       const patient = await Patient.create({
@@ -39,6 +42,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       user.patients = user.patients.concat(patient.id);
+      if (user.recentPatients.length === 3) {
+        user.recentPatients.shift();
+      }
+      user.recentPatients = user.recentPatients.concat(patient.id);
       await user.save();
 
       const company = await Company.findById(user.company);
@@ -54,44 +61,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }
-  }
-
-  if (req.method === 'GET') {
-    const { companyId, doctorId } = req.query;
-
-    if (companyId !== 'undefined') {
-      try {
-        await connectDatabase();
-
-        const company = await Company.findById(companyId).populate('patients');
-
-        if (!company) {
-          return res.status(404).json({ message: 'Company not found.' });
-        }
-
-        return res.status(200).json(company.patients);
-      } catch (error: any) {
-        return res.status(400).json({ message: error.message });
-      }
-    }
-
-    if (doctorId !== 'undefined') {
-      try {
-        await connectDatabase();
-
-        const doctor = await User.findById(doctorId).populate('patients');
-
-        if (!doctor) {
-          return res.status(404).json({ message: 'Doctor not found.' });
-        }
-
-        return res.status(200).json(doctor.patients);
-      } catch (error: any) {
-        return res.status(400).json({ message: error.message });
-      }
-    }
-
-    res.status(404).json({ message: 'No patients found.' });
   }
 };
 
