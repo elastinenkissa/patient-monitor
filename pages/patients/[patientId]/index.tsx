@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
+import { GetServerSideProps } from 'next';
 import { FC, useState } from 'react';
 import { Female, Male, Transgender } from '@mui/icons-material';
 import { Modal } from '@mui/material';
@@ -13,7 +13,8 @@ import Diagnosis from '@/components/patients/Diagnosis/Diagnosis';
 import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
 import NewEntry from '@/components/patients/NewEntry/NewEntry';
 
-import { Entry, Patient as PatientType } from '@/models/patient';
+import { PatientType } from '@/models/patient';
+import { EntryType } from '@/models/entry';
 
 import classes from './Patient.module.css';
 
@@ -29,17 +30,17 @@ const Patient: FC<PatientProps> = (props) => {
   const router = useRouter();
 
   const checkGender = () => {
-    if (props.patient.sex === 'Male') {
+    if (props.patient.gender === 'Male') {
       return (
         <Male color="primary" fontSize="large" className={classes.gender} />
       );
     }
-    if (props.patient.sex === 'Female') {
+    if (props.patient.gender === 'Female') {
       return (
         <Female color="error" fontSize="large" className={classes.gender} />
       );
     }
-    if (props.patient.sex === 'Other') {
+    if (props.patient.gender === 'Other') {
       return (
         <Transgender
           color="success"
@@ -50,40 +51,10 @@ const Patient: FC<PatientProps> = (props) => {
     }
   };
 
-  const addEntryHandler = (entry: Entry) => {
+  const addEntryHandler = (entry: EntryType) => {
     setModalIsVisible(false);
     setPatient((prevPatient) => {
-      let diagnosis = prevPatient.diagnosis;
-      let prescriptions = prevPatient.prescriptions;
-
-      if (entry.addedDiagnosis) {
-        diagnosis = diagnosis.concat(entry.addedDiagnosis);
-      }
-
-      if (entry.addedPrescriptions) {
-        prescriptions = prescriptions.concat(entry.addedPrescriptions);
-      }
-
-      if (entry.removingDiagnosis) {
-        diagnosis = diagnosis.filter(
-          (diagnose, index) => diagnose !== entry.removingDiagnosis[index]
-        );
-      }
-
-      if (entry.removingPrescriptions) {
-        prescriptions = prescriptions.filter(
-          (prescription, index) =>
-            prescription !== entry.removingPrescriptions[index]
-        );
-      }
-
-      return {
-        ...prevPatient,
-        entries: prevPatient.entries?.concat(entry),
-        diagnosis,
-        prescriptions,
-        healthRating: entry.newHealthRating
-      };
+      return { ...prevPatient, entries: prevPatient.entries.concat(entry) };
     });
   };
 
@@ -126,52 +97,18 @@ const Patient: FC<PatientProps> = (props) => {
   );
 };
 
-export const getStaticProps = (
-  context: GetStaticPropsContext<{ patientId: string }>
-): GetStaticPropsResult<PatientProps> => {
-  const patients: Array<PatientType> = [
-    {
-      id: 'p1',
-      name: 'Arto Hellas',
-      healthcareCompany: { id: 'c1', name: 'KYS' },
-      sex: 'Male',
-      occupation: 'Doctor',
-      healthRating: 1,
-      identificationNumber: 'blabla055',
-      diagnosis: [],
-      prescriptions: [],
-      entries: []
-    }
-  ];
-
-  const patient = patients.find(
-    (patient) => patient.id === context?.params?.patientId
+export const getServerSideProps: GetServerSideProps<PatientProps> = async (
+  context
+) => {
+  const response = await fetch(
+    `http://localhost:3000/api/patients/${context.query.patientId}`
   );
-
-  if (!patient) {
-    return {
-      redirect: {
-        destination: '/home',
-        permanent: true
-      }
-    };
-  }
+  const patient: PatientType = await response.json();
 
   return {
     props: {
       patient
     }
-  };
-};
-
-export const getStaticPaths = () => {
-  return {
-    paths: [
-      {
-        params: { patientId: 'p1' }
-      }
-    ],
-    fallback: true
   };
 };
 

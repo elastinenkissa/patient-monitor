@@ -2,12 +2,12 @@ import { FC } from 'react';
 
 import PatientItem from '../PatientItem/PatientItem';
 
-import { Patient } from '@/models/patient';
+import { PatientType } from '@/models/patient';
 
 import classes from './PatientList.module.css';
 
 interface PatientListProps {
-  patients: Array<Patient>;
+  patients: Array<PatientType>;
 }
 
 const PatientList: FC<PatientListProps> = (props) => {

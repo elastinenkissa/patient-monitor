@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 
 import { User } from '@/models/user';
-import { Company } from '@/models/company';
 
 import { connectDatabase } from '@/util/connectDatabase';
 

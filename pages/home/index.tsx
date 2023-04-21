@@ -7,7 +7,7 @@ import HomeLayout from '@/components/shared/Layout/HomeLayout/HomeLayout';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
-import { Patient } from '@/models/patient';
+import { PatientType } from '@/models/patient';
 
 import classes from './Home.module.css';
 
@@ -18,11 +18,13 @@ export const getStaticProps = (): GetStaticPropsResult<HomeProps> => {
         {
           id: 'p1',
           name: 'Arto Hellas',
-          healthcareCompany: { id: 'c1', name: 'KYS' },
-          sex: 'Male',
+          gender: 'Male',
           occupation: 'Placeholder',
           healthRating: 1,
-          identificationNumber: 'blabla055'
+          identificationNumber: 'blabla055',
+          diagnosis: [],
+          prescriptions: [],
+          entries: []
         }
       ]
     }
@@ -30,7 +32,7 @@ export const getStaticProps = (): GetStaticPropsResult<HomeProps> => {
 };
 
 interface HomeProps {
-  patients: Array<Patient>;
+  patients: Array<PatientType>;
 }
 
 const Home: FC<HomeProps> = (props) => {

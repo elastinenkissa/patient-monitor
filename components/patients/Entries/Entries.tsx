@@ -2,12 +2,12 @@ import { FC } from 'react';
 
 import PatientEntry from '../Entry/Entry';
 
-import { Patient } from '@/models/patient';
+import { PatientType } from '@/models/patient';
 
 import classes from './Entries.module.css';
 
 interface EntriesProps {
-  patient: Patient;
+  patient: PatientType;
 }
 
 const Entries: FC<EntriesProps> = (props) => {
@@ -15,7 +15,7 @@ const Entries: FC<EntriesProps> = (props) => {
     <div className={classes.scrollable}>
       {props.patient.entries
         ?.map((entry) => (
-          <PatientEntry key={entry.date + Math.random()} entry={entry} />
+          <PatientEntry key={entry + Math.random().toString()} entry={entry} />
         ))
         .reverse()}
     </div>

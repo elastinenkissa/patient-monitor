@@ -1,5 +1,5 @@
 import { AddCircle } from '@mui/icons-material';
-import { Badge, InputLabel, OutlinedInput } from '@mui/material';
+import {  InputLabel, OutlinedInput } from '@mui/material';
 import { ChangeEvent, FC, FocusEvent, useState } from 'react';
 
 import MedicalRecord from '../../MedicalRecord/MedicalRecord';

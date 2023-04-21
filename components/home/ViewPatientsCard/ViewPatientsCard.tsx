@@ -6,14 +6,14 @@ import { CSSTransition } from 'react-transition-group';
 import Card from '@/components/shared/Card/Card';
 import PatientList from '@/components/patients/PatientList/PatientList';
 
-import { User } from '@/models/user';
-import { Patient } from '@/models/patient';
+import { UserType } from '@/models/user';
+import { PatientType } from '@/models/patient';
 
 import classes from './ViewPatientsCard.module.css';
 
 interface ViewPatientsCardProps {
-  user: User | undefined;
-  patients: Array<Patient>;
+  user: UserType | undefined;
+  patients: Array<PatientType>;
 }
 
 const ViewPatientsCard: FC<ViewPatientsCardProps> = (props) => {

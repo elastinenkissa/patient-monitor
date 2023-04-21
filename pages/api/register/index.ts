@@ -2,9 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { User } from '@/models/user';
 import { Company } from '@/models/company';
-
 import { connectDatabase } from '@/util/connectDatabase';
-import mongoose from 'mongoose';
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,7 +22,8 @@ export default async function handler(
       name: req.body.fullName,
       identificationNumber: req.body.socialNumber,
       company: newCompany.id,
-      isOwner: true
+      isOwner: true,
+      patients: []
     });
 
     res

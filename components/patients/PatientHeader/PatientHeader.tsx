@@ -2,12 +2,12 @@ import { FC, ReactNode } from 'react';
 
 import HealthRating from '../HealthRating/HealthRating';
 
-import { Patient } from '@/models/patient';
+import { PatientType } from '@/models/patient';
 
 import classes from './PatientHeader.module.css';
 
 interface PatientHeaderProps {
-  patient: Patient;
+  patient: PatientType;
   genderSymbol: ReactNode;
 }
 

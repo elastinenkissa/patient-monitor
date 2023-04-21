@@ -1,13 +1,23 @@
-
 .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .health {
-    margin-left: 3.2rem;
-  }
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.header > :nth-child(1) {
+  flex-basis: 33%;
+}
+
+.header > :nth-child(2) {
+  flex-basis: 40%;
+}
+
+.header > :nth-child(3) {
+  flex-basis: 1%;
+}
+
+.health {
+  margin-left: 3.2rem;
+}

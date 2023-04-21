@@ -4,20 +4,27 @@ import Link from 'next/link';
 
 import HealthRating from '../HealthRating/HealthRating';
 
-import { Patient } from '@/models/patient';
+import { PatientType } from '@/models/patient';
 
 import classes from './PatientItem.module.css';
 
 interface PatientItemProps {
-  patient: Patient;
+  patient: PatientType;
 }
 
 const PatientItem: FC<PatientItemProps> = (props) => {
   return (
     <div className={classes.container}>
-      <p>{props.patient.name}</p>
-      <HealthRating healthRating={props.patient.healthRating} />
-      <Link href={`/patients/${props.patient.id}`} className={classes.link}>
+      <div className={classes.flexItemOne}>
+        <p>{props.patient.name}</p>
+      </div>
+      <div className={classes.flexItemTwo}>
+        <HealthRating healthRating={props.patient.healthRating} />
+      </div>
+      <Link
+        href={`/patients/${props.patient.id}`}
+        className={classes.link + ' ' + classes.flexItem}
+      >
         <Visibility />
       </Link>
     </div>

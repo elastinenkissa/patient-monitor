@@ -3,12 +3,12 @@ import { FC, useContext } from 'react';
 import NewPatientCard from '../NewPatientCard/NewPatientCard';
 import ViewPatientsCard from '../ViewPatientsCard/ViewPatientsCard';
 
-import { Patient } from '@/models/patient';
+import { PatientType } from '@/models/patient';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
 interface HomeCardsProps {
-  patients: Array<Patient>;
+  patients: Array<PatientType>;
 }
 
 const HomeCards: FC<HomeCardsProps> = (props) => {

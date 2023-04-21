@@ -3,7 +3,7 @@ import { FC } from 'react';
 import MedicalRecords from '../MedicalRecords/MedicalRecords';
 import HealthRating from '../HealthRating/HealthRating';
 
-import { Entry as EntryType } from '@/models/patient';
+import { EntryType } from '@/models/entry';
 
 import classes from './Entry.module.css';
 interface EntryProps {
@@ -15,7 +15,7 @@ const Entry: FC<EntryProps> = (props) => {
     <div className={classes.entry}>
       <p className={classes.content}>{props.entry.content}</p>
 
-      {props.entry.addedPrescriptions.length > 0 && (
+      {props.entry.addedPrescriptions?.length > 0 && (
         <MedicalRecords records={props.entry.addedPrescriptions}>
           Added prescriptions
         </MedicalRecords>
@@ -30,7 +30,7 @@ const Entry: FC<EntryProps> = (props) => {
           Added diagnosis
         </MedicalRecords>
       )}
-      {props.entry.removingDiagnosis.length > 0 && (
+      {props.entry.removingDiagnosis?.length > 0 && (
         <MedicalRecords records={props.entry.removingDiagnosis}>
           Removed diagnosis
         </MedicalRecords>
@@ -40,7 +40,8 @@ const Entry: FC<EntryProps> = (props) => {
         <HealthRating healthRating={props.entry.newHealthRating} />
       </div>
       <em>
-        Checked by {props.entry.by.name} on {props.entry.date.toLocaleString()}
+        Checked by {props.entry.by.name} on
+        <time>{' '}{new Date(props.entry.lastUpdated).toLocaleDateString()}</time>
       </em>
     </div>
   );

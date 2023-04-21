@@ -1,5 +1,5 @@
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
-import { ChangeEvent, FC } from 'react';
+import { FC } from 'react';
 
 import classes from './RemoveRecord.module.css';
 

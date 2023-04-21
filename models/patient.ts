@@ -1,32 +1,8 @@
 import mongoose from 'mongoose';
 
-import { UserType } from './user';
+import { EntryType } from './entry';
 
 export type HealthRating = 1 | 2 | 3 | 4 | 5;
-
-type Doctor = Omit<
-  UserType,
-  'identificationNumber' | 'company' | 'imageUrl' | 'isAdministrator'
->;
-
-type Diagnosis = Array<string>;
-type Prescriptions = Array<string>;
-
-export class Entry {
-  date: Date;
-
-  constructor(
-    public by: Doctor,
-    public content: string,
-    public addedDiagnosis: Diagnosis,
-    public removingDiagnosis: Diagnosis,
-    public addedPrescriptions: Prescriptions,
-    public removingPrescriptions: Prescriptions,
-    public newHealthRating: HealthRating
-  ) {
-    this.date = new Date();
-  }
-}
 
 export type Gender = 'Male' | 'Female' | 'Other';
 
@@ -36,10 +12,10 @@ export interface PatientType {
   identificationNumber: string;
   occupation: string;
   gender: Gender;
-  diagnosis: Diagnosis;
-  prescriptions: Prescriptions;
+  diagnosis: Array<string>;
+  prescriptions: Array<string>;
   healthRating: HealthRating;
-  entries: Array<Entry>;
+  entries: Array<EntryType>;
 }
 
 const patientSchema = new mongoose.Schema<PatientType>({
@@ -73,7 +49,13 @@ const patientSchema = new mongoose.Schema<PatientType>({
   healthRating: {
     type: Number,
     required: true
-  }
+  },
+  entries: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Entry'
+    }
+  ]
 });
 
 patientSchema.set('toJSON', {

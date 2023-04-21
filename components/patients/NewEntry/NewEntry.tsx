@@ -10,17 +10,17 @@ import Form from '@/components/shared/Form/Form';
 import { UserContext, UserContextType } from '@/context/UserContext';
 
 import {
-  Entry,
   HealthRating as HealthRatingType,
-  Patient
+  PatientType
 } from '@/models/patient';
+import { EntryType } from '@/models/entry';
 
 import classes from './NewEntry.module.css';
 
 interface NewEntryProps {
   visible: boolean;
-  onAddEntry: (entry: Entry) => void;
-  patient: Patient;
+  onAddEntry: (entry: EntryType) => void;
+  patient: PatientType;
 }
 
 const NewEntry: FC<NewEntryProps> = (props) => {
@@ -81,27 +81,36 @@ const NewEntry: FC<NewEntryProps> = (props) => {
     );
   };
 
-  const addEntryHandler = () => {
+  const addEntryHandler = async () => {
     if (contentValue.trim().length < 10) {
       return;
     }
 
-    console.log(removingDiagnosis);
-    console.log(removingPrescriptions);
-    
-    
+    try {
+      const response = await fetch(
+        `/api/entries?patientId=${props.patient.id}`,
+        {
+          method: 'post',
+          body: JSON.stringify({
+            content: contentValue,
+            addedDiagnosis: diagnosis,
+            addedPrescriptions: prescriptions,
+            newHealthRating,
+            removingDiagnosis,
+            removingPrescriptions
+          }),
+          headers: {
+            Authorization: `bearer ${user?.token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      const newEntry: EntryType = await response.json();
 
-    const newEntry = new Entry(
-      user!,
-      contentValue,
-      diagnosis,
-      removingDiagnosis,
-      prescriptions,
-      removingPrescriptions,
-      newHealthRating
-    );
-
-    props.onAddEntry(newEntry);
+      props.onAddEntry(newEntry);
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return (
@@ -112,7 +121,11 @@ const NewEntry: FC<NewEntryProps> = (props) => {
       mountOnEnter
       unmountOnExit
     >
-      <Form buttonText="ADD" onSubmit={addEntryHandler} inputsContainerHeight='50%'>
+      <Form
+        buttonText="ADD"
+        onSubmit={addEntryHandler}
+        inputsContainerHeight="50%"
+      >
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="content">Content</InputLabel>
           <OutlinedInput

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   Home,
-  AccountCircle,
   Logout,
   PeopleAlt,
   AdminPanelSettings,
@@ -63,14 +62,7 @@ const Navbar: FC = () => {
                 <p>Home</p>
               </Link>
               <Link
-                href="/profile"
-                className={router.pathname === '/profile' ? classes.active : ''}
-              >
-                <AccountCircle />
-                <p>Profile</p>
-              </Link>
-              <Link
-                href="/patients"
+                href={`/patients?company=${user.company.id}`}
                 className={
                   router.pathname.startsWith('/patients') ? classes.active : ''
                 }

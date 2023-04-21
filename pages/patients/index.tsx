@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { GetStaticPropsResult } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { FC, useContext } from 'react';
 
 import PatientList from '@/components/patients/PatientList/PatientList';
@@ -7,30 +7,12 @@ import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLa
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
-import { Patient } from '@/models/patient';
+import { PatientType } from '@/models/patient';
 
 import classes from './Patients.module.css';
 
-export const getStaticProps = (): GetStaticPropsResult<PatientsProps> => {
-  return {
-    props: {
-      patients: [
-        {
-          id: 'p1',
-          name: 'Arto Hellas',
-          healthcareCompany: { id: 'c1', name: 'KYS' },
-          sex: 'Male',
-          occupation: 'Placeholder',
-          healthRating: 1,
-          identificationNumber: 'blabla055'
-        }
-      ]
-    }
-  };
-};
-
 interface PatientsProps {
-  patients: Array<Patient>;
+  patients: Array<PatientType>;
 }
 
 const Patients: FC<PatientsProps> = (props) => {
@@ -47,15 +29,34 @@ const Patients: FC<PatientsProps> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <PatientsLayout>
-        <div className={classes.header}>
-          <h4>Name</h4>
-          <h4 className={classes.health}>Health rating</h4>
-          <h4>View</h4>
-        </div>
-        <PatientList patients={props.patients} />
+        {props.patients.length > 0 && (
+          <>
+            <div className={classes.header}>
+              <h4>Name</h4>
+              <h4 className={classes.health}>Health rating</h4>
+              <h4>View</h4>
+            </div>
+            <PatientList patients={props.patients} />
+          </>
+        )}
       </PatientsLayout>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const response = await fetch(
+    `http://localhost:3000/api/patients?companyId=${context.query.company}&doctorId=${context.query.doctor}`
+  );
+  const patients = await response.json();
+
+  return {
+    props: {
+      patients
+    }
+  };
 };
 
 export default Patients;

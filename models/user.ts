@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
-import { HealthcareCompany } from './company';
 
-export interface UserType {
+import { HealthcareCompany } from './company';
+import { PatientType } from './patient';
+
+export interface UserType extends mongoose.Document {
   id: string;
   name: string;
   identificationNumber: string;
   company: HealthcareCompany;
+  patients: Array<PatientType>;
   imageUrl?: string;
   isAdministrator?: boolean;
   isOwner?: boolean;
@@ -33,7 +36,13 @@ const userSchema = new mongoose.Schema<UserType>({
   },
   imageUrl: {
     type: String
-  }
+  },
+  patients: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Patient'
+    }
+  ]
 });
 
 userSchema.set('toJSON', {

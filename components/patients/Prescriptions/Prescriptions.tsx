@@ -2,10 +2,10 @@ import { FC } from 'react';
 
 import MedicalRecords from '../MedicalRecords/MedicalRecords';
 
-import { Patient } from '@/models/patient';
+import { PatientType } from '@/models/patient';
 
 interface PrescriptionsProps {
-  patient: Patient;
+  patient: PatientType;
 }
 
 const Prescriptions: FC<PrescriptionsProps> = (props) => {
