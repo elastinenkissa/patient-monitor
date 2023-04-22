@@ -6,6 +6,7 @@ import { PatientType } from './patient';
 export interface UserType extends mongoose.Document {
   id: string;
   name: string;
+  username: string;
   identificationNumber: string;
   company: HealthcareCompany;
   patients: Array<PatientType>;
@@ -19,6 +20,11 @@ const userSchema = new mongoose.Schema<UserType>({
   name: {
     type: String,
     required: true
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true
   },
   identificationNumber: {
     type: String,

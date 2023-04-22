@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { FC, useState } from 'react';
 import { Female, Male, Transgender } from '@mui/icons-material';
@@ -14,21 +13,20 @@ import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
 import NewEntry from '@/components/patients/NewEntry/NewEntry';
 
 import { PatientType, Patient as PatientDB } from '@/models/patient';
+import { User } from '@/models/user';
 
 import { connectDatabase } from '@/util/connectDatabase';
 
 import classes from './Patient.module.css';
 
 interface PatientProps {
-  patient: PatientType;
+  patient: PatientType & { assignedDoctorId: string | undefined };
 }
 
 const Patient: FC<PatientProps> = (props) => {
   const [patient, setPatient] = useState<PatientType>(props.patient);
 
   const [modalIsVisible, setModalIsVisible] = useState<boolean>(false);
-
-  const router = useRouter();
 
   const checkGender = () => {
     if (props.patient.gender === 'Male') {
@@ -77,7 +75,10 @@ const Patient: FC<PatientProps> = (props) => {
             )}
           </div>
           <div className={classes.buttons}>
-            <PatientFooter onNewEntry={() => setModalIsVisible(true)} />
+            <PatientFooter
+              onNewEntry={() => setModalIsVisible(true)}
+              patient={props.patient}
+            />
             <Modal
               className={classes.modal}
               open={modalIsVisible}
@@ -102,19 +103,26 @@ export const getServerSideProps: GetServerSideProps<PatientProps> = async (
   try {
     await connectDatabase();
 
-    const patient = await PatientDB.findById(context.query.patientId).populate(
-      'entries'
-    );
+    const fetchedPatient = await PatientDB.findById(
+      context.query.patientId
+    ).populate('entries');
 
-    if (!patient) {
+    if (!fetchedPatient) {
       return {
         notFound: true
       };
     }
 
+    const user = await User.findOne({ patients: { $in: fetchedPatient.id } });
+
+    const patient = {
+      ...JSON.parse(JSON.stringify(fetchedPatient)),
+      assignedDoctorId: user?.id || null
+    };
+
     return {
       props: {
-        patient: JSON.parse(JSON.stringify(patient))
+        patient
       }
     };
   } catch (error: any) {

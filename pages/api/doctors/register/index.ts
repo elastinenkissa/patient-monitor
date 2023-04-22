@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import bcrypt from 'bcrypt';
 
 import { User } from '@/models/user';
 import { Company } from '@/models/company';
+
 import { connectDatabase } from '@/util/connectDatabase';
 
 export default async function handler(
@@ -17,10 +19,14 @@ export default async function handler(
   try {
     await connectDatabase();
 
+    const hashedSN = await bcrypt.hash(req.body.socialNumber, 10);
+
     const newCompany = await Company.create({ name: req.body.companyName });
+
     await User.create({
       name: req.body.fullName,
-      identificationNumber: req.body.socialNumber,
+      username: req.body.username,
+      identificationNumber: hashedSN,
       company: newCompany.id,
       isOwner: true,
       patients: [],

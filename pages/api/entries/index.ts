@@ -31,8 +31,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const patient = await Patient.findById(req.query.patientId);
 
       if (!patient) {
-        return res.status(404).json({ message: 'Patient not found.' });
+        return res.status(404).json({ message: 'Patient does not exist.' });
       }
+
+      user.patients = user.patients.concat(patient.id);
+
+      const existingPatient = user.recentPatients.find(
+        (foundPatient) => foundPatient.toString() === patient.id
+      );
+
+      if (!existingPatient) {
+
+        if (user.recentPatients.length === 3) {
+          user.recentPatients.shift();
+        }
+        user.recentPatients = user.recentPatients.concat(patient.id);
+      }
+
+      await user.save();
 
       patient.entries = patient.entries.concat(newEntry.id);
       patient.diagnosis = patient.diagnosis.concat(req.body.addedDiagnosis);

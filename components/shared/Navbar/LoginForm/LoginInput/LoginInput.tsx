@@ -13,34 +13,36 @@ interface LoginInputProps {
   onExited: () => void;
   onLogin: (value: {
     socialNumber: string;
+    username: string;
     companyName?: string;
     fullName?: string;
   }) => Promise<void>;
 }
 
 const LoginInput: FC<LoginInputProps> = (props) => {
+  const [username, setUsername] = useState<string>('');
   const [socialNumber, setSocialNumber] = useState<string>('');
   const [companyName, setCompanyName] = useState<string>('');
   const [fullName, setFullName] = useState<string>('');
 
-  const [registerPhase, setRegisterPhase] = useState<1 | 2 | 3>(1);
+  const [registerPhase, setRegisterPhase] = useState<1 | 2 | 3 | 4>(1);
 
   const input = (
     <>
       {registerPhase === 1 && (
         <OutlinedInput
           className={classes.input}
-          value={socialNumber}
-          placeholder="Social Number"
-          onChange={(event) => setSocialNumber(event.target.value)}
+          value={username}
+          placeholder="Username"
+          onChange={(event) => setUsername(event.target.value)}
         />
       )}
       {registerPhase === 2 && (
         <OutlinedInput
           className={classes.input}
-          value={companyName}
-          placeholder="Company Name"
-          onChange={(event) => setCompanyName(event.target.value)}
+          value={socialNumber}
+          placeholder="Social Number"
+          onChange={(event) => setSocialNumber(event.target.value)}
         />
       )}
       {registerPhase === 3 && (
@@ -51,6 +53,14 @@ const LoginInput: FC<LoginInputProps> = (props) => {
           onChange={(event) => setFullName(event.target.value)}
         />
       )}
+      {registerPhase === 4 && (
+        <OutlinedInput
+          className={classes.input}
+          value={companyName}
+          placeholder="Company Name"
+          onChange={(event) => setCompanyName(event.target.value)}
+        />
+      )}
     </>
   );
 
@@ -58,9 +68,10 @@ const LoginInput: FC<LoginInputProps> = (props) => {
     event.preventDefault();
 
     if (props.loginType === 'REGISTER') {
-      if (registerPhase === 3) {
+      if (registerPhase === 4) {
         const registerData = {
           fullName,
+          username,
           socialNumber,
           companyName
         };
@@ -71,10 +82,16 @@ const LoginInput: FC<LoginInputProps> = (props) => {
     }
 
     if (props.loginType === 'LOGIN') {
-      if (socialNumber.trim().length === 0) {
-        return;
+      if (registerPhase === 2) {
+        const loginData = {
+          username,
+          socialNumber
+        };
+
+        return props.onLogin(loginData);
       }
-      props.onLogin({ socialNumber });
+
+      setRegisterPhase((prevPhase) => (prevPhase + 1) as 1 | 2 | 3);
     }
   };
   return (
@@ -91,7 +108,8 @@ const LoginInput: FC<LoginInputProps> = (props) => {
           {input}
           {(socialNumber.trim().length > 0 ||
             fullName.trim().length > 0 ||
-            companyName.trim().length > 0) && (
+            companyName.trim().length > 0 ||
+            username.trim().length > 0) && (
             <button className={classes.arrow} type="submit">
               <ArrowRight />
             </button>

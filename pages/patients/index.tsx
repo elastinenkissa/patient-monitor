@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { FC, useContext } from 'react';
+import Link from 'next/link';
 
 import PatientList from '@/components/patients/PatientList/PatientList';
 import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLayout';
@@ -38,11 +39,26 @@ const Patients: FC<PatientsProps> = (props) => {
           <h4 className={classes.health}>Health rating</h4>
           <h4>View</h4>
         </div>
-        {props.patients.length > 0 && (
-          <div className={classes.scrollable}>
+        <div
+          className={`${classes.scrollable} ${
+            (!props.patients || props.patients.length === 0) &&
+            classes.noPatients
+          }`}
+        >
+          <div
+            className={`${
+              (!props.patients || props.patients.length === 0) &&
+              classes.noPatientsContent
+            }`}
+          >
             <PatientList patients={props.patients} />
+            {(!props.patients || props.patients.length === 0) && (
+              <Link href="/patients/new" className={classes.addNewLink}>
+                Add new?
+              </Link>
+            )}
           </div>
-        )}
+        </div>
       </PatientsLayout>
     </>
   );

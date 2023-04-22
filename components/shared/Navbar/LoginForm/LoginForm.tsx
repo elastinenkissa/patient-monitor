@@ -21,14 +21,18 @@ const LoginForm: FC = () => {
 
   const router = useRouter();
 
-  const loginHandler = async (value: { socialNumber: string }) => {
+  const loginHandler = async (value: {
+    socialNumber: string;
+    username: string;
+  }) => {
     try {
-      const userResponse = await fetch('/api/login', {
+      const userResponse = await fetch('/api/doctors/login', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          username: value.username,
           socialNumber: value.socialNumber
         })
       });
@@ -45,9 +49,10 @@ const LoginForm: FC = () => {
     socialNumber: string;
     fullName?: string;
     companyName?: string;
+    username: string;
   }) => {
     try {
-      await fetch('/api/register', {
+      await fetch('/api/doctors/register', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
@@ -55,14 +60,18 @@ const LoginForm: FC = () => {
         body: JSON.stringify({
           socialNumber: value.socialNumber,
           companyName: value.companyName,
-          fullName: value.fullName
+          fullName: value.fullName,
+          username: value.username
         })
       });
     } catch (error) {
       console.log(error);
     }
 
-    loginHandler({ socialNumber: value.socialNumber });
+    loginHandler({
+      socialNumber: value.socialNumber,
+      username: value.username
+    });
   };
 
   useEffect(() => {

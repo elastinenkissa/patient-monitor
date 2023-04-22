@@ -1,4 +1,5 @@
-import { FC, FormEvent, ReactNode } from 'react';
+import { FC, FormEvent, ReactNode, useState } from 'react';
+import { CircularProgress } from '@mui/material';
 
 import Card from '../Card/Card';
 import Button from '../Button/Button';
@@ -13,9 +14,13 @@ interface FormProps {
 }
 
 const Form: FC<FormProps> = (props) => {
-  const submitHandler = (event: FormEvent) => {
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    props.onSubmit();
+    setDisabled(true);
+    await props.onSubmit();
+    setDisabled(false);
   };
 
   return (
@@ -27,8 +32,16 @@ const Form: FC<FormProps> = (props) => {
         >
           {props.children}
         </div>
-        <Button type="submit" className={classes.submitButton}>
-          {props.buttonText}
+        <Button
+          type="submit"
+          className={classes.submitButton}
+          disabled={disabled}
+        >
+          {disabled ? (
+            <CircularProgress size={25} color="inherit" />
+          ) : (
+            props.buttonText
+          )}
         </Button>
       </form>
     </Card>

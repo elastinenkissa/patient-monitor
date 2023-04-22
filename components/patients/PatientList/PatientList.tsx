@@ -14,7 +14,7 @@ const PatientList: FC<PatientListProps> = (props) => {
   return (
     <div className={classes.container}>
       {!props.patients || props.patients.length === 0 ? (
-        <h1>No patients</h1>
+        <h3>No patients</h3>
       ) : (
         props.patients.map((patient) => (
           <PatientItem key={patient.id} patient={patient} />

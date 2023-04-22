@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 import { User } from '@/models/user';
 
@@ -18,12 +19,22 @@ export default async function handler(
   try {
     await connectDatabase();
 
-    const user = await User.findOne({
-      identificationNumber: req.body.socialNumber
-    }).populate('company', '-patients');
+    const user = await User.findOne({ username: req.body.username }).populate(
+      'company',
+      '-patients'
+    );
 
     if (!user) {
-      throw new Error('Employee not found.');
+      return res.status(404).json({ message: 'Invalid username.' });
+    }
+
+    const socialNumberIsMatching = bcrypt.compare(
+      req.body.socialNumber,
+      user?.identificationNumber
+    );
+
+    if (!socialNumberIsMatching) {
+      return res.status(401).json({ message: 'Incorrect password.' });
     }
 
     const token = jwt.sign(user.id, process.env.JWT_SECRET!);
