@@ -16,6 +16,7 @@ const Dashboard: NextPage = (props) => {
     if (!user?.isOwner && !user?.isAdministrator) {
       router.push('/home');
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   return user?.isAdministrator || user?.isOwner ? <Card>Test</Card> : <></>;
