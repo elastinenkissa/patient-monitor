@@ -28,7 +28,7 @@ export default async function handler(
       return res.status(404).json({ message: 'Invalid username.' });
     }
 
-    const socialNumberIsMatching = bcrypt.compare(
+    const socialNumberIsMatching = await bcrypt.compare(
       req.body.socialNumber,
       user?.identificationNumber
     );

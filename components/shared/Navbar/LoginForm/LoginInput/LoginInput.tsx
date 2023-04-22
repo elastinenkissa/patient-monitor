@@ -1,5 +1,5 @@
 import { FormControl, OutlinedInput } from '@mui/material';
-import { ArrowRight } from '@mui/icons-material';
+import { ArrowLeft, ArrowRight, Check } from '@mui/icons-material';
 import { FC, FormEvent, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
@@ -91,9 +91,14 @@ const LoginInput: FC<LoginInputProps> = (props) => {
         return props.onLogin(loginData);
       }
 
-      setRegisterPhase((prevPhase) => (prevPhase + 1) as 1 | 2 | 3);
+      setRegisterPhase((prevPhase) => (prevPhase + 1) as 1 | 2 | 3 | 4);
     }
   };
+
+  const isFinalPhase =
+    (registerPhase === 2 && props.loginType === 'LOGIN') ||
+    (registerPhase === 4 && props.loginType === 'REGISTER');
+
   return (
     <CSSTransition
       in={props.show}
@@ -105,13 +110,35 @@ const LoginInput: FC<LoginInputProps> = (props) => {
     >
       <form onSubmit={loginHandler}>
         <FormControl>
+          {registerPhase > 1 && (
+            <button
+              type="button"
+              className={classes.arrow + ' ' + classes.arrowLeft}
+              onClick={() =>
+                setRegisterPhase(
+                  (prevPhase) => (prevPhase - 1) as 1 | 2 | 3 | 4
+                )
+              }
+            >
+              <ArrowLeft />
+            </button>
+          )}
           {input}
           {(socialNumber.trim().length > 0 ||
             fullName.trim().length > 0 ||
             companyName.trim().length > 0 ||
             username.trim().length > 0) && (
-            <button className={classes.arrow} type="submit">
-              <ArrowRight />
+            <button
+              className={
+                (isFinalPhase && classes.finalPhase) +
+                ' ' +
+                classes.arrow +
+                ' ' +
+                classes.arrowRight
+              }
+              type="submit"
+            >
+              {isFinalPhase ? <Check /> : <ArrowRight />}
             </button>
           )}
         </FormControl>

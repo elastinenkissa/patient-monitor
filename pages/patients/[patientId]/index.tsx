@@ -1,5 +1,5 @@
-import { GetServerSideProps } from 'next';
-import { FC, useState } from 'react';
+import { GetServerSideProps, NextPage } from 'next';
+import { FC, useContext, useState } from 'react';
 import { Female, Male, Transgender } from '@mui/icons-material';
 import { Modal } from '@mui/material';
 import Head from 'next/head';
@@ -12,19 +12,28 @@ import Diagnosis from '@/components/patients/Diagnosis/Diagnosis';
 import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
 import NewEntry from '@/components/patients/NewEntry/NewEntry';
 
-import { PatientType, Patient as PatientDB } from '@/models/patient';
+import {
+  PatientType,
+  Patient as PatientDB,
+  PatientWithDoctor
+} from '@/models/patient';
 import { User } from '@/models/user';
 
+import { UserContext, UserContextType } from '@/context/UserContext';
+
 import { connectDatabase } from '@/util/connectDatabase';
+import withAuth from '@/util/higherOrderComponents';
 
 import classes from './Patient.module.css';
 
-interface PatientProps {
-  patient: PatientType & { assignedDoctorId: string | undefined };
+interface PatientProps extends Record<string, unknown> {
+  patient: PatientWithDoctor;
 }
 
-const Patient: FC<PatientProps> = (props) => {
-  const [patient, setPatient] = useState<PatientType>(props.patient);
+const Patient: NextPage<PatientProps> = (props) => {
+  const { user } = useContext<UserContextType>(UserContext);
+
+  const [patient, setPatient] = useState<PatientWithDoctor>(props.patient);
 
   const [modalIsVisible, setModalIsVisible] = useState<boolean>(false);
 
@@ -52,7 +61,7 @@ const Patient: FC<PatientProps> = (props) => {
 
   const addEntryHandler = (newPatient: PatientType) => {
     setModalIsVisible(false);
-    setPatient(newPatient);
+    setPatient({ ...newPatient, assignedDoctorId: user?.id });
   };
 
   const gender = checkGender();
@@ -77,7 +86,7 @@ const Patient: FC<PatientProps> = (props) => {
           <div className={classes.buttons}>
             <PatientFooter
               onNewEntry={() => setModalIsVisible(true)}
-              patient={props.patient}
+              patient={patient}
             />
             <Modal
               className={classes.modal}
@@ -115,7 +124,7 @@ export const getServerSideProps: GetServerSideProps<PatientProps> = async (
 
     const user = await User.findOne({ patients: { $in: fetchedPatient.id } });
 
-    const patient = {
+    const patient: PatientWithDoctor = {
       ...JSON.parse(JSON.stringify(fetchedPatient)),
       assignedDoctorId: user?.id || null
     };
@@ -132,4 +141,4 @@ export const getServerSideProps: GetServerSideProps<PatientProps> = async (
   }
 };
 
-export default Patient;
+export default withAuth<PatientProps>(Patient);

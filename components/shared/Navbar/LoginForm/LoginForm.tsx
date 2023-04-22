@@ -37,6 +37,10 @@ const LoginForm: FC = () => {
         })
       });
 
+      if (!userResponse.ok) {
+        throw new Error(JSON.parse(await userResponse.text()).message);
+      }
+
       login(await userResponse.json());
 
       router.push('/home');

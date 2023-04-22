@@ -18,6 +18,10 @@ export interface PatientType {
   entries: Array<EntryType>;
 }
 
+export type PatientWithDoctor = PatientType & {
+  assignedDoctorId: string | undefined;
+};
+
 const patientSchema = new mongoose.Schema<PatientType>({
   name: {
     type: String,
@@ -25,7 +29,7 @@ const patientSchema = new mongoose.Schema<PatientType>({
   },
   identificationNumber: {
     type: String,
-    required: true,
+    required: true
   },
   occupation: {
     type: String,

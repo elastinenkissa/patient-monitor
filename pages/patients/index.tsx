@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { FC, useContext } from 'react';
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
+import { useContext } from 'react';
 import Link from 'next/link';
 
 import PatientList from '@/components/patients/PatientList/PatientList';
@@ -13,14 +13,15 @@ import { Company } from '@/models/company';
 import { User } from '@/models/user';
 
 import { connectDatabase } from '@/util/connectDatabase';
+import withAuth from '@/util/higherOrderComponents';
 
 import classes from './Patients.module.css';
 
-interface PatientsProps {
+interface PatientsProps extends Record<string, unknown> {
   patients: Array<PatientType>;
 }
 
-const Patients: FC<PatientsProps> = (props) => {
+const Patients: NextPage<PatientsProps> = (props) => {
   const { user } = useContext<UserContextType>(UserContext);
 
   return (
@@ -126,4 +127,4 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-export default Patients;
+export default withAuth(Patients);

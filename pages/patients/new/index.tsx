@@ -1,4 +1,5 @@
-import { FC, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 
@@ -8,11 +9,13 @@ import NewPatientGender from '@/components/patients/NewPatientGender/NewPatientG
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
+import withAuth from '@/util/higherOrderComponents';
+
 import { Gender, HealthRating } from '@/models/patient';
 
 import classes from './NewPatient.module.css';
 
-const NewPatient: FC = () => {
+const NewPatient: NextPage = () => {
   const { user } = useContext<UserContextType>(UserContext);
 
   const [healthRating, setHealthRating] = useState<HealthRating>(1);
@@ -102,4 +105,4 @@ const NewPatient: FC = () => {
   );
 };
 
-export default NewPatient;
+export default withAuth(NewPatient);

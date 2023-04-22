@@ -12,9 +12,8 @@ const Layout: FC<LayoutProps> = (props) => {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 300, opacity: 0 }}
       transition={{
-        type: 'tween',
+        type: 'tween'
       }}
-      style={{alignSelf: 'center'}}
     >
       {props.children}
     </motion.div>

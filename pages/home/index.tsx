@@ -1,21 +1,20 @@
 import Head from 'next/head';
-import { FC, useContext, useEffect, useState } from 'react';
+import { NextPage } from 'next';
+import { useContext, useEffect, useState } from 'react';
 
 import HomeCards from '@/components/home/HomeCards/HomeCards';
 import HomeLayout from '@/components/shared/Layout/HomeLayout/HomeLayout';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
+import withAuth from '@/util/higherOrderComponents';
+
 import { PatientType } from '@/models/patient';
 
 import classes from './Home.module.css';
 
-// const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-const Home: FC = () => {
+const Home: NextPage = () => {
   const { user } = useContext<UserContextType>(UserContext);
-
-  // const { data } = useSWR<Array<PatientType>>('/api/patients/recent', fetcher);
 
   const [patients, setPatients] = useState<Array<PatientType>>();
 
@@ -26,8 +25,12 @@ const Home: FC = () => {
           Authorization: `bearer ${user?.token}`
         }
       });
-      const fetchedPatients: Array<PatientType> = await response.json();
 
+      if (!response.ok) {
+        throw new Error(JSON.parse(await response.text()).message);
+      }
+
+      const fetchedPatients: Array<PatientType> = await response.json();
       setPatients(fetchedPatients);
     } catch (error: any) {
       console.log(error.message);
@@ -36,6 +39,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     fetchPatients();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -53,4 +57,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);

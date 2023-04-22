@@ -1,8 +1,9 @@
 import { FC, useContext } from 'react';
+import { useRouter } from 'next/router';
 
 import Button from '@/components/shared/Button/Button';
 
-import { PatientType } from '@/models/patient';
+import { PatientWithDoctor } from '@/models/patient';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
@@ -10,11 +11,13 @@ import classes from './PatientFooter.module.css';
 
 interface PatientFooterProps {
   onNewEntry: () => void;
-  patient: PatientType & { assignedDoctorId: string | undefined };
+  patient: PatientWithDoctor;
 }
 
 const PatientFooter: FC<PatientFooterProps> = (props) => {
   const { user } = useContext<UserContextType>(UserContext);
+
+  const router = useRouter();
 
   const dismissPatientHandler = async () => {
     if (window.confirm('Are you sure?')) {
@@ -30,8 +33,10 @@ const PatientFooter: FC<PatientFooterProps> = (props) => {
         );
 
         if (!response.ok) {
-          throw new Error(await response.text());
+          throw new Error(JSON.parse(await response.text()).message);
         }
+
+        router.push(`/patients?company=${user?.company.id}`);
       } catch (error: any) {
         console.log(error.message);
       }

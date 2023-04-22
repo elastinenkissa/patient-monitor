@@ -21,13 +21,6 @@ const Navbar: FC = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
   const logoutHandler = () => {
     logout();
   };
@@ -38,7 +31,7 @@ const Navbar: FC = () => {
         <Menu />
       </button>
       <div className={classes.container}>
-        <h1>PatientsE</h1> {/*make logo and replace this with it */}
+        <h1>Patient Monitor</h1> {/*make logo and replace this with it */}
         {!user ? (
           <LoginForm />
         ) : (
