@@ -11,20 +11,21 @@ interface FormProps {
   buttonText: string;
   onSubmit: () => void;
   inputsContainerHeight?: string;
+  className?: string;
 }
 
 const Form: FC<FormProps> = (props) => {
-  const [disabled, setDisabled] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    setDisabled(true);
+    setSubmitted(true);
     await props.onSubmit();
-    setDisabled(false);
+    setSubmitted(false);
   };
 
   return (
-    <Card className={classes.container}>
+    <Card className={classes.container + ' ' + props.className}>
       <form className={classes.form} onSubmit={submitHandler}>
         <div
           className={classes.formInputs}
@@ -35,9 +36,9 @@ const Form: FC<FormProps> = (props) => {
         <Button
           type="submit"
           className={classes.submitButton}
-          disabled={disabled}
+          disabled={submitted}
         >
-          {disabled ? (
+          {submitted ? (
             <CircularProgress size={25} color="inherit" />
           ) : (
             props.buttonText

@@ -17,7 +17,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <UserContextProvider>
       <AppLayout className={inter.className}>
         <Navbar />
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait">
           <Component {...pageProps} key={router.asPath} />
         </AnimatePresence>
       </AppLayout>

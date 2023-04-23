@@ -39,21 +39,23 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     fetchPatients();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <HomeLayout>
+    <>
       <Head>
-        <title>PatientsE</title>
-        <meta name="description" content="Time heals all wounds." />
+        <title>Patients Monitor</title>
+        <meta name="description" content="Some description" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div className={classes.container}>
-        <h1>{user?.company.name}</h1>
-        <HomeCards patients={patients!} />
-      </div>
-    </HomeLayout>
+      <HomeLayout>
+        <div className={classes.container}>
+          <h1>{user?.company.name}</h1>
+          <HomeCards patients={patients!} />
+        </div>
+      </HomeLayout>
+    </>
   );
 };
 

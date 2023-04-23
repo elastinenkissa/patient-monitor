@@ -1,6 +1,6 @@
 .container {
   padding: 2rem;
-  width: 50vw;
+  width: 100%;
   height: fit-content;
   align-self: center;
 }

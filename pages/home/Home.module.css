@@ -7,3 +7,16 @@
 .container > h1 {
   padding-bottom: 3rem;
 }
+
+@media screen and (max-width: 900px) {
+  .container {
+    width: 100vw;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .container > h1 {
+    align-self: center;
+  }
+}

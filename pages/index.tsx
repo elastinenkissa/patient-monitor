@@ -5,8 +5,8 @@ const Welcome: FC = () => {
   return (
     <>
       <Head>
-        <title>PatientsE</title>
-        <meta name="description" content="Because time heals all wounds." />
+        <title>Patient Monitor</title>
+        <meta name="description" content="Some description" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
     </>

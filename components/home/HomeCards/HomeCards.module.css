@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .container:nth-child(2) {
+    width: fit-content;
+  }
+}
+
+/* @media screen and (max-width: 1030px) {
+  .container:nth-child(2) {
+    flex-direction: column;
+    width: fit-content;
+  } */
+/* } */
+
+@media screen and (max-width: 1120px) {
+  .container {
+    /* background-color: red; */
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .container {
+    width: 65vw;
+  }
+}

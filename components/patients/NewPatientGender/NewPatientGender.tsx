@@ -3,8 +3,6 @@ import { FC } from 'react';
 
 import { Gender } from '@/models/patient';
 
-import classes from './NewPatientGender.module.css';
-
 interface NewPatientGenderProps {
   onGenderSelect: (gender: Gender) => void;
 }
@@ -16,7 +14,7 @@ const NewPatientGender: FC<NewPatientGenderProps> = (props) => {
       <RadioGroup
         name="radio-buttons-group"
         aria-labelledby="radio-label"
-        className={classes.container}
+        sx={{ display: 'flex', flexDirection: 'row' }}
         onChange={(event) => props.onGenderSelect(event.target.value as Gender)}
       >
         <FormControlLabel control={<Radio />} label="Male" value="Male" />

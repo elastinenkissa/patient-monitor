@@ -120,92 +120,100 @@ const NewEntry: FC<NewEntryProps> = (props) => {
       mountOnEnter
       unmountOnExit
     >
-      <Form
-        buttonText="ADD"
-        onSubmit={addEntryHandler}
-        inputsContainerHeight="50%"
-      >
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="content">Content</InputLabel>
-          <OutlinedInput
-            id="content"
-            multiline
-            className={classes.input}
-            label="Content"
-            value={contentValue}
-            onChange={(event) => setContentValue(event.target.value)}
-          />
-        </FormControl>
-        <FormControl className={classes.formControl + ' ' + classes.record}>
-          <NewRecord
-            label="Diagnosis"
-            htmlId="diagnosis"
-            records={diagnosis}
-            onAddRecord={addDiagnosisHandler}
-          />
-        </FormControl>
-        <FormControl>
-          <NewRecord
-            label="Prescription"
-            htmlId="prescription"
-            records={prescriptions}
-            onAddRecord={addPrescriptionHandler}
-          />
-        </FormControl>
-        {props.patient.diagnosis?.length > 0 && (
-          <FormControl>
-            <RemoveRecord
-              onSelect={(record) =>
-                setRemovingDiagnosis((prevDiagnosis) =>
-                  prevDiagnosis.concat(record)
-                )
-              }
-              onDeselect={(record) =>
-                setRemovingDiagnosis((prevDiagnosis) =>
-                  prevDiagnosis.filter((diagnosis) => diagnosis !== record)
-                )
-              }
-              records={props.patient.diagnosis}
-              recordType="diagnosis"
+      <div className={classes.container}>
+        <Form
+          buttonText="ADD"
+          onSubmit={addEntryHandler}
+          inputsContainerHeight="50%"
+        >
+          <FormControl sx={{ marginBottom: '1rem' }}>
+            <InputLabel htmlFor="content">Content</InputLabel>
+            <OutlinedInput
+              id="content"
+              multiline
+              className={classes.input}
+              label="Content"
+              value={contentValue}
+              onChange={(event) => setContentValue(event.target.value)}
             />
           </FormControl>
-        )}
-        {props.patient.prescriptions?.length > 0 && (
+          <FormControl
+            sx={{
+              marginBottom: '1rem',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            <NewRecord
+              label="Diagnosis"
+              htmlId="diagnosis"
+              records={diagnosis}
+              onAddRecord={addDiagnosisHandler}
+            />
+          </FormControl>
           <FormControl>
-            <RemoveRecord
-              onSelect={(record) =>
-                setRemovingPrescriptions((prevPrescriptions) =>
-                  prevPrescriptions.concat(record)
-                )
-              }
-              onDeselect={(record) =>
-                setRemovingPrescriptions((prevPrescriptions) =>
-                  prevPrescriptions.filter(
-                    (prescription) => prescription !== record
+            <NewRecord
+              label="Prescription"
+              htmlId="prescription"
+              records={prescriptions}
+              onAddRecord={addPrescriptionHandler}
+            />
+          </FormControl>
+          {props.patient.diagnosis?.length > 0 && (
+            <FormControl>
+              <RemoveRecord
+                onSelect={(record) =>
+                  setRemovingDiagnosis((prevDiagnosis) =>
+                    prevDiagnosis.concat(record)
                   )
+                }
+                onDeselect={(record) =>
+                  setRemovingDiagnosis((prevDiagnosis) =>
+                    prevDiagnosis.filter((diagnosis) => diagnosis !== record)
+                  )
+                }
+                records={props.patient.diagnosis}
+                recordType="diagnosis"
+              />
+            </FormControl>
+          )}
+          {props.patient.prescriptions?.length > 0 && (
+            <FormControl>
+              <RemoveRecord
+                onSelect={(record) =>
+                  setRemovingPrescriptions((prevPrescriptions) =>
+                    prevPrescriptions.concat(record)
+                  )
+                }
+                onDeselect={(record) =>
+                  setRemovingPrescriptions((prevPrescriptions) =>
+                    prevPrescriptions.filter(
+                      (prescription) => prescription !== record
+                    )
+                  )
+                }
+                records={props.patient.prescriptions}
+                recordType="prescriptions"
+              />
+            </FormControl>
+          )}
+          <FormControl sx={{ marginTop: '1rem' }}>
+            <HealthRatingChange
+              newHealthRating={newHealthRating}
+              increaseHealthRating={() =>
+                setNewHealthRating(
+                  (prevRating) => (prevRating + 1) as HealthRatingType
                 )
               }
-              records={props.patient.prescriptions}
-              recordType="prescriptions"
+              reduceHealthRating={() =>
+                setNewHealthRating(
+                  (prevRating) => (prevRating - 1) as HealthRatingType
+                )
+              }
             />
           </FormControl>
-        )}
-        <FormControl className={classes.healthRatingContainer}>
-          <HealthRatingChange
-            newHealthRating={newHealthRating}
-            increaseHealthRating={() =>
-              setNewHealthRating(
-                (prevRating) => (prevRating + 1) as HealthRatingType
-              )
-            }
-            reduceHealthRating={() =>
-              setNewHealthRating(
-                (prevRating) => (prevRating - 1) as HealthRatingType
-              )
-            }
-          />
-        </FormControl>
-      </Form>
+        </Form>
+      </div>
     </CSSTransition>
   );
 };

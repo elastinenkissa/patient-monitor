@@ -25,9 +25,9 @@
 }
 
 .patients {
-  width: 500px;
+  width: 455px;
   padding: 2rem;
-  height: 100%;
+  height: fit-content;
 }
 
 .recentPatients {
