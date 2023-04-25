@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react';
 
 interface YearSelectProps {
   onChangeYear: (value: number) => void;
+  submitted: boolean;
 }
 
 const YearSelect: FC<YearSelectProps> = (props) => {
@@ -21,6 +22,10 @@ const YearSelect: FC<YearSelectProps> = (props) => {
   useEffect(() => {
     props.onChangeYear(currentYear);
   }, []);
+
+  useEffect(() => {
+    setYearValue(currentYear);
+  }, [props.submitted]);
 
   return (
     <>

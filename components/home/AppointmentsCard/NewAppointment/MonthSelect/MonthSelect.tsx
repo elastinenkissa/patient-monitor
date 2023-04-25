@@ -1,8 +1,9 @@
 import { InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 interface MonthSelectProps {
   onChangeMonth: (value: number) => void;
+  submitted: boolean;
 }
 
 const MonthSelect: FC<MonthSelectProps> = (props) => {
@@ -10,12 +11,16 @@ const MonthSelect: FC<MonthSelectProps> = (props) => {
 
   const selectMonthHandler = (event: SelectChangeEvent<string | number>) => {
     setMonthValue(event.target.value);
-    
+
     if (typeof event.target.value === 'string') {
       return props.onChangeMonth(0);
     }
     props.onChangeMonth(event.target.value);
   };
+
+  useEffect(() => {
+    setMonthValue('');
+  }, [props.submitted]);
 
   return (
     <>

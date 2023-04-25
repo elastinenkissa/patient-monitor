@@ -33,7 +33,7 @@ const NewPatient: NextPage = () => {
   const addPatientHandler = async () => {
     try {
       const response = await fetch('/api/patients', {
-        method: 'post',
+        method: 'POST',
         body: JSON.stringify({
           name: patientName,
           socialNumber: patientSocialNumber,
@@ -54,25 +54,18 @@ const NewPatient: NextPage = () => {
       const newPatient: PatientType = await response.json();
 
       if (!!router.query) {
-        console.log(newPatient.id, router.query.appointment);
-        
         const appointmentResponse = await fetch(
-          `/api/appointments/${router.query.appointment}`,
+          `/api/appointments/${router.query.appointment}?patientId=${newPatient.id}`,
           {
-            method: 'patch',
-            body: JSON.stringify({
-              patientId: newPatient.id
-            }),
+            method: 'PATCH',
             headers: {
-              Authorization: `bearer ${user?.token}`,
-              'Content-Type': 'application/json'
+              Authorization: `bearer ${user?.token}`
             }
           }
         );
 
         if (!appointmentResponse.ok) {
-
-          throw new Error(JSON.parse(await appointmentResponse.text()).message);
+          throw new Error(JSON.parse(await appointmentResponse.text()));
         }
       }
     } catch (error: any) {

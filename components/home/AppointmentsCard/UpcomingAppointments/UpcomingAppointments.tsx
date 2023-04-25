@@ -21,7 +21,7 @@ const UpcomingAppointments: FC<UpcomingAppointmentsProps> = (props) => {
 
   const fetchAppointments = async () => {
     const response = await fetch('/api/appointments', {
-      method: 'get',
+      method: 'GET',
       headers: {
         Authorization: `bearer ${user?.token}`
       }

@@ -24,8 +24,12 @@ const UpcomingAppointmentItem: FC<UpcomingAppointmentItemProps> = (props) => {
 
   return (
     <button onClick={visitPatientHandler} className={classes.container}>
-      <p className={classes.name}>{props.appointment.patientName}</p>
-      <p className={classes.date}>{new Date(props.appointment.scheduled).toLocaleString('en-GB')}</p>
+      <p className={classes.name}>
+        {props.appointment.patient?.name || props.appointment.patientName}
+      </p>
+      <p className={classes.date}>
+        {new Date(props.appointment.scheduled).toLocaleString('en-GB')}
+      </p>
     </button>
   );
 };

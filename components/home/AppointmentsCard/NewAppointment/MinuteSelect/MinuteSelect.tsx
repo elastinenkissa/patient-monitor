@@ -1,8 +1,9 @@
 import { InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 interface MinuteSelectProps {
   onChangeMinutes: (value: number) => void;
+  submitted: boolean;
 }
 
 const MinuteSelect: FC<MinuteSelectProps> = (props) => {
@@ -22,6 +23,10 @@ const MinuteSelect: FC<MinuteSelectProps> = (props) => {
     }
     props.onChangeMinutes(event.target.value);
   };
+
+  useEffect(() => {
+    setMinuteValue('');
+  }, [props.submitted]);
 
   return (
     <>

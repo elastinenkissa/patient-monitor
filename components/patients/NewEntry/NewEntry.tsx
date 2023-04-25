@@ -89,7 +89,7 @@ const NewEntry: FC<NewEntryProps> = (props) => {
       const response = await fetch(
         `/api/entries?patientId=${props.patient.id}`,
         {
-          method: 'post',
+          method: 'POST',
           body: JSON.stringify({
             content: contentValue,
             addedDiagnosis: diagnosis,

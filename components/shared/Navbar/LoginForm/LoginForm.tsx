@@ -27,7 +27,7 @@ const LoginForm: FC = () => {
   }) => {
     try {
       const userResponse = await fetch('/api/doctors/login', {
-        method: 'post',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -57,7 +57,7 @@ const LoginForm: FC = () => {
   }) => {
     try {
       await fetch('/api/doctors/register', {
-        method: 'post',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },

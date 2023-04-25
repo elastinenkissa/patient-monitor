@@ -25,7 +25,7 @@ const PatientFooter: FC<PatientFooterProps> = (props) => {
         const response = await fetch(
           `/api/doctors/${user!.id}?patientId=${props.patient.id}`,
           {
-            method: 'delete',
+            method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
             }

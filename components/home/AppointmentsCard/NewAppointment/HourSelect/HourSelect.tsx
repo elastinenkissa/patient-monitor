@@ -1,8 +1,9 @@
 import { InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 interface HourSelectProps {
   onChangeHour: (value: number) => void;
+  submitted: boolean;
 }
 
 const HourSelect: FC<HourSelectProps> = (props) => {
@@ -22,6 +23,10 @@ const HourSelect: FC<HourSelectProps> = (props) => {
     }
     props.onChangeHour(event.target.value);
   };
+
+  useEffect(() => {
+    setHourValue('');
+  }, [props.submitted]);
 
   return (
     <>

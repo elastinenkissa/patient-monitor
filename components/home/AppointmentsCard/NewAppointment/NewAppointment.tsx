@@ -28,14 +28,18 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
   const [minutes, setMinutes] = useState<number>();
   const [year, setYear] = useState<number>();
 
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
   const addAppointmentHandler = async () => {
     if (!name || !day || !year || !month || !hour || !minutes) {
       return;
     }
 
+    setSubmitted(true);
+
     try {
       const response = await fetch('/api/appointments', {
-        method: 'post',
+        method: 'POST',
         body: JSON.stringify({
           patientName: name,
           scheduled: new Date(year, month - 1, day, hour, minutes)
@@ -56,6 +60,9 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
     } catch (error: any) {
       console.log(error.message);
     }
+
+    setSubmitted(false);
+    setName('');
   };
 
   return (
@@ -76,19 +83,35 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
       </FormControl>
       <div className={classes.date}>
         <FormControl sx={{ width: 100, marginBottom: '1rem' }}>
-          <MonthSelect onChangeMonth={(value) => setMonth(value)} />
+          <MonthSelect
+            onChangeMonth={(value) => setMonth(value)}
+            submitted={submitted}
+          />
         </FormControl>
         <FormControl sx={{ width: 100 }}>
-          <DaySelect month={month} onChangeDay={(value) => setDay(value)} />
+          <DaySelect
+            month={month}
+            onChangeDay={(value) => setDay(value)}
+            submitted={submitted}
+          />
         </FormControl>
         <FormControl sx={{ width: 100 }}>
-          <YearSelect onChangeYear={(value) => setYear(value)} />
+          <YearSelect
+            onChangeYear={(value) => setYear(value)}
+            submitted={submitted}
+          />
         </FormControl>
         <FormControl sx={{ width: 100, marginBottom: '1rem' }}>
-          <HourSelect onChangeHour={(value) => setHour(value)} />
+          <HourSelect
+            onChangeHour={(value) => setHour(value)}
+            submitted={submitted}
+          />
         </FormControl>
         <FormControl sx={{ width: 100, marginBottom: '1rem' }}>
-          <MinuteSelect onChangeMinutes={(value) => setMinutes(value)} />
+          <MinuteSelect
+            onChangeMinutes={(value) => setMinutes(value)}
+            submitted={submitted}
+          />
         </FormControl>
       </div>
     </Form>

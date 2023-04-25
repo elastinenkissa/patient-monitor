@@ -25,6 +25,7 @@
 
 .flexItemOne {
   flex-basis: 30%;
+  word-break: break-all;
 }
 
 .flexItemTwo {

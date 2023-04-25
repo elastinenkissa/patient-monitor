@@ -4,6 +4,7 @@ import { FC, useState, useEffect } from 'react';
 interface DaySelectProps {
   month: number;
   onChangeDay: (value: number) => void;
+  submitted: boolean;
 }
 
 const DaySelect: FC<DaySelectProps> = (props) => {
@@ -54,6 +55,10 @@ const DaySelect: FC<DaySelectProps> = (props) => {
     }
     props.onChangeDay(dayValue);
   }, [props.month, dayValue]);
+
+  useEffect(() => {
+    setDayValue('');
+  }, [props.submitted]);
 
   return (
     <>
