@@ -8,7 +8,7 @@ import { PatientType } from '@/models/patient';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
-import classes from './HomeCards.module.css'
+import classes from './HomeCards.module.css';
 
 interface HomeCardsProps {
   patients: Array<PatientType>;

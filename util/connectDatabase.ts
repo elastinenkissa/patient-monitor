@@ -9,5 +9,6 @@ export const connectDatabase = async () => {
     require('../models/entry');
     require('../models/patient');
     require('../models/user');
+    require('../models/appointment');
   });
 };

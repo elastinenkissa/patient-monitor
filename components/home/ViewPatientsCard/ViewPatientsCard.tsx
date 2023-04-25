@@ -10,6 +10,7 @@ import { UserType } from '@/models/user';
 import { PatientType } from '@/models/patient';
 
 import classes from './ViewPatientsCard.module.css';
+import { CircularProgress } from '@mui/material';
 
 interface ViewPatientsCardProps {
   user: UserType | undefined;
@@ -37,7 +38,11 @@ const ViewPatientsCard: FC<ViewPatientsCardProps> = (props) => {
           <p>Recent patients</p>
           <History />
         </div>
-        <PatientList patients={props.patients} />
+        {props.patients ? (
+          <PatientList patients={props.patients} />
+        ) : (
+          <CircularProgress />
+        )}
       </div>
     </Card>
   );

@@ -1,6 +1,8 @@
 import { FC, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
+import classes from './Layout.module.css'
+
 interface LayoutProps {
   children: ReactNode;
 }
@@ -14,6 +16,7 @@ const Layout: FC<LayoutProps> = (props) => {
       transition={{
         type: 'tween'
       }}
+      className={classes.container}
     >
       {props.children}
     </motion.div>

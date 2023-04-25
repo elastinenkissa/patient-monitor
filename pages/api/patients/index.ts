@@ -57,7 +57,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       company.patients = company.patients.concat(patient.id);
       await company.save();
 
-      return res.status(201).json({ message: 'Patient added successfully.' });
+      return res.status(201).json(patient);
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }

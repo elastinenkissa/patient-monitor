@@ -13,20 +13,22 @@ import { UserContext, UserContextType } from '@/context/UserContext';
 
 import withAuth from '@/util/higherOrderComponents';
 
-import { Gender, HealthRating } from '@/models/patient';
+import { Gender, HealthRating, PatientType } from '@/models/patient';
 
 import classes from './NewPatient.module.css';
 
 const NewPatient: NextPage = () => {
   const { user } = useContext<UserContextType>(UserContext);
 
+  const router = useRouter();
+
   const [healthRating, setHealthRating] = useState<HealthRating>(1);
   const [patientGender, setPatientGender] = useState<Gender>();
-  const [patientName, setPatientName] = useState<string>('');
+  const [patientName, setPatientName] = useState<string>(
+    (router.query.patientName as string) || ''
+  );
   const [patientSocialNumber, setPatientSocialNumber] = useState<string>('');
   const [patientOccupation, setPatientOccupation] = useState<string>('');
-
-  const router = useRouter();
 
   const addPatientHandler = async () => {
     try {
@@ -46,7 +48,32 @@ const NewPatient: NextPage = () => {
       });
 
       if (!response.ok) {
-        return console.log(JSON.parse(await response.text()).message);
+        throw new Error(JSON.parse(await response.text()).message);
+      }
+
+      const newPatient: PatientType = await response.json();
+
+      if (!!router.query) {
+        console.log(newPatient.id, router.query.appointment);
+        
+        const appointmentResponse = await fetch(
+          `/api/appointments/${router.query.appointment}`,
+          {
+            method: 'patch',
+            body: JSON.stringify({
+              patientId: newPatient.id
+            }),
+            headers: {
+              Authorization: `bearer ${user?.token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+
+        if (!appointmentResponse.ok) {
+
+          throw new Error(JSON.parse(await appointmentResponse.text()).message);
+        }
       }
     } catch (error: any) {
       return console.log(error.message);
@@ -79,6 +106,7 @@ const NewPatient: NextPage = () => {
                 label="Full Name"
                 value={patientName}
                 onChange={(event) => setPatientName(event.target.value)}
+                disabled={!!router.query}
               />
             </FormControl>
             <FormControl sx={{ marginBottom: '1rem' }}>

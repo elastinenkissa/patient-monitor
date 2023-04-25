@@ -51,7 +51,7 @@ const Home: NextPage = () => {
       </Head>
       <HomeLayout>
         <div className={classes.container}>
-          <h1>{user?.company.name}</h1>
+        
           <HomeCards patients={patients!} />
         </div>
       </HomeLayout>

@@ -2,3 +2,16 @@
   padding: 1rem;
   width: 100%;
 }
+
+.date {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+@media screen and (max-width: 1120px) {
+  .container {
+    text-align: center;
+  }
+}
