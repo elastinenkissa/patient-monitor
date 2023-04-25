@@ -19,17 +19,20 @@ export interface UserType extends mongoose.Document {
 const userSchema = new mongoose.Schema<UserType>({
   name: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    trim: true
   },
   identificationNumber: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    trim: true
   },
   isAdministrator: {
     type: Boolean

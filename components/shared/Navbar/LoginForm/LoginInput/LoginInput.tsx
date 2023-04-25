@@ -43,6 +43,7 @@ const LoginInput: FC<LoginInputProps> = (props) => {
           value={socialNumber}
           placeholder="Social Number"
           onChange={(event) => setSocialNumber(event.target.value)}
+          type="password"
         />
       )}
       {registerPhase === 3 && (

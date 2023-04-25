@@ -17,6 +17,10 @@
 @media screen and (max-width: 1120px) {
     .container {
       text-align: center;
-      width: 455px;
+      width: 460px;
     }
+  }
+
+  .loading {
+    align-self: center;
   }

@@ -73,8 +73,8 @@ const LoginForm: FC = () => {
     }
 
     loginHandler({
-      socialNumber: value.socialNumber,
-      username: value.username
+      socialNumber: value.socialNumber.trim(),
+      username: value.username.trim()
     });
   };
 

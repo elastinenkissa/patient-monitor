@@ -35,8 +35,6 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
       return;
     }
 
-    setSubmitted(true);
-
     try {
       const response = await fetch('/api/appointments', {
         method: 'POST',
@@ -54,15 +52,18 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
         throw new Error(JSON.parse(await response.text()).message);
       }
 
+      setSubmitted(true);
+
       const newAppointment: AppointmentType = await response.json();
 
       props.onNewAppointment(newAppointment);
+
+      setName('');
     } catch (error: any) {
       console.log(error.message);
     }
 
     setSubmitted(false);
-    setName('');
   };
 
   return (

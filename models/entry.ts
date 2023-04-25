@@ -23,7 +23,8 @@ const entrySchema = new mongoose.Schema<EntryType>({
   content: {
     type: String,
     required: true,
-    minlength: 10
+    minlength: 10,
+    trim: true
   },
   addedDiagnosis: [
     {

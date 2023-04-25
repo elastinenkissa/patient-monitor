@@ -8,10 +8,13 @@ import { PatientType } from '@/models/patient';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
+import { AppointmentType } from '@/models/appointment';
+
 import classes from './HomeCards.module.css';
 
 interface HomeCardsProps {
   patients: Array<PatientType>;
+  appointments: Array<AppointmentType>;
 }
 
 const HomeCards: FC<HomeCardsProps> = (props) => {
@@ -24,7 +27,7 @@ const HomeCards: FC<HomeCardsProps> = (props) => {
         <NewPatientCard />
       </div>
       <div>
-        <AppointmentsCard />
+        <AppointmentsCard appointments={props.appointments} />
       </div>
     </div>
   );

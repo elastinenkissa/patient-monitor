@@ -14,7 +14,8 @@ export interface AppointmentType {
 const appointmentSchema = new mongoose.Schema<AppointmentType>({
   patientName: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   patient: {
     type: mongoose.Schema.Types.ObjectId,

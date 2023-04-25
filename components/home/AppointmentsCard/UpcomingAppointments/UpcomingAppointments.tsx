@@ -6,35 +6,17 @@ import UpcomingAppointmentItem from './UpcomingAppointmentItem/UpcomingAppointme
 
 import { AppointmentType } from '@/models/appointment';
 
-import { UserContext, UserContextType } from '@/context/UserContext';
-
 import classes from './UpcomingAppointments.module.css';
 
 interface UpcomingAppointmentsProps {
   newAppointment: AppointmentType;
+  appointments: Array<AppointmentType>;
 }
 
 const UpcomingAppointments: FC<UpcomingAppointmentsProps> = (props) => {
-  const { user } = useContext<UserContextType>(UserContext);
-
-  const [appointments, setAppointments] = useState<Array<AppointmentType>>();
-
-  const fetchAppointments = async () => {
-    const response = await fetch('/api/appointments', {
-      method: 'GET',
-      headers: {
-        Authorization: `bearer ${user?.token}`
-      }
-    });
-
-    const fetchedAppointments: Array<AppointmentType> = await response.json();
-
-    setAppointments(fetchedAppointments);
-  };
-
-  useEffect(() => {
-    fetchAppointments();
-  }, []);
+  const [appointments, setAppointments] = useState<Array<AppointmentType>>(
+    props.appointments
+  );
 
   useEffect(() => {
     setAppointments((prevAppointments) =>
@@ -51,14 +33,16 @@ const UpcomingAppointments: FC<UpcomingAppointmentsProps> = (props) => {
             (a, b) =>
               new Date(a.scheduled).getTime() - new Date(b.scheduled).getTime()
           )
-          .map((appointment) => (
-            <UpcomingAppointmentItem
-              key={appointment.id}
-              appointment={appointment}
-            />
-          ))
+          .map((appointment) =>
+            appointment ? (
+              <UpcomingAppointmentItem
+                key={appointment.id}
+                appointment={appointment}
+              />
+            ) : null
+          )
       ) : (
-        <CircularProgress color="primary" />
+        <CircularProgress className={classes.loading} color="primary" />
       )}
     </Card>
   );

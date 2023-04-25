@@ -25,15 +25,18 @@ export type PatientWithDoctor = PatientType & {
 const patientSchema = new mongoose.Schema<PatientType>({
   name: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   identificationNumber: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   occupation: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   gender: {
     type: String,

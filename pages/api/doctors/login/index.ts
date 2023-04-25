@@ -39,7 +39,13 @@ export default async function handler(
 
     const token = jwt.sign(user.id, process.env.JWT_SECRET!);
 
-    res.status(200).json({ ...user.toJSON(), token });
+    res
+      .setHeader(
+        'Set-Cookie',
+        `userId=${user.id}; Path=/; HttpOnly; SameSite=Strict`
+      )
+      .status(200)
+      .json({ ...user.toJSON(), token });
   } catch (error: any) {
     res.status(404).json({ message: error.message });
   }

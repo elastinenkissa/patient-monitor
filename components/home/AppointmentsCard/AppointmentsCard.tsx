@@ -5,12 +5,19 @@ import NewAppointment from './NewAppointment/NewAppointment';
 
 import { AppointmentType } from '@/models/appointment';
 
-const AppointmentsCard: FC = (props) => {
+interface AppointmentsCardProps {
+  appointments: Array<AppointmentType>;
+}
+
+const AppointmentsCard: FC<AppointmentsCardProps> = (props) => {
   const [newAppointment, setNewAppointment] = useState<AppointmentType>();
 
   return (
     <>
-      <UpcomingAppointments newAppointment={newAppointment!}  />
+      <UpcomingAppointments
+        newAppointment={newAppointment!}
+        appointments={props.appointments}
+      />
       <NewAppointment
         onNewAppointment={(appointment) => setNewAppointment(appointment)}
       />
