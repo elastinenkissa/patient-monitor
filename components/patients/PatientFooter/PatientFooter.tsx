@@ -6,6 +6,10 @@ import Button from '@/components/shared/Button/Button';
 import { PatientWithDoctor } from '@/models/patient';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
+import {
+  NotificationContext,
+  NotificationContextType
+} from '@/context/NotificationContext';
 
 import classes from './PatientFooter.module.css';
 
@@ -17,6 +21,8 @@ interface PatientFooterProps {
 
 const PatientFooter: FC<PatientFooterProps> = (props) => {
   const { user } = useContext<UserContextType>(UserContext);
+  const { setNotification } =
+    useContext<NotificationContextType>(NotificationContext);
 
   const router = useRouter();
 
@@ -37,9 +43,11 @@ const PatientFooter: FC<PatientFooterProps> = (props) => {
           throw new Error(JSON.parse(await response.text()).message);
         }
 
+        setNotification(`Patient ${props.patient.name} removed from your patients.`,'success')
+
         router.push(`/patients?company=${user?.company.id}`);
       } catch (error: any) {
-        console.log(error.message);
+        setNotification(error.message, 'error')
       }
     }
   };

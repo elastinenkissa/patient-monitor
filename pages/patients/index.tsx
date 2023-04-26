@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
-import { useContext } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import Link from 'next/link';
+import { Input } from '@mui/material';
 
 import PatientList from '@/components/patients/PatientList/PatientList';
 import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLayout';
@@ -24,6 +25,20 @@ interface PatientsProps extends Record<string, unknown> {
 const Patients: NextPage<PatientsProps> = (props) => {
   const { user } = useContext<UserContextType>(UserContext);
 
+  const [patients, setPatients] = useState<Array<PatientType>>(props.patients);
+
+  const searchPatientsHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value === '') {
+      setPatients(props.patients);
+    }
+
+    setPatients(
+      props.patients.filter((patient) =>
+        patient.name.toLowerCase().includes(event.target.value.toLowerCase())
+      )
+    );
+  };
+
   return (
     <>
       <Head>
@@ -40,26 +55,37 @@ const Patients: NextPage<PatientsProps> = (props) => {
           <h4 className={classes.health}>Health rating</h4>
           <h4>View</h4>
         </div>
+        <hr />
         <div
           className={`${classes.scrollable} ${
-            (!props.patients || props.patients.length === 0) &&
-            classes.noPatients
+            (!patients || patients.length === 0) && classes.noPatients
           }`}
         >
           <div
             className={`${
-              (!props.patients || props.patients.length === 0) &&
-              classes.noPatientsContent
+              (!patients || patients.length === 0) && classes.noPatientsContent
             }`}
           >
-            <PatientList patients={props.patients} />
-            {(!props.patients || props.patients.length === 0) && (
+            <PatientList patients={patients} />
+            {(!patients || patients.length === 0) && (
               <Link href="/patients/new" className={classes.addNewLink}>
                 Add new?
               </Link>
             )}
           </div>
         </div>
+        <Input
+          sx={{
+            margin: '2rem',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            width: '92%',
+            height: 40
+          }}
+          placeholder="Search..."
+          onChange={searchPatientsHandler}
+        />
       </PatientsLayout>
     </>
   );

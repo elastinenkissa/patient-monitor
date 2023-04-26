@@ -9,7 +9,7 @@ import { UserContext, UserContextType } from '@/context/UserContext';
 import classes from './LoginForm.module.css';
 
 const LoginForm: FC = () => {
-  const { user, login } = useContext<UserContextType>(UserContext);
+  const { login } = useContext<UserContextType>(UserContext);
 
   const [loginType, setLoginType] = useState<LoginType>();
 
@@ -18,6 +18,8 @@ const LoginForm: FC = () => {
 
   const [showLoginForm, setShowLoginForm] = useState<boolean>(false);
   const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
+
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
   const router = useRouter();
 
@@ -45,7 +47,10 @@ const LoginForm: FC = () => {
 
       router.push('/home');
     } catch (error: any) {
-      console.log(error.message);
+      setErrorMessage(error.message);
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000);
     }
   };
 
@@ -103,6 +108,7 @@ const LoginForm: FC = () => {
           onExited={() => setShowLoginButton(true)}
           onLogin={loginHandler}
           loginType={loginType}
+          errorMessage={errorMessage}
         />
       </div>
       <div className={classes.login}>

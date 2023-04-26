@@ -1,8 +1,12 @@
 import Head from 'next/head';
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
+import { useContext, useState } from 'react';
 
-import HomeCards from '@/components/home/HomeCards/HomeCards';
 import HomeLayout from '@/components/shared/Layout/HomeLayout/HomeLayout';
+import UpcomingAppointments from '@/components/home/UpcomingAppointments/UpcomingAppointments';
+import NewAppointment from '@/components/home/NewAppointment/NewAppointment';
+import ViewPatientsCard from '@/components/home/ViewPatientsCard/ViewPatientsCard';
+import NewPatientCard from '@/components/home/NewPatientCard/NewPatientCard';
 
 import withAuth from '@/util/higherOrderComponents';
 import { connectDatabase } from '@/util/connectDatabase';
@@ -10,6 +14,8 @@ import { connectDatabase } from '@/util/connectDatabase';
 import { PatientType } from '@/models/patient';
 import { User } from '@/models/user';
 import { Appointment, AppointmentType } from '@/models/appointment';
+
+import { UserContext, UserContextType } from '@/context/UserContext';
 
 import classes from './Home.module.css';
 
@@ -19,6 +25,10 @@ interface HomeProps extends Record<string, unknown> {
 }
 
 const Home: NextPage<HomeProps> = (props) => {
+  const { user } = useContext<UserContextType>(UserContext);
+
+  const [newAppointment, setNewAppointment] = useState<AppointmentType>();
+
   return (
     <>
       <Head>
@@ -27,11 +37,24 @@ const Home: NextPage<HomeProps> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <HomeLayout>
-        <div className={classes.container}>
-          <HomeCards
-            patients={props.recentPatients}
-            appointments={props.appointments}
-          />
+        <div className={classes.wrapper}>
+          <div className={classes.container}>
+            <div>
+              <ViewPatientsCard user={user} patients={props.recentPatients} />
+              <UpcomingAppointments
+                newAppointment={newAppointment!}
+                appointments={props.appointments}
+              />
+            </div>
+            <div className={classes.secondContainer}>
+              <NewPatientCard />
+              <NewAppointment
+                onNewAppointment={(appointment) =>
+                  setNewAppointment(appointment)
+                }
+              />
+            </div>
+          </div>
         </div>
       </HomeLayout>
     </>
@@ -54,6 +77,10 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
         '-identificationNumber -occupation -gender -diagnosis -prescriptions -entries'
       )
     ).recentPatients;
+
+    const currentDate = new Date(new Date().getTime() + 30 * 60000);
+
+    await Appointment.deleteMany({ scheduled: { $lte: currentDate } });
 
     const appointments = await Appointment.find({ doctor: userId }).populate(
       'patient'

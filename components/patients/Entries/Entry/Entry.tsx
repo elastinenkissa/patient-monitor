@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import MedicalRecords from '../MedicalRecords/MedicalRecords';
-import HealthRating from '../HealthRating/HealthRating';
+import MedicalRecords from '../../MedicalRecords/MedicalRecords';
+import HealthRating from '../../HealthRating/HealthRating';
 
 import { EntryType } from '@/models/entry';
 

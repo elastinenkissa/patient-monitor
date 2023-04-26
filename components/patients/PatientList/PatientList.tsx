@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import PatientItem from '../PatientItem/PatientItem';
+import PatientItem from './PatientItem/PatientItem';
 
 import { PatientType } from '@/models/patient';
 

@@ -1,3 +1,4 @@
+
 .header {
   display: flex;
   flex-direction: row;
@@ -24,6 +25,8 @@
 
 .scrollable {
   overflow: scroll;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
 }
 
 .scrollable::-webkit-scrollbar {

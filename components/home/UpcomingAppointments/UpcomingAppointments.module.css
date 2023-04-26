@@ -1,7 +1,8 @@
 .container {
-    width: 350px;
+    width: 100%;
     padding: 2rem;
     height: 300px;
+    padding-bottom: 4rem;
 }
 
 
@@ -13,7 +14,6 @@
 .container > div {
   overflow: scroll;
   height: 100%;
-  padding-bottom: 2rem;
 }
 
 .container > div::-webkit-scrollbar {

@@ -1,22 +1,45 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.container > h1 {
+.wrapper > h1 {
   padding-bottom: 3rem;
 }
 
 @media screen and (max-width: 900px) {
-  .container {
-    width: 100vw;
-    text-align: center;
-    align-content: center;
-    align-items: center;
+  .wrapper {
+    display: flex;
+    justify-content: center;
   }
 
-  .container > h1 {
+  .wrapper > h1 {
     align-self: center;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2rem;
+}
+
+.secondContainer {
+  width: 45%;
+}
+
+@media screen and (max-width: 1120px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin-top: 35rem;
+    align-self: center;
+    align-content: center;
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .secondContainer {
+    width: 100%;
   }
 }

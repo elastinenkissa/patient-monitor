@@ -9,6 +9,7 @@ import classes from './Form.module.css';
 interface FormProps {
   children: ReactNode;
   buttonText: string;
+  valid: boolean;
   onSubmit: () => void;
   inputsContainerHeight?: string;
   className?: string;
@@ -36,7 +37,7 @@ const Form: FC<FormProps> = (props) => {
         <Button
           type="submit"
           className={classes.submitButton}
-          disabled={submitted}
+          disabled={!props.valid || submitted}
         >
           {submitted ? (
             <CircularProgress size={25} color="inherit" />

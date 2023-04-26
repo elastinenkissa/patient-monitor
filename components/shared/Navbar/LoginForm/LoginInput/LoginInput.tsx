@@ -10,6 +10,7 @@ import classes from './LoginInput.module.css';
 interface LoginInputProps {
   show: boolean;
   loginType: LoginType | undefined;
+  errorMessage?: string;
   onExited: () => void;
   onLogin: (value: {
     socialNumber: string;
@@ -143,6 +144,7 @@ const LoginInput: FC<LoginInputProps> = (props) => {
             </button>
           )}
         </FormControl>
+        <p className={classes.errorMessage}>{props.errorMessage}</p>
       </form>
     </CSSTransition>
   );

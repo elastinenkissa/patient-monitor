@@ -10,6 +10,10 @@ import MinuteSelect from './MinuteSelect/MinuteSelect';
 import YearSelect from './YearSelect/YearSelect';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
+import {
+  NotificationContext,
+  NotificationContextType
+} from '@/context/NotificationContext';
 
 import { AppointmentType } from '@/models/appointment';
 import { PatientType } from '@/models/patient';
@@ -24,6 +28,8 @@ interface NewAppointmentProps {
 
 const NewAppointment: FC<NewAppointmentProps> = (props) => {
   const { user } = useContext<UserContextType>(UserContext);
+  const { setNotification } =
+    useContext<NotificationContextType>(NotificationContext);
 
   const [name, setName] = useState<string>('');
   const [month, setMonth] = useState<number>(0);
@@ -36,7 +42,7 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
 
   const router = useRouter();
 
-  const addAppointmentHandler = async () => {    
+  const addAppointmentHandler = async () => {
     if (
       (!name && router.pathname === '/home') ||
       !day ||
@@ -72,9 +78,11 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
 
       props.onNewAppointment(newAppointment);
 
+      setNotification('Appointment scheduled!', 'success')
+
       setName('');
     } catch (error: any) {
-      console.log(error.message);
+      setNotification(error.message, 'error');
     }
 
     setSubmitted(false);
@@ -85,6 +93,7 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
       className={classes.container + props.className}
       buttonText="ADD"
       onSubmit={addAppointmentHandler}
+      valid={!!day && !!year && !!hour && !!month && !!minutes && (router.pathname === '/home' ? !!name : true)}
     >
       {router.pathname === '/home' && (
         <>

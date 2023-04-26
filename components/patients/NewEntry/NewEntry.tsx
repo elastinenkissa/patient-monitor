@@ -8,6 +8,10 @@ import RemoveRecord from './RemoveRecord/RemoveRecord';
 import Form from '@/components/shared/Form/Form';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
+import {
+  NotificationContext,
+  NotificationContextType
+} from '@/context/NotificationContext';
 
 import {
   HealthRating as HealthRatingType,
@@ -23,6 +27,10 @@ interface NewEntryProps {
 }
 
 const NewEntry: FC<NewEntryProps> = (props) => {
+  const { user } = useContext<UserContextType>(UserContext);
+  const { setNotification } =
+    useContext<NotificationContextType>(NotificationContext);
+
   const [show, setShow] = useState(false);
 
   const [diagnosis, setDiagnosis] = useState<Array<string>>([]);
@@ -36,8 +44,6 @@ const NewEntry: FC<NewEntryProps> = (props) => {
   const [newHealthRating, setNewHealthRating] = useState<HealthRatingType>(
     props.patient.healthRating
   );
-
-  const { user } = useContext<UserContextType>(UserContext);
 
   useEffect(() => {
     if (props.visible === true) {
@@ -106,6 +112,8 @@ const NewEntry: FC<NewEntryProps> = (props) => {
       );
       const patient: PatientType = await response.json();
 
+      setNotification('Entry added!', 'success');
+
       props.onAddEntry(patient);
     } catch (error: any) {
       console.log(error);
@@ -125,6 +133,7 @@ const NewEntry: FC<NewEntryProps> = (props) => {
           buttonText="ADD"
           onSubmit={addEntryHandler}
           inputsContainerHeight="50%"
+          valid={contentValue.length > 10}
         >
           <FormControl sx={{ marginBottom: '1rem' }}>
             <InputLabel htmlFor="content">Content</InputLabel>

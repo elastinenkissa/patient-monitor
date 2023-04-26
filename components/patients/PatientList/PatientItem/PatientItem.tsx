@@ -3,7 +3,7 @@ import { Visibility } from '@mui/icons-material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import HealthRating from '../HealthRating/HealthRating';
+import HealthRating from '../../HealthRating/HealthRating';
 
 import { PatientType } from '@/models/patient';
 

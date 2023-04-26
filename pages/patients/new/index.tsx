@@ -10,6 +10,10 @@ import NewPatientGender from '@/components/patients/NewPatientGender/NewPatientG
 import Layout from '@/components/shared/Layout/Layout';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
+import {
+  NotificationContext,
+  NotificationContextType
+} from '@/context/NotificationContext';
 
 import withAuth from '@/util/higherOrderComponents';
 
@@ -19,6 +23,8 @@ import classes from './NewPatient.module.css';
 
 const NewPatient: NextPage = () => {
   const { user } = useContext<UserContextType>(UserContext);
+  const { setNotification } =
+    useContext<NotificationContextType>(NotificationContext);
 
   const router = useRouter();
 
@@ -31,6 +37,15 @@ const NewPatient: NextPage = () => {
   const [patientOccupation, setPatientOccupation] = useState<string>('');
 
   const addPatientHandler = async () => {
+    if (
+      !patientName ||
+      !patientGender ||
+      !patientSocialNumber ||
+      !patientOccupation
+    ) {
+      return;
+    }
+
     try {
       const response = await fetch('/api/patients', {
         method: 'POST',
@@ -53,7 +68,7 @@ const NewPatient: NextPage = () => {
 
       const newPatient: PatientType = await response.json();
 
-      if (!!router.query) {
+      if (!!router.query.appointmentId) {
         const appointmentResponse = await fetch(
           `/api/appointments/${router.query.appointment}?patientId=${newPatient.id}`,
           {
@@ -65,13 +80,16 @@ const NewPatient: NextPage = () => {
         );
 
         if (!appointmentResponse.ok) {
-          throw new Error(JSON.parse(await appointmentResponse.text()));
+          throw new Error(JSON.parse(await appointmentResponse.text()).message);
         }
       }
+
+      setNotification(`Patient ${newPatient.name} added to the database!`, 'success');
+
+      router.push(`/patients?company=${user?.company.id}`);
     } catch (error: any) {
-      return console.log(error.message);
+      return setNotification(error.message, 'error');
     }
-    router.push(`/patients?company=${user?.company.id}`);
   };
 
   return (
@@ -91,6 +109,12 @@ const NewPatient: NextPage = () => {
             buttonText="ADD"
             onSubmit={addPatientHandler}
             inputsContainerHeight="65%"
+            valid={
+              !!patientName &&
+              !!patientSocialNumber &&
+              !!patientOccupation &&
+              !!patientGender
+            }
           >
             <FormControl sx={{ marginBottom: '1rem' }}>
               <InputLabel htmlFor="name">Full Name</InputLabel>
@@ -99,7 +123,7 @@ const NewPatient: NextPage = () => {
                 label="Full Name"
                 value={patientName}
                 onChange={(event) => setPatientName(event.target.value)}
-                disabled={!!router.query}
+                disabled={!!router.query.patientName}
               />
             </FormControl>
             <FormControl sx={{ marginBottom: '1rem' }}>

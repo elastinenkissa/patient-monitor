@@ -11,6 +11,7 @@ import {
 import { useRouter } from 'next/router';
 
 import LoginForm from './LoginForm/LoginForm';
+import Notification from './Notification/Notification';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
@@ -81,6 +82,7 @@ const Navbar: FC = () => {
             </Link>
           </>
         )}
+        <Notification />
       </div>
     </>
   );

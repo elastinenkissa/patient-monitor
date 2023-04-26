@@ -13,7 +13,7 @@ import PatientFooter from '@/components/patients/PatientFooter/PatientFooter';
 import Diagnosis from '@/components/patients/Diagnosis/Diagnosis';
 import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
 import NewEntry from '@/components/patients/NewEntry/NewEntry';
-import NewAppointment from '@/components/home/AppointmentsCard/NewAppointment/NewAppointment';
+import NewAppointment from '@/components/home/NewAppointment/NewAppointment';
 
 import {
   PatientType,

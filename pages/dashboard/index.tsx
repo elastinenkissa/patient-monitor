@@ -5,9 +5,9 @@ import { useContext, useEffect } from 'react';
 import { UserContext, UserContextType } from '@/context/UserContext';
 
 import withAuth from '@/util/higherOrderComponents';
-import Card from '@/components/shared/Card/Card';
+import AdminLayout from '@/components/shared/Layout/AdminLayout/AdminLayout';
 
-const Dashboard: NextPage = (props) => {
+const Dashboard: NextPage = () => {
   const { user } = useContext<UserContextType>(UserContext);
 
   const router = useRouter();
@@ -16,10 +16,9 @@ const Dashboard: NextPage = (props) => {
     if (!user?.isOwner && !user?.isAdministrator) {
       router.push('/home');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
-  return user?.isAdministrator || user?.isOwner ? <Card>Test</Card> : <></>;
+  return user?.isAdministrator || user?.isOwner ? <AdminLayout>Test</AdminLayout> : <></>;
 };
 
 export default withAuth(Dashboard);

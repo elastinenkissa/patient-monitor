@@ -141,3 +141,31 @@ a {
   transform: translateX(-100%);
   opacity: 0;
 }
+
+.notification-exit {
+  transform: translateY(-100%);
+  opacity: 1;
+}
+.notification-exit-active {
+  transform: translateY(0);
+  opacity: 0;
+  transition: all 150ms;
+}
+.notification-exit-done {
+  transform: translateY(0);
+  opacity: 0;
+}
+
+.notification-enter {
+  transform: translateY(0);
+  opacity: 0;
+}
+.notification-enter-active {
+  transform: translateY(-100%);
+  opacity: 1;
+  transition: all 150ms;
+}
+.notification-enter-done {
+  transform: translateY(-100%);
+  opacity: 1;
+}
