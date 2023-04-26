@@ -1,5 +1,6 @@
 import { FC, useState, useContext } from 'react';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import Form from '@/components/shared/Form/Form';
 import DaySelect from './DaySelect/DaySelect';
@@ -11,11 +12,14 @@ import YearSelect from './YearSelect/YearSelect';
 import { UserContext, UserContextType } from '@/context/UserContext';
 
 import { AppointmentType } from '@/models/appointment';
+import { PatientType } from '@/models/patient';
 
 import classes from './NewAppointment.module.css';
 
 interface NewAppointmentProps {
   onNewAppointment: (appointment: AppointmentType) => void;
+  patient?: PatientType;
+  className?: string;
 }
 
 const NewAppointment: FC<NewAppointmentProps> = (props) => {
@@ -30,8 +34,17 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
 
   const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const addAppointmentHandler = async () => {
-    if (!name || !day || !year || !month || !hour || !minutes) {
+  const router = useRouter();
+
+  const addAppointmentHandler = async () => {    
+    if (
+      (!name && router.pathname === '/home') ||
+      !day ||
+      !year ||
+      !month ||
+      !hour ||
+      !minutes
+    ) {
       return;
     }
 
@@ -40,7 +53,8 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
         method: 'POST',
         body: JSON.stringify({
           patientName: name,
-          scheduled: new Date(year, month - 1, day, hour, minutes)
+          scheduled: new Date(year, month - 1, day, hour, minutes),
+          patientId: props.patient?.id
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -68,20 +82,24 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
 
   return (
     <Form
-      className={classes.container}
+      className={classes.container + props.className}
       buttonText="ADD"
       onSubmit={addAppointmentHandler}
     >
-      <h4>New appointment</h4>
-      <FormControl sx={{ marginBottom: '1rem', marginTop: '2rem' }}>
-        <InputLabel htmlFor="name">Name</InputLabel>
-        <OutlinedInput
-          id="name"
-          label="Name"
-          value={name}
-          onChange={(event) => setName(event?.target.value)}
-        />
-      </FormControl>
+      {router.pathname === '/home' && (
+        <>
+          <h4>New appointment</h4>
+          <FormControl sx={{ marginBottom: '1rem', marginTop: '2rem' }}>
+            <InputLabel htmlFor="name">Name</InputLabel>
+            <OutlinedInput
+              id="name"
+              label="Name"
+              value={name}
+              onChange={(event) => setName(event?.target.value)}
+            />
+          </FormControl>
+        </>
+      )}
       <div className={classes.date}>
         <FormControl sx={{ width: 100, marginBottom: '1rem' }}>
           <MonthSelect

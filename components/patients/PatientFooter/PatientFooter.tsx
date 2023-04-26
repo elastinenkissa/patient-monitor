@@ -11,6 +11,7 @@ import classes from './PatientFooter.module.css';
 
 interface PatientFooterProps {
   onNewEntry: () => void;
+  onNewAppointment: () => void;
   patient: PatientWithDoctor;
 }
 
@@ -44,19 +45,22 @@ const PatientFooter: FC<PatientFooterProps> = (props) => {
   };
 
   return (
-    <>
-      <Button onClick={props.onNewEntry} className={classes.button}>
-        NEW ENTRY
-      </Button>
-      {user?.id === props.patient.assignedDoctorId && (
-        <Button
-          className={classes.button + ' ' + classes.dismiss}
-          onClick={dismissPatientHandler}
-        >
-          DISMISS
+    <div className={classes.container}>
+      <Button onClick={props.onNewAppointment}>SCHEDULE APPOINTMENT</Button>
+      <div>
+        <Button onClick={props.onNewEntry} className={classes.button}>
+          NEW ENTRY
         </Button>
-      )}
-    </>
+        {user?.id === props.patient.assignedDoctorId && (
+          <Button
+            className={classes.button + ' ' + classes.dismiss}
+            onClick={dismissPatientHandler}
+          >
+            DISMISS
+          </Button>
+        )}
+      </div>
+    </div>
   );
 };
 

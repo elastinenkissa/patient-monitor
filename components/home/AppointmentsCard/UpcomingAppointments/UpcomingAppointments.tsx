@@ -27,8 +27,8 @@ const UpcomingAppointments: FC<UpcomingAppointmentsProps> = (props) => {
   return (
     <Card className={classes.container}>
       <h4>Upcoming appointments</h4>
-      {appointments ? (
-        appointments
+      <div>
+        {appointments
           .sort(
             (a, b) =>
               new Date(a.scheduled).getTime() - new Date(b.scheduled).getTime()
@@ -40,10 +40,8 @@ const UpcomingAppointments: FC<UpcomingAppointmentsProps> = (props) => {
                 appointment={appointment}
               />
             ) : null
-          )
-      ) : (
-        <CircularProgress className={classes.loading} color="primary" />
-      )}
+          )}
+      </div>
     </Card>
   );
 };

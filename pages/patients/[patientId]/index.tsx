@@ -1,8 +1,10 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { FC, useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Female, Male, Transgender } from '@mui/icons-material';
 import { Modal } from '@mui/material';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { CSSTransition } from 'react-transition-group';
 
 import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLayout';
 import PatientHeader from '@/components/patients/PatientHeader/PatientHeader';
@@ -11,6 +13,7 @@ import PatientFooter from '@/components/patients/PatientFooter/PatientFooter';
 import Diagnosis from '@/components/patients/Diagnosis/Diagnosis';
 import Prescriptions from '@/components/patients/Prescriptions/Prescriptions';
 import NewEntry from '@/components/patients/NewEntry/NewEntry';
+import NewAppointment from '@/components/home/AppointmentsCard/NewAppointment/NewAppointment';
 
 import {
   PatientType,
@@ -35,7 +38,20 @@ const Patient: NextPage<PatientProps> = (props) => {
 
   const [patient, setPatient] = useState<PatientWithDoctor>(props.patient);
 
-  const [modalIsVisible, setModalIsVisible] = useState<boolean>(false);
+  const [entryCreation, setEntryCreation] = useState<boolean>(false);
+  const [appointmentCreation, setAppointmentCreation] =
+    useState<boolean>(false);
+  const [showAppointmentCreation, setShowAppointmentCreation] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (appointmentCreation === true) {
+      return setShowAppointmentCreation(true);
+    }
+    setShowAppointmentCreation(false);
+  }, [appointmentCreation]);
+
+  const router = useRouter();
 
   const checkGender = () => {
     if (props.patient.gender === 'Male') {
@@ -60,8 +76,13 @@ const Patient: NextPage<PatientProps> = (props) => {
   };
 
   const addEntryHandler = (newPatient: PatientType) => {
-    setModalIsVisible(false);
+    setEntryCreation(false);
     setPatient({ ...newPatient, assignedDoctorId: user?.id });
+  };
+
+  const makeAppointmentHandler = () => {
+    setAppointmentCreation(false);
+    router.push('/home');
   };
 
   const gender = checkGender();
@@ -85,19 +106,42 @@ const Patient: NextPage<PatientProps> = (props) => {
           </div>
           <div className={classes.buttons}>
             <PatientFooter
-              onNewEntry={() => setModalIsVisible(true)}
+              onNewEntry={() => setEntryCreation(true)}
+              onNewAppointment={() => setAppointmentCreation(true)}
               patient={patient}
             />
             <Modal
               className={classes.modal}
-              open={modalIsVisible}
-              onClose={() => setModalIsVisible(false)}
+              open={entryCreation}
+              onClose={() => setEntryCreation(false)}
             >
-              <NewEntry
-                patient={patient}
-                onAddEntry={addEntryHandler}
-                visible={modalIsVisible}
-              />
+              <div>
+                <NewEntry
+                  patient={patient}
+                  onAddEntry={addEntryHandler}
+                  visible={entryCreation}
+                />
+              </div>
+            </Modal>
+            <Modal
+              className={classes.modal}
+              open={appointmentCreation}
+              onClose={() => setAppointmentCreation(false)}
+            >
+              <div className={classes.newAppointment}>
+                <CSSTransition
+                  in={showAppointmentCreation}
+                  timeout={300}
+                  classNames="modal-appear"
+                  mountOnEnter
+                  unmountOnExit
+                >
+                  <NewAppointment
+                    patient={patient}
+                    onNewAppointment={makeAppointmentHandler}
+                  />
+                </CSSTransition>
+              </div>
             </Modal>
           </div>
         </div>

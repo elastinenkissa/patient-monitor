@@ -12,6 +12,8 @@
   font-weight: 500;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   transition: color 200ms;
+  flex-wrap: nowrap;
+  word-break: break-all;
 }
 
 .container:hover {

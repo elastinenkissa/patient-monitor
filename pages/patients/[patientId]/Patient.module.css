@@ -26,3 +26,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+.newAppointment{
+  width: 500px;
+}

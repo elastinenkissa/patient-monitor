@@ -11,7 +11,7 @@ const MinuteSelect: FC<MinuteSelectProps> = (props) => {
 
   const minutes = [];
 
-  for (let i = 1; i <= 59; i++) {
+  for (let i = 0; i <= 59; i++) {
     minutes.push(i);
   }
 

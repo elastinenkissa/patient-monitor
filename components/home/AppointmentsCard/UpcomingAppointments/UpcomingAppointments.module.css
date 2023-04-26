@@ -1,16 +1,23 @@
 .container {
     width: 350px;
-    padding: 1rem;
+    padding: 2rem;
     height: 300px;
-    overflow: scroll;
 }
 
-.container::-webkit-scrollbar {
-    display: none;
-}
+
 
 .container > h4 {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+
+.container > div {
+  overflow: scroll;
+  height: 100%;
+  padding-bottom: 2rem;
+}
+
+.container > div::-webkit-scrollbar {
+  display: none;
 }
 
 

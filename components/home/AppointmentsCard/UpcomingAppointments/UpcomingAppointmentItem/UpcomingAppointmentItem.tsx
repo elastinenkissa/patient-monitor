@@ -28,7 +28,13 @@ const UpcomingAppointmentItem: FC<UpcomingAppointmentItemProps> = (props) => {
         {props.appointment.patient?.name || props.appointment.patientName}
       </p>
       <p className={classes.date}>
-        {new Date(props.appointment.scheduled).toLocaleString('en-GB')}
+        {new Date(props.appointment.scheduled).toLocaleString('en-GB', {
+          day:'2-digit',
+          month:'2-digit',
+          year: '2-digit',
+          hour: 'numeric',
+          minute: 'numeric'
+        })}
       </p>
     </button>
   );
