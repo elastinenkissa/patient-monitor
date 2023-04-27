@@ -1,5 +1,4 @@
-import { FC, useState, useContext, useEffect } from 'react';
-import { CircularProgress } from '@mui/material';
+import { FC, useState, useEffect } from 'react';
 
 import Card from '@/components/shared/Card/Card';
 import UpcomingAppointmentItem from './UpcomingAppointmentItem/UpcomingAppointmentItem';
@@ -19,28 +18,35 @@ const UpcomingAppointments: FC<UpcomingAppointmentsProps> = (props) => {
   );
 
   useEffect(() => {
-    setAppointments((prevAppointments) =>
-      prevAppointments?.concat(props.newAppointment)
-    );
+    if (props.newAppointment) {
+      setAppointments((prevAppointments) =>
+        prevAppointments?.concat(props.newAppointment)
+      );
+    }
   }, [props.newAppointment]);
 
   return (
     <Card className={classes.container}>
       <h4>Upcoming appointments</h4>
       <div>
-        {appointments
-          .sort(
-            (a, b) =>
-              new Date(a.scheduled).getTime() - new Date(b.scheduled).getTime()
-          )
-          .map((appointment) =>
-            appointment ? (
-              <UpcomingAppointmentItem
-                key={appointment.id}
-                appointment={appointment}
-              />
-            ) : null
-          )}
+        {appointments.length > 0 ? (
+          appointments
+            .sort(
+              (a, b) =>
+                new Date(a.scheduled).getTime() -
+                new Date(b.scheduled).getTime()
+            )
+            .map((appointment) =>
+              appointment ? (
+                <UpcomingAppointmentItem
+                  key={appointment.id}
+                  appointment={appointment}
+                />
+              ) : null
+            )
+        ) : (
+          <p>No appointments</p>
+        )}
       </div>
     </Card>
   );

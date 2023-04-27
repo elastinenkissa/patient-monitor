@@ -12,14 +12,16 @@ interface ButtonProps {
 
 const Button: FC<ButtonProps> = (props) => {
   return (
-    <button
-      className={classes.button + ' ' + props.className}
-      onClick={props.onClick}
-      type={props.type}
-      disabled={props.disabled}
-    >
-      {props.children}
-    </button>
+    <span className={classes.container}>
+      <button
+        className={classes.button + ' ' + props.className}
+        onClick={props.onClick}
+        type={props.type}
+        disabled={props.disabled}
+      >
+        {props.children}
+      </button>
+    </span>
   );
 };
 

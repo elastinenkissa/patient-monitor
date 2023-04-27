@@ -94,33 +94,7 @@ const Patients: NextPage<PatientsProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { company, doctor } = context.query;
-
-  if (company) {
-    try {
-      await connectDatabase();
-
-      const fetchedCompany = await Company.findById(company).populate(
-        'patients'
-      );
-
-      if (!fetchedCompany) {
-        return {
-          notFound: true
-        };
-      }
-
-      return {
-        props: {
-          patients: JSON.parse(JSON.stringify(fetchedCompany.patients))
-        }
-      };
-    } catch (error: any) {
-      return {
-        notFound: true
-      };
-    }
-  }
+  const { doctor } = context.query;
 
   if (doctor) {
     try {
@@ -139,6 +113,35 @@ export const getServerSideProps: GetServerSideProps = async (
       return {
         props: {
           patients: JSON.parse(JSON.stringify(fetchedDoctor.patients))
+        }
+      };
+    } catch (error: any) {
+      return {
+        notFound: true
+      };
+    }
+  }
+
+  const company = (await User.findById(context.req.cookies.userId))?.company
+
+  
+  if (company) {
+    try {
+      await connectDatabase();
+
+      const fetchedCompany = await Company.findById(company).populate(
+        'patients'
+      );
+
+      if (!fetchedCompany) {
+        return {
+          notFound: true
+        };
+      }
+
+      return {
+        props: {
+          patients: JSON.parse(JSON.stringify(fetchedCompany.patients))
         }
       };
     } catch (error: any) {

@@ -26,5 +26,9 @@
 
 .button:disabled {
   background-color: gray;
+  pointer-events: none;
+}
+
+.container {
   cursor: not-allowed;
 }

@@ -56,7 +56,7 @@ const Navbar: FC = () => {
                 <p>Home</p>
               </Link>
               <Link
-                href={`/patients?company=${user.company.id}`}
+                href={`/patients`}
                 className={
                   router.pathname.startsWith('/patients') ? classes.active : ''
                 }

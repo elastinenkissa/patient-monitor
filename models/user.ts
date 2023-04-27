@@ -16,6 +16,8 @@ export interface UserType extends mongoose.Document {
   isOwner?: boolean;
 }
 
+export type Employee = UserType;
+
 const userSchema = new mongoose.Schema<UserType>({
   name: {
     type: String,
@@ -67,13 +69,6 @@ userSchema.set('toJSON', {
     delete object._id;
     delete object.__v;
   }
-});
-
-userSchema.pre('save', function (next) {
-  this.imageUrl =
-    'https://th.bing.com/th/id/R.2212e2e523684c91bb6ade690d9e3fc0?rik=jKD89fg3ekClvw&pid=ImgRaw&r=0';
-
-  next();
 });
 
 export const User: mongoose.Model<UserType> =

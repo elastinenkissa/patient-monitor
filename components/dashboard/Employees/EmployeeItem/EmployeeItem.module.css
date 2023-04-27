@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1rem;
+  color: grey;
+}
+
+.role {
+  color: gray;
+  transition: all 300ms;
+}
+
+.role:hover {
+  color: rgb(18, 18, 53);
+  transition: all 300ms;
+}
+
+.rightItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.button {
+  border: none;
+  background: none;
+  color: gray;
+  margin-left: 0.5rem;
+  transition: all 300ms;
+}
+
+.button:hover {
+  color: rgb(18, 18, 53);
+  cursor: pointer;
+  transition: all 300ms;
+}

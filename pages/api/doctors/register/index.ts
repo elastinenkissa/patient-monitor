@@ -5,6 +5,7 @@ import { User } from '@/models/user';
 import { Company } from '@/models/company';
 
 import { connectDatabase } from '@/util/connectDatabase';
+import { getLoggedInUser } from '@/util/pseudoMiddleware';
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,22 +22,45 @@ export default async function handler(
 
     const hashedSN = await bcrypt.hash(req.body.socialNumber, 10);
 
+    if (req.body.type === 'create') {
+      const user = await getLoggedInUser(req);
+
+      const employee = await User.create({
+        name: req.body.fullName,
+        username: req.body.username,
+        identificationNumber: hashedSN,
+        company: user.company,
+        isAdministrator: user.isOwner && req.body.isAdministrator,
+        patients: [],
+        recentPatients: [],
+        imageUrl:
+          req.body.imageUrl ||
+          'https://th.bing.com/th/id/R.2212e2e523684c91bb6ade690d9e3fc0?rik=jKD89fg3ekClvw&pid=ImgRaw&r=0'
+      });
+
+      return res.status(201).json(employee);
+    }
+
+    if (!req.body.companyName) {
+      throw new Error('Company name missing.');
+    }
+
     const newCompany = await Company.create({ name: req.body.companyName });
 
-    await User.create({
+    const user = await User.create({
       name: req.body.fullName,
       username: req.body.username,
       identificationNumber: hashedSN,
       company: newCompany.id,
       isOwner: true,
       patients: [],
-      recentPatients: []
+      recentPatients: [],
+      imageUrl:
+        'https://th.bing.com/th/id/R.2212e2e523684c91bb6ade690d9e3fc0?rik=jKD89fg3ekClvw&pid=ImgRaw&r=0'
     });
 
-    res
-      .status(201)
-      .json({ message: 'User and company registered succesfully.' });
+    res.status(201).json(user);
   } catch (error: any) {
-    res.status(404).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 }

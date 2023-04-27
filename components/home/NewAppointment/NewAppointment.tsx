@@ -97,7 +97,7 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
     >
       {router.pathname === '/home' && (
         <>
-          <h4>New appointment</h4>
+          <h4>Schedule new appointment</h4>
           <FormControl sx={{ marginBottom: '1rem', marginTop: '2rem' }}>
             <InputLabel htmlFor="name">Name</InputLabel>
             <OutlinedInput

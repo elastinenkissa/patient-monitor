@@ -9,10 +9,3 @@
   grid-template-columns: 1fr 1fr 1fr;
   margin-bottom: 1rem;
 }
-
-
-@media screen and (max-width: 1120px) {
-  .container {
-    text-align: center;
-  }
-}

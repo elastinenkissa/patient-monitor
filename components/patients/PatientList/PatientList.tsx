@@ -4,15 +4,13 @@ import PatientItem from './PatientItem/PatientItem';
 
 import { PatientType } from '@/models/patient';
 
-import classes from './PatientList.module.css';
-
 interface PatientListProps {
   patients: Array<PatientType>;
 }
 
 const PatientList: FC<PatientListProps> = (props) => {
   return (
-    <div className={classes.container}>
+    <div>
       {!props.patients || props.patients.length === 0 ? (
         <h3>No patients</h3>
       ) : (

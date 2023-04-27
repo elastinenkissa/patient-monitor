@@ -1,18 +1,20 @@
 import { FC, ReactNode, createContext, useEffect, useState } from 'react';
 
+type NotificationType = 'error' | 'success' | '';
+
 interface Notification {
   message: string;
-  type: string;
+  type: NotificationType;
 }
 
 export interface NotificationContextType {
   notification: Notification;
-  setNotification: (message: string, type: string) => void;
+  setNotification: (message: string, type: NotificationType) => void;
 }
 
 export const NotificationContext = createContext<NotificationContextType>({
   notification: { message: '', type: '' },
-  setNotification: (_message: string, _type: string) => {}
+  setNotification: (_message: string, _type: NotificationType) => {}
 });
 
 interface NotificationContextProviderProps {
@@ -31,7 +33,7 @@ const NotificationContextProvider: FC<NotificationContextProviderProps> = (
     undefined
   );
 
-  const setNotification = (message: string, type: string) => {
+  const setNotification = (message: string, type: NotificationType) => {
     setNotificationState({ message, type });
 
     if (timeoutId) {
