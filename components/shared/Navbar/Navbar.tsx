@@ -15,6 +15,8 @@ import Notification from './Notification/Notification';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
+import logo from '../../../public/logo.png'
+
 import classes from './Navbar.module.css';
 
 const Navbar: FC = () => {
@@ -32,7 +34,12 @@ const Navbar: FC = () => {
         <Menu />
       </button>
       <div className={classes.container}>
-        <h1>Patient Monitor</h1> {/*make logo and replace this with it */}
+        <Image
+          src={logo}
+          alt="Patient Monitor"
+          width={200}
+          height={150}
+        />
         {!user ? (
           <LoginForm />
         ) : (

@@ -1,4 +1,5 @@
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 
@@ -60,20 +61,30 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
   };
 
   return user?.isAdministrator || user?.isOwner ? (
-    <AdminLayout>
-      <div>
-        <Employees
-          employees={employees}
-          onRemoveEmployee={removeEmployeeHandler}
-          onEditEmployee={editEmployeeHandler}
+    <>
+      <Head>
+        <title>{user.company.name} - Admin Dashboard</title>
+        <meta
+          name="description"
+          content={`Admin dashboard for company ${user.company.name}`}
         />
-        <ManageEmployee
-          employee={editingEmployee}
-          onUpdateEmployee={updateEmployeeInformationHandler}
-        />
-      </div>
-      <AddEmployee onAddEmployee={addEmployeeHandler} />
-    </AdminLayout>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      <AdminLayout>
+        <div>
+          <Employees
+            employees={employees}
+            onRemoveEmployee={removeEmployeeHandler}
+            onEditEmployee={editEmployeeHandler}
+          />
+          <ManageEmployee
+            employee={editingEmployee}
+            onUpdateEmployee={updateEmployeeInformationHandler}
+          />
+        </div>
+        <AddEmployee onAddEmployee={addEmployeeHandler} />
+      </AdminLayout>
+    </>
   ) : (
     <></>
   );

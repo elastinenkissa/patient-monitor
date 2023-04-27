@@ -103,8 +103,6 @@ export const getServerSideProps: GetServerSideProps = async (
       const fetchedDoctor = await User.findById(doctor).populate('patients');
 
       if (!fetchedDoctor) {
-        console.log('i here');
-
         return {
           notFound: true
         };
@@ -122,9 +120,8 @@ export const getServerSideProps: GetServerSideProps = async (
     }
   }
 
-  const company = (await User.findById(context.req.cookies.userId))?.company
+  const company = (await User.findById(context.req.cookies.userId))?.company;
 
-  
   if (company) {
     try {
       await connectDatabase();

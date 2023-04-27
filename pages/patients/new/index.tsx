@@ -84,9 +84,12 @@ const NewPatient: NextPage = () => {
         }
       }
 
-      setNotification(`Patient ${newPatient.name} added to the database!`, 'success');
+      setNotification(
+        `Patient ${newPatient.name} added to the database!`,
+        'success'
+      );
 
-      router.push(`/patients?company=${user?.company.id}`);
+      router.push(`/patients`);
     } catch (error: any) {
       return setNotification(error.message, 'error');
     }

@@ -28,6 +28,7 @@ import { connectDatabase } from '@/util/connectDatabase';
 import withAuth from '@/util/higherOrderComponents';
 
 import classes from './Patient.module.css';
+import { Company } from '@/models/company';
 
 interface PatientProps extends Record<string, unknown> {
   patient: PatientWithDoctor;
@@ -163,6 +164,23 @@ export const getServerSideProps: GetServerSideProps<PatientProps> = async (
     if (!fetchedPatient) {
       return {
         notFound: true
+      };
+    }
+
+    const currentCompanyId = (await User.findById(context.req.cookies.userId))
+      ?.company;
+
+    const companyOfPatient = await Company.findOne({
+      patients: { $in: fetchedPatient.id }
+    });
+    
+
+    if (currentCompanyId?.toString() !== companyOfPatient?.id) {
+      return {
+        redirect: { 
+          destination: '/home',
+          permanent: true
+        }
       };
     }
 
