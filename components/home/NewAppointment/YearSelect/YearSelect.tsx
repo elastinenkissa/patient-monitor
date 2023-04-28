@@ -1,5 +1,7 @@
-import { InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 interface YearSelectProps {
   onChangeYear: (value: number) => void;

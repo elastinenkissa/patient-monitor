@@ -1,7 +1,10 @@
-import { FormControl, OutlinedInput } from '@mui/material';
-import { ArrowLeft, ArrowRight, Check } from '@mui/icons-material';
 import { FC, FormEvent, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import ArrowLeft from '@mui/icons-material/ArrowLeft';
+import ArrowRight from '@mui/icons-material/ArrowRight';
+import Check from '@mui/icons-material/Check';
 
 import { LoginType } from '../LoginButton/LoginButton';
 

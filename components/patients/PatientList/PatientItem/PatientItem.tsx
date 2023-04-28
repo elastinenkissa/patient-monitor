@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Visibility } from '@mui/icons-material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Visibility from '@mui/icons-material/Visibility';
 
 import HealthRating from '../../HealthRating/HealthRating';
 

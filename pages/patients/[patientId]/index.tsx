@@ -1,7 +1,9 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { useContext, useState, useEffect } from 'react';
-import { Female, Male, Transgender } from '@mui/icons-material';
-import { Modal } from '@mui/material';
+import Female from '@mui/icons-material/Female';
+import Male from '@mui/icons-material/Male';
+import Transgender from '@mui/icons-material/Transgender';
+import Modal from '@mui/material/Modal';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { CSSTransition } from 'react-transition-group';

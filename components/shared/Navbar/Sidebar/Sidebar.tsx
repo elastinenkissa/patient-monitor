@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { Modal } from '@mui/material';
+import Modal from '@mui/material/Modal';
 
 import NavbarContent from '../Links/NavbarContent';
 

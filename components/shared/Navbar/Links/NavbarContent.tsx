@@ -2,12 +2,10 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, useContext } from 'react';
-import {
-  AdminPanelSettings,
-  Home,
-  Logout,
-  PeopleAlt
-} from '@mui/icons-material';
+import AdminPanelSettings from '@mui/icons-material/AdminPanelSettings';
+import Home from '@mui/icons-material/Home';
+import Logout from '@mui/icons-material/Logout';
+import PeopleAlt from '@mui/icons-material/PeopleAlt';
 
 import LoginForm from '../LoginForm/LoginForm';
 

@@ -2,7 +2,9 @@ import { useContext, useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 import HealthRatingChange from '@/components/patients/NewEntry/HealthRatingChange/HealthRatingChange';
 import Form from '@/components/shared/Form/Form';

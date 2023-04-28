@@ -1,6 +1,8 @@
 import { FC, useState, useContext } from 'react';
-import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { useRouter } from 'next/router';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 import Form from '@/components/shared/Form/Form';
 import DaySelect from './DaySelect/DaySelect';
@@ -78,7 +80,7 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
 
       props.onNewAppointment(newAppointment);
 
-      setNotification('Appointment scheduled!', 'success')
+      setNotification('Appointment scheduled!', 'success');
 
       setName('');
     } catch (error: any) {
@@ -93,7 +95,14 @@ const NewAppointment: FC<NewAppointmentProps> = (props) => {
       className={classes.container + props.className}
       buttonText="ADD"
       onSubmit={addAppointmentHandler}
-      valid={!!day && !!year && !!hour && !!month && !!minutes && (router.pathname === '/home' ? !!name : true)}
+      valid={
+        !!day &&
+        !!year &&
+        !!hour &&
+        !!month &&
+        !!minutes &&
+        (router.pathname === '/home' ? !!name : true)
+      }
     >
       {router.pathname === '/home' && (
         <>

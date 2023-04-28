@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FC, ReactNode, useState } from 'react';
-import { Add } from '@mui/icons-material';
+import Add from '@mui/icons-material/Add';
 import { CSSTransition } from 'react-transition-group';
 
 import Card from '@/components/shared/Card/Card';

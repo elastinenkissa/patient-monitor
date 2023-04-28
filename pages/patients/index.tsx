@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
 import { ChangeEvent, useContext, useState } from 'react';
 import Link from 'next/link';
-import { Input } from '@mui/material';
+import Input from '@mui/material/Input';
 
 import PatientList from '@/components/patients/PatientList/PatientList';
 import PatientsLayout from '@/components/shared/Layout/PatientsLayout/PatientsLayout';

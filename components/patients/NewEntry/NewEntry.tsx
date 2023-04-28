@@ -1,6 +1,8 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 import NewRecord from './NewRecord/NewRecord';
 import HealthRatingChange from './HealthRatingChange/HealthRatingChange';

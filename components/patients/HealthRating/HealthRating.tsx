@@ -1,5 +1,5 @@
-import { Favorite } from '@mui/icons-material';
 import { FC, JSXElementConstructor, ReactElement, cloneElement } from 'react';
+import Favorite from '@mui/icons-material/Favorite';
 
 interface HealthRatingProps {
   healthRating: number;

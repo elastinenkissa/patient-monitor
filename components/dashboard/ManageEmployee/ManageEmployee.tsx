@@ -1,16 +1,14 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
 
 import Form from '@/components/shared/Form/Form';
 
 import { UserType } from '@/models/user';
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select
-} from '@mui/material';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 import {

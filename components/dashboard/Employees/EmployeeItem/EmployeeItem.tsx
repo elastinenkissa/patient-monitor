@@ -1,12 +1,10 @@
 import { FC, useContext } from 'react';
-import {
-  AccountBalance,
-  Build,
-  Clear,
-  Edit,
-  Person
-} from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
+import AccountBalance from '@mui/icons-material/AccountBalance';
+import Build from '@mui/icons-material/Build';
+import Clear from '@mui/icons-material/Clear';
+import Edit from '@mui/icons-material/Edit';
+import Person from '@mui/icons-material/Person';
+import Tooltip from '@mui/material/Tooltip';
 
 import { Employee } from '@/models/user';
 

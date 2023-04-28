@@ -1,5 +1,5 @@
 import { FC, FormEvent, ReactNode, useState } from 'react';
-import { CircularProgress } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Card from '../Card/Card';
 import Button from '../Button/Button';

@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { AddCircle, RemoveCircle } from '@mui/icons-material';
+import AddCircle from '@mui/icons-material/AddCircle';
+import RemoveCircle from '@mui/icons-material/RemoveCircle';
 
 import HealthRating from '../../HealthRating/HealthRating';
 

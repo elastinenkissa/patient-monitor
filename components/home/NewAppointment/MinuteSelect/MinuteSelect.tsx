@@ -1,5 +1,7 @@
-import { InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { FC, useState, useEffect } from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 interface MinuteSelectProps {
   onChangeMinutes: (value: number) => void;

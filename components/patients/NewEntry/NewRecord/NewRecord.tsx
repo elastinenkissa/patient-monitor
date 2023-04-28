@@ -1,6 +1,7 @@
-import { AddCircle } from '@mui/icons-material';
-import {  InputLabel, OutlinedInput } from '@mui/material';
 import { ChangeEvent, FC, FocusEvent, useState } from 'react';
+import AddCircle from '@mui/icons-material/AddCircle';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 import MedicalRecord from '../../MedicalRecord/MedicalRecord';
 
@@ -20,7 +21,7 @@ const NewRecord: FC<NewRecordProps> = (props) => {
 
   const addRecordHandler = () => {
     props.onAddRecord(recordValue);
-    setAddButtonIsShown(false)
+    setAddButtonIsShown(false);
     setRecordValue('');
   };
 

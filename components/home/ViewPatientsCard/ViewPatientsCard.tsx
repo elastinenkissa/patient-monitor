@@ -1,6 +1,8 @@
 import { FC, useState } from 'react';
 import Link from 'next/link';
-import { ChevronRight, History } from '@mui/icons-material';
+import ChevronRight from '@mui/icons-material/ChevronRight';
+import History from '@mui/icons-material/ChevronRight';
+import CircularProgress from '@mui/material/CircularProgress';
 import { CSSTransition } from 'react-transition-group';
 
 import Card from '@/components/shared/Card/Card';
@@ -10,7 +12,6 @@ import { UserType } from '@/models/user';
 import { PatientType } from '@/models/patient';
 
 import classes from './ViewPatientsCard.module.css';
-import { CircularProgress } from '@mui/material';
 
 interface ViewPatientsCardProps {
   user: UserType | undefined;
