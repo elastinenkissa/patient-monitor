@@ -19,7 +19,7 @@ export default function Document() {
           property="og:description"
           content="Patient monitoring and management services available to anyone"
         />
-        <meta name="twitter:card" content="https://i.imgur.com/qq94gA7.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <body>
         <Main />
