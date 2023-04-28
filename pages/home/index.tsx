@@ -33,7 +33,7 @@ const Home: NextPage<HomeProps> = (props) => {
     <>
       <Head>
         <title>Patient Monitor</title>
-        <meta name="description" content="Some description" />
+        <meta name="description" content="Patient monitoring and management services avaialble to anyone" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <HomeLayout>
