@@ -81,13 +81,21 @@ const EmployeeItem: FC<EmployeeItemProps> = (props) => {
           (props.employee.isAdministrator && user?.isAdministrator)) && (
           <>
             {props.employee.isAdministrator && user?.isOwner && (
-              <button className={classes.button} onClick={editEmployeeHandler}>
-                <Edit />
-              </button>
+              <>
+                <button
+                  className={classes.button}
+                  onClick={editEmployeeHandler}
+                >
+                  <Edit />
+                </button>
+                <button
+                  className={classes.button}
+                  onClick={removeEmployeeHandler}
+                >
+                  <Clear />
+                </button>
+              </>
             )}
-            <button className={classes.button} onClick={removeEmployeeHandler}>
-              <Clear />
-            </button>
           </>
         )}
       </div>
