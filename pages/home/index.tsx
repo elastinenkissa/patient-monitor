@@ -32,7 +32,7 @@ const Home: NextPage<HomeProps> = (props) => {
   return (
     <>
       <Head>
-        <title>Patients Monitor</title>
+        <title>Patient Monitor</title>
         <meta name="description" content="Some description" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>

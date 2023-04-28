@@ -6,10 +6,11 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  align-content: center;
   text-align: center;
   color: white;
-  margin-right: 6.5vw;
   position: fixed;
+  transition: width 200ms;
 }
 
 .hamburger {
@@ -25,6 +26,9 @@
     display: block;
     border: none;
     background: none;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
   }
 
   .hamburger:hover {
@@ -32,55 +36,3 @@
   }
 }
 
-.userInfo {
-  text-align: center;
-}
-
-.userInfo > h3 {
-  padding-top: 1rem;
-  font-size: 21px;
-}
-
-.links > a,
-.logout {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 200px;
-  border-radius: 3px;
-  padding: 5px;
-  margin-bottom: 0.5rem;
-  transition: background-color 400ms, color 400ms;
-}
-
-.links > a:hover,
-.active {
-  background-color: white;
-  color: rgb(18, 18, 53);
-  transition: background-color 400ms, color 400ms;
-}
-
-.links > a > p,
-.logout > p {
-  padding-left: 0.5rem;
-}
-
-.links {
-  display: flex;
-  flex-direction: column;
-}
-
-.logout {
-  color: gray;
-  font-size: 15px;
-  margin-bottom: 0;
-  margin-top: 10rem;
-}
-
-.logout:hover {
-  color: white;
-}
-
-.logout:active {
-  color: #808080;
-}

@@ -169,3 +169,29 @@ a {
   transform: translateY(-100%);
   opacity: 1;
 }
+
+.navbar-enter {
+  transform: translateX(-100%);
+}
+
+.navbar-enter-active {
+  transform: translateX(0);
+  transition: all 300ms;
+}
+
+.navbar-enter-done {
+  transform: translateX(0);
+}
+
+.navbar-exit {
+  transform: translateX(0);
+}
+
+.navbar-exit-active {
+  transform: translateX(-100%);
+  transition: all 300ms;
+}
+
+.navbar-exit-done {
+  transform: translateX(-100%);
+}

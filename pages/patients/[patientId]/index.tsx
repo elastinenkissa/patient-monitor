@@ -173,11 +173,10 @@ export const getServerSideProps: GetServerSideProps<PatientProps> = async (
     const companyOfPatient = await Company.findOne({
       patients: { $in: fetchedPatient.id }
     });
-    
 
     if (currentCompanyId?.toString() !== companyOfPatient?.id) {
       return {
-        redirect: { 
+        redirect: {
           destination: '/home',
           permanent: true
         }

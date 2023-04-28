@@ -1,0 +1,56 @@
+.links > a,
+.logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 200px;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 0.5rem;
+  transition: background-color 400ms, color 400ms;
+}
+
+.companyName {
+ text-align: center;
+}
+
+.links > a:hover,
+.active {
+  background-color: white;
+  color: rgb(18, 18, 53);
+  transition: background-color 400ms, color 400ms;
+}
+
+.links > a > p,
+.logout > p {
+  padding-left: 0.5rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.logout {
+  color: gray;
+  font-size: 15px;
+  margin-bottom: 0;
+  margin-top: 10rem;
+}
+
+.logout:hover {
+  color: white;
+}
+
+.logout:active {
+  color: #808080;
+}
+
+.userInfo {
+  text-align: center;
+}
+
+.userInfo > h3 {
+  padding-top: 1rem;
+  font-size: 21px;
+}

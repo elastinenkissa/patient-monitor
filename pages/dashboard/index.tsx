@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from 'react';
 
 import { UserContext, UserContextType } from '@/context/UserContext';
 
-import withAuth from '@/util/higherOrderComponents';
 import AdminLayout from '@/components/shared/Layout/AdminLayout/AdminLayout';
 import AddEmployee from '@/components/dashboard/AddEmployee/AddEmployee';
 import Employees from '@/components/dashboard/Employees/Employees';
@@ -14,6 +13,7 @@ import ManageEmployee from '@/components/dashboard/ManageEmployee/ManageEmployee
 import { Employee, User } from '@/models/user';
 
 import { connectDatabase } from '@/util/connectDatabase';
+import withAuth from '@/util/higherOrderComponents';
 
 interface DashboardProps extends Record<string, unknown> {
   employees: Array<Employee>;
