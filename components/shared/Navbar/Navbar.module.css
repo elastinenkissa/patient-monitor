@@ -22,6 +22,11 @@
     display: none;
   }
 
+  .mobile {
+    display: flex;
+    width: 25vw;
+  }
+
   .hamburger {
     display: block;
     border: none;
@@ -33,6 +38,20 @@
 
   .hamburger:hover {
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .mobile {
+    display: flex;
+    width: 40vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mobile {
+    display: flex;
+    width: 50vw;
   }
 }
 

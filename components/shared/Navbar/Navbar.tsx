@@ -39,11 +39,9 @@ const Navbar: FC = () => {
         </>
       )}
       <div
-        className={classes.container}
-        style={{
-          display: (router.pathname === '/' && 'flex') as Display,
-          width: router.pathname === '/' ? '35%' : '25vw'
-        }}
+        className={
+          classes.container + ' ' + (router.pathname === '/' && classes.mobile)
+        }
       >
         <NavbarContent />
       </div>
