@@ -8,6 +8,18 @@ export default function Document() {
           name="keywords"
           content="Healthcare, Patients, Patient, Diagnosis, Patient monitoring, Patients monitoring, Prescription, Prescriptions"
         />
+
+        <meta property="og:image" content="https://imgur.com/qq94gA7" />
+        <meta property="og:title" content="Patient Monitor" />
+        <meta
+          property="og:url"
+          content="https://sensational-sprinkles-170f00.netlify.app/"
+        />
+        <meta
+          property="og:description"
+          content="Patient monitoring and management services available to anyone"
+        />
+        <meta name="twitter:card" content="https://imgur.com/qq94gA7" />
       </Head>
       <body>
         <Main />
