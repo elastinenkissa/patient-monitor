@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta property="og:image" content="../public/embed.png" />
         <meta
           name="keywords"
           content="Healthcare, Patients, Patient, Diagnosis, Patient monitoring, Patients monitoring, Prescription, Prescriptions"
