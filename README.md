@@ -23,4 +23,5 @@ Furthermore, the employee can dismiss a patient, which is only possible if the p
 The owner and administrators of the company have access to the admin panel page. Here they can view a list of all the company's employees and their types (owner, admin, employee). The owner is able to remove any employee, while administrators can only remove non-admins. There is also the option to register a new employee to the company, and available only to the owner is what type of employee it will be (admin or employee). And last but not least is the ability to edit patient's name and, owner only, type.
 
 # Todo
-/
+
+1. Fix some responsiveness issues
