@@ -1,0 +1,10 @@
+.leftCards {
+  margin-right: 2rem;
+}
+
+@media screen and (max-width: 1240px) {
+  .leftCards {
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+}

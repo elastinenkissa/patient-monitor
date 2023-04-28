@@ -15,6 +15,8 @@ import { Employee, User } from '@/models/user';
 import { connectDatabase } from '@/util/connectDatabase';
 import withAuth from '@/util/higherOrderComponents';
 
+import classes from './Dashboard.module.css'
+
 interface DashboardProps extends Record<string, unknown> {
   employees: Array<Employee>;
 }
@@ -71,7 +73,7 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <AdminLayout>
-        <div>
+        <div className={classes.leftCards}>
           <Employees
             employees={employees}
             onRemoveEmployee={removeEmployeeHandler}

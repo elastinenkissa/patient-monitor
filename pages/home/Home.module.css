@@ -16,24 +16,31 @@
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   margin: 2rem;
+}
+
+.leftCards {
+  margin-right: 2rem;
 }
 
 .secondContainer {
   width: 45%;
 }
 
-@media screen and (max-width: 1240px) {
+@media screen and (max-width: 1340px) {
   .container {
     display: flex;
     flex-direction: column;
     width: fit-content;
-    margin-top: 35rem;
     align-self: center;
     align-content: center;
   }
-  
+
+  .leftCards {
+    margin-right: 0;
+  }
+
   .wrapper {
     display: flex;
     justify-content: center;

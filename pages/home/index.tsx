@@ -39,7 +39,7 @@ const Home: NextPage<HomeProps> = (props) => {
       <HomeLayout>
         <div className={classes.wrapper}>
           <div className={classes.container}>
-            <div>
+            <div className={classes.leftCards}>
               <ViewPatientsCard user={user} patients={props.recentPatients} />
               <UpcomingAppointments
                 newAppointment={newAppointment!}
