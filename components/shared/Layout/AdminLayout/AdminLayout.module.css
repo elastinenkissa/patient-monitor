@@ -10,9 +10,9 @@
 @media screen and (max-width: 1240px) {
   .container {
     flex-direction: column;
-    flex-wrap: wrap;
     height: 100vh;
     justify-content: center;
     width: 100%;
+    margin-top: 5rem;
   }
 }

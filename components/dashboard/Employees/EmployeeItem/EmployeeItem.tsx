@@ -80,9 +80,11 @@ const EmployeeItem: FC<EmployeeItemProps> = (props) => {
         {(!props.employee.isOwner ||
           (props.employee.isAdministrator && user?.isAdministrator)) && (
           <>
-            <button className={classes.button} onClick={editEmployeeHandler}>
-              <Edit />
-            </button>
+            {props.employee.isAdministrator && user?.isOwner && (
+              <button className={classes.button} onClick={editEmployeeHandler}>
+                <Edit />
+              </button>
+            )}
             <button className={classes.button} onClick={removeEmployeeHandler}>
               <Clear />
             </button>

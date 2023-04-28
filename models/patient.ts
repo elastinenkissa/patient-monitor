@@ -45,13 +45,11 @@ const patientSchema = new mongoose.Schema<PatientType>({
   diagnosis: [
     {
       type: String,
-      unique: true
     }
   ],
   prescriptions: [
     {
       type: String,
-      unique: true
     }
   ],
   healthRating: {

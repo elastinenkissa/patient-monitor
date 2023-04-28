@@ -25,6 +25,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             backgroundColor: '#121235',
             zIndex: 999,
             height: '100%',
+            width: '40vw',
             color: 'white',
             padding: '2rem',
             display: 'flex',
