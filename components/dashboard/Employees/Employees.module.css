@@ -4,15 +4,21 @@
 }
 
 .container > h4 {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .container > div {
-    max-height: 350px;
-    height: fit-content;
-    overflow: scroll;
+  max-height: 350px;
+  height: fit-content;
+  overflow: scroll;
 }
 
 .container > div::-webkit-scrollbar {
-    display: none;
+  display: none;
+}
+
+@media screen and (max-width: 445px) {
+  .container {
+    width: 100vw;
+  }
 }

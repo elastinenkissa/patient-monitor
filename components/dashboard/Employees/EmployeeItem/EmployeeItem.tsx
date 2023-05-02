@@ -77,10 +77,7 @@ const EmployeeItem: FC<EmployeeItemProps> = (props) => {
       <p>{props.employee.name}</p>
       <div className={classes.rightItem}>
         <div className={classes.role}>{employeeType}</div>
-        {(!props.employee.isOwner ||
-          (props.employee.isAdministrator && user?.isAdministrator)) && (
-          <>
-            {props.employee.isAdministrator && user?.isOwner && (
+        {!props.employee.isOwner && !(user?.isAdministrator && props.employee.isAdministrator) && (
               <>
                 <button
                   className={classes.button}
@@ -96,8 +93,6 @@ const EmployeeItem: FC<EmployeeItemProps> = (props) => {
                 </button>
               </>
             )}
-          </>
-        )}
       </div>
     </div>
   );

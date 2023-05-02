@@ -31,3 +31,9 @@
 .flexItemTwo {
   flex-basis: 35%;
 }
+
+@media screen and (max-width: 492px) {
+  .flexItemTwo {
+    text-align: center;
+  }
+}

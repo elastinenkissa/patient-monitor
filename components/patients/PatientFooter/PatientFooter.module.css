@@ -6,7 +6,7 @@
 
 .button {
   border: none;
-  border-radius: 5px; 
+  border-radius: 5px;
   margin-left: 1rem;
   color: white;
   padding: 1rem;
@@ -25,4 +25,16 @@
 .dismiss:active {
   background-color: rgb(156, 39, 39);
   transition: all 200ms;
+}
+
+@media screen and (max-width: 555px) {
+  .container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+
+  .container > div {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
 }

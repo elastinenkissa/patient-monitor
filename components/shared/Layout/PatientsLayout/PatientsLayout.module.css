@@ -5,16 +5,21 @@
   padding: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  margin-top: 5vh;
+  margin-top: 6vh;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
 
-/* @media screen and (max-width: 900px) {
+@media screen and (max-width: 900px) {
     .container {
-        width: 92vw;
-        margin-left: 1rem;
+        width: 90vw;
     }
-} */
+}
+
+@media screen and (max-width: 445px) {
+  .container {
+    width: 100vw;
+  }
+}

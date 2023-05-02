@@ -1,4 +1,3 @@
-
 .header {
   display: flex;
   flex-direction: row;
@@ -43,7 +42,7 @@
   font-size: 28px;
 }
 
-.noPatientsContent{
+.noPatientsContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,3 +57,4 @@
 .addNewLink:hover {
   text-decoration: underline;
 }
+

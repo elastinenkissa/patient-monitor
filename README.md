@@ -21,7 +21,3 @@ On the patients page, the employee will see all patients registered to their hea
 Furthermore, the employee can dismiss a patient, which is only possible if the patient was registered by the employee or the employee has added at least one entry to the patient, given that they haven't dismissed the patient after the last added entry. The employee can also schedule an appointment through the patient's individual page. Appointments scheduled this way won't take the employee to the patient creation page, and will instead directly take them to the patient's page itself. Also, back to the home page, the employee is provided with a link to view their patients, which will navigate the employee to the patients page, but with patients filtered to only those added, updated and not dismissed by the employee.
 
 The owner and administrators of the company have access to the admin panel page. Here they can view a list of all the company's employees and their types (owner, admin, employee). The owner is able to remove any employee, while administrators can only remove non-admins. There is also the option to register a new employee to the company, and available only to the owner is what type of employee it will be (admin or employee). And last but not least is the ability to edit patient's name and, owner only, type.
-
-# Todo
-
-1. Fix some responsiveness issues

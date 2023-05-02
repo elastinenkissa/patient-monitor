@@ -35,6 +35,7 @@ const LoginInput: FC<LoginInputProps> = (props) => {
     <>
       {registerPhase === 1 && (
         <OutlinedInput
+          sx={{ paddingRight: '3rem' }}
           className={classes.input}
           value={username}
           placeholder="Username"
@@ -43,6 +44,7 @@ const LoginInput: FC<LoginInputProps> = (props) => {
       )}
       {registerPhase === 2 && (
         <OutlinedInput
+          sx={{ paddingRight: '3rem' }}
           className={classes.input}
           value={socialNumber}
           placeholder="Social Number"
@@ -52,6 +54,7 @@ const LoginInput: FC<LoginInputProps> = (props) => {
       )}
       {registerPhase === 3 && (
         <OutlinedInput
+          sx={{ paddingRight: '3rem' }}
           className={classes.input}
           value={fullName}
           placeholder="Full Name"
@@ -60,6 +63,7 @@ const LoginInput: FC<LoginInputProps> = (props) => {
       )}
       {registerPhase === 4 && (
         <OutlinedInput
+          sx={{ paddingRight: '3rem' }}
           className={classes.input}
           value={companyName}
           placeholder="Company Name"

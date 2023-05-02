@@ -4,6 +4,8 @@ import Modal from '@mui/material/Modal';
 
 import NavbarContent from '../Links/NavbarContent';
 
+import classes from './Sidebar.module.css';
+
 interface SidebarProps {
   close: boolean | undefined;
   onClickModal: () => void;
@@ -19,20 +21,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
         mountOnEnter
         unmountOnExit
       >
-        <div
-          style={{
-            position: 'absolute',
-            backgroundColor: '#121235',
-            zIndex: 999,
-            height: '100%',
-            width: '50vw',
-            color: 'white',
-            padding: '2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-around'
-          }}
-        >
+        <div className={classes.container}>
           <NavbarContent />
         </div>
       </CSSTransition>

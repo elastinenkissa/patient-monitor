@@ -1,9 +1,7 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Display } from 'next/dist/compiled/@next/font';
 import Menu from '@mui/icons-material/Menu';
 
-import Notification from './Notification/Notification';
 import NavbarContent from './Links/NavbarContent';
 import Sidebar from './Sidebar/Sidebar';
 
