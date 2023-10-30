@@ -16,8 +16,7 @@ const companySchema = new mongoose.Schema<HealthcareCompany>({
   patients: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Patient',
-      unique: true
+      ref: 'Patient'
     }
   ]
 });

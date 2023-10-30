@@ -43,7 +43,7 @@ export default async function handler(
     if (!req.body.companyName) {
       throw new Error('Company name missing.');
     }
-
+    
     const newCompany = await Company.create({ name: req.body.companyName });
 
     const user = await User.create({
